@@ -95,4 +95,14 @@
 }
 .contact-submit-btn:hover {
     background-color: #eae0c8;
-  }
+}
+
+@media only screen and (max-width: 900px) {
+    #contact {
+        color: #fff;
+        height: 100vh;
+        width: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+}

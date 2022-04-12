@@ -1,0 +1,31 @@
+#message-sent {
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 20vh;
+    width: 40vh;
+    z-index: 10000;
+}
+
+.message-sent-text {
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+}
+
+.TiTick {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom'
+
 import { Helmet } from 'react-helmet-async';
 
 import AOS from 'aos';
@@ -13,6 +15,11 @@ import NavigationBar from '../../Components/NavigationBar';
 function Accomodations() {
 
     const [activeTab, setActiveTab] = useState('accomodations')
+
+    //automatically scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         AOS.init({ duration: 2000 })
@@ -59,7 +66,7 @@ function Accomodations() {
                                         Price: R 3729.36 pm
                                     </div>
                                     <div className='accomodation-card-view'>
-                                        View Unit
+                                        <Link to='/View-unit'>View Unit</Link>
                                     </div>
                                 </div>
                             </div>

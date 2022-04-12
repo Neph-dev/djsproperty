@@ -63,10 +63,10 @@
 
 @media only screen and (max-width: 900px) {
     #home {
-    color: #fff;
-      height: auto;
-      width: 100vh;
-      position: relative;
-      overflow-x: hidden;
+        color: #fff;
+        height: auto;
+        width: 100vh;
+        position: relative;
+        overflow-x: hidden;
     }
-  }
+}

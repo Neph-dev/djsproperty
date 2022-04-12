@@ -1,57 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { Helmet } from 'react-helmet-async';
+import { ImCancelCircle } from 'react-icons/im';
 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
-import './contact.css';
-
-import NavigationBar from '../../Components/NavigationBar';
-import SentMessage from '../../Components/SentMessage';
+import './contactAgent.css';
 
 
-function Contact() {
-
-    const [activeTab, setActiveTab] = useState('contact')
-    const [messageSent, setMessageSent] = useState(false)
-
-    useEffect(() => {
-        AOS.init({ duration: 2000 })
-    })
-
-    //automatically scroll to top
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    if (messageSent === true) {
-        setTimeout(() => {
-            setMessageSent(false);
-            window.location.reload(false);
-        }, 2000);
-    }
-
+function ContactAgent({ setShowContact, setMessageSent }) {
     return (
-        <div id='contact'>
+        <div id='contact-agent'>
+            <ImCancelCircle
+                onClick={() => setShowContact(false)}
+                color={'#000'}
+                size={30}
+                className='ImCancelCircle' />
 
-            <Helmet>
-                <title>CONTACT AN AGENT | DJS PROPERTIES</title>
-                <meta
-                    name="description"
-                    content=""
-                    data-rh="true"
-                />
-                <link rel='canonical' href='/Accomodations' />
-            </Helmet>
-
-            <NavigationBar activeTab={activeTab} />
-
-            {messageSent && (<SentMessage />)}
-
-            <div className='home-background' />
-
-            <div className='contact-content'>
+            <div className='contact-agent-content'>
                 <div
                     data-aos="fade-in"
                     data-aos-duration="1500"
@@ -100,8 +63,9 @@ function Contact() {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }
 
-export default Contact;
+export default ContactAgent;

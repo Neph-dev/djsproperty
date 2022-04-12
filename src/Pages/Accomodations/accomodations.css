@@ -43,13 +43,13 @@
     width: 20rem;
 }
 .accomodation-card-img {
-    height: 11rem;
-    width: 100%;
-    background-image: url("../../Assets/1_4.jpg");
+    background-image: url("../../Assets/flat.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     background-position: center;
+    height: 11rem;
+    width: 100%;
 }
 .accomodation-card-details {
     align-items: center;
@@ -68,6 +68,10 @@
     font-size: 15px;
     margin-top: 1rem;
     margin-left: 2rem;
+}
+.accomodation-card-view a { 
+    text-decoration: none;
+    color: #fff;
 }
 .accomodation-card-view {
     cursor: pointer;
@@ -129,7 +133,7 @@
 @media only screen and (max-width: 900px) {
     #accomodations {
         color: #fff;
-        height: auto;
+        height: 100vh;
         width: 100vh;
         position: relative;
         overflow-x: hidden;

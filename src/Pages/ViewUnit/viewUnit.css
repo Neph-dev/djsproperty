@@ -1,0 +1,93 @@
+#viewUnit {
+    color: white;
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.view-unit-content {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-bottom: auto;
+    position: absolute;
+    z-index: 9;
+    margin-top: 25vh;
+}
+.view-unit-details-container {
+    width: 100%;
+}
+.view-unit-img {
+    background-image: url("../../Assets/flat.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    background-color: aliceblue;
+    height: 28rem;
+    width: 40rem;
+    position: fixed;
+    left:0;
+}
+.view-unit-details {
+    float: right;
+    width: 40rem;
+}
+.view-unit-details-location {
+    letter-spacing: 5px;
+    text-align: center;
+    margin: 20px;
+    text-transform: uppercase;
+}
+.view-unit-details-type {
+    font-size: 36px;
+    text-align: center;
+}
+.view-unit-details-address { 
+    letter-spacing: 5px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 46px;
+    margin-top: 46px;
+    text-transform: uppercase;
+}
+
+.view-unit-details-price {
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+}
+
+.view-unit-description {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    letter-spacing: 2px;
+    line-height: 35px;
+    margin-top: 2rem;
+    width: 80%;
+}
+
+.view-unit-contact {
+    align-items: center;
+    background-color:#fff;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right:0;
+    margin-bottom: 2rem; 
+    margin-top: 2rem; 
+    padding: 1rem;
+    width: 10rem;
+}
+.view-unit-contact:hover {
+    background-color:rgb(222, 209, 209);
+}
