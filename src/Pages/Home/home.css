@@ -1,0 +1,72 @@
+#home {
+    color: #fff;
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+}
+.home-background {
+    background-image: url("../../Assets/joburg1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.welcome-text-container {
+    align-items: center;
+    display: flex;
+    margin-left: 2rem;
+    height: 80%;
+    width: 60%
+}
+.welcome-text-title {
+    display: flex;
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: 0;
+}
+.welcome-text {
+    display: flex;
+    font-size: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    top: 0;
+}
+.apply-btn  {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background-color: transparent;
+}
+.apply-btn a {
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: auto;
+}
+.apply-btn a:hover { 
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+@media only screen and (max-width: 900px) {
+    #home {
+    color: #fff;
+      height: auto;
+      width: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+  }

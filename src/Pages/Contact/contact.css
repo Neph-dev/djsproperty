@@ -1,0 +1,98 @@
+#contact {
+    color: white;
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.contact-content {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-bottom: auto;
+    position: absolute;
+    z-index: 9;
+    margin-top: 25vh;
+}
+
+.contact-content-title {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 15px;
+    text-align:center;
+    text-transform: uppercase;
+}
+
+.contact-inputs {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    height: auto;
+    width: 100%;
+}
+.contact-input {
+    background-color: transparent;
+    border-bottom: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #fff;
+    outline: none;
+    font-size: 18px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 1.5rem;
+    width: 20rem;
+}
+.contact-input:focus {
+    border-color: red;
+}
+
+.contact-input-msg {
+    background-color: transparent;
+  
+    border-bottom: 2px solid;
+    border-color: #fff;
+    border-left: 2px solid #fff;
+    border-right-width: 0;
+    border-top-width: 0;
+  
+    color: #fff;
+    display: flex;
+    font-size: 18px;
+    margin-top: 0;
+  
+    min-height: 9.5rem;
+    max-height: 9.5rem;
+    min-width: 20rem;
+    max-width: 20rem;
+  
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+  
+    outline: none;
+    padding: 0.5rem;
+    resize: none;
+  }
+  .contact-input-msg:focus {
+    border-color: red;
+  }
+  .contact-submit-btn {
+    background-color: #d8cca4;
+    border-width: 0;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    float: right;
+    font-size: 15px;
+    height: 2rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+}
+.contact-submit-btn:hover {
+    background-color: #eae0c8;
+  }
