@@ -50,3 +50,50 @@
     margin-top: 4rem;
     position: relative;
 }
+
+@media only screen and (max-width: 500px) {
+    
+    .AiOutlineMenu {
+        background-color: transparent;
+        color: #000;
+        right:0;
+        position: fixed;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        z-index: 1001;
+    }
+
+    #toggled-navigation{
+        background-color: #000;
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+    }
+    .AiOutlineRight {
+        color: white; 
+        margin: 20;
+    }
+    .toggled-nav-list {
+        display: block;
+        width: 100%;
+    }
+    .toggled-nav-list-item {
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        list-style: none;
+        padding: 20px 0 20px 0;
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
+    .toggled-nav-list-item a{
+        color: #fff;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        width: 100%;
+    }
+}

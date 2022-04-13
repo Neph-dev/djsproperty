@@ -38,9 +38,10 @@ function Accomodations() {
                 <link rel='canonical' href='/Accomodations' />
             </Helmet>
 
-            <div className='home-background' />
 
             <NavigationBar activeTab={activeTab} />
+
+            <div className='home-background' />
 
             <div className='accomodations-content'>
                 <section id='featured-appartments'>

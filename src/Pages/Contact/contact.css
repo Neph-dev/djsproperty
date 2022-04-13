@@ -1,8 +1,8 @@
 #contact {
-    color: white;
-    height: 100vh;
+    color: #fff;
     width: 100%;
-    overflow-y: auto;
+    height: auto;
+    overflow-x: hidden;
 }
 
 .contact-content {
@@ -12,13 +12,13 @@
     margin-bottom: auto;
     position: absolute;
     z-index: 9;
-    margin-top: 25vh;
 }
 
 .contact-content-title {
     color: #fff;
     font-size: 18px;
     letter-spacing: 15px;
+    margin-top: 25vh;
     text-align:center;
     text-transform: uppercase;
 }
@@ -100,7 +100,7 @@
 @media only screen and (max-width: 900px) {
     #contact {
         color: #fff;
-        height: 100vh;
+        height: auto;
         width: 100vh;
         position: relative;
         overflow-x: hidden;

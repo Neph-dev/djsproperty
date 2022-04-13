@@ -49,9 +49,7 @@ function Contact() {
 
             {messageSent && (<SentMessage />)}
 
-            <div className='home-background' />
-
-            <div className='contact-content'>
+            <div className='home-background'>
                 <div
                     data-aos="fade-in"
                     data-aos-duration="1500"
