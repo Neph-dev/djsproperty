@@ -4,14 +4,21 @@
     right:0;
     top: 6rem;
     height: 100vh;
-    width: 100vh;
+    width: 100%;
     z-index: 80;
 }
 
 .contact-agent-content {
-    margin-top: 10vh;
     position: relative;
     z-index: 9;
+}
+.contact-agent-content-title {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 15px;
+    margin-top: 10vh;
+    text-align:center;
+    text-transform: uppercase;
 }
 
 .ImCancelCircle {

@@ -15,6 +15,13 @@
     margin-top: 25vh;
 }
 .view-unit-details-container {
+    align-items: center;
+    justify-content:space-around;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1;
+    margin-top: 0rem;
+    position: relative;
     width: 100%;
 }
 .view-unit-img {
@@ -26,12 +33,13 @@
     background-color: aliceblue;
     height: 28rem;
     width: 40rem;
-    position: fixed;
+    position: relative;
     left:0;
 }
 .view-unit-details {
-    float: right;
-    width: 40rem;
+    right: 0;
+    position: relative;
+    width: 35rem;
 }
 .view-unit-details-location {
     letter-spacing: 5px;
@@ -90,4 +98,8 @@
 }
 .view-unit-contact:hover {
     background-color:rgb(222, 209, 209);
+}
+
+@media only screen and (max-width: 900px) {
+
 }

@@ -18,7 +18,7 @@ function ContactAgent({ setShowContact, setMessageSent }) {
                 <div
                     data-aos="fade-in"
                     data-aos-duration="1500"
-                    className='contact-content-title'>
+                    className='contact-agent-content-title'>
                     Contact An Agent
                 </div>
                 <div className="contact-inputs">
