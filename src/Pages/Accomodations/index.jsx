@@ -10,6 +10,7 @@ import 'aos/dist/aos.css';
 import './accomodations.css';
 
 import NavigationBar from '../../Components/NavigationBar';
+import Map from '../../Components/Map';
 
 
 function Accomodations() {
@@ -107,9 +108,17 @@ function Accomodations() {
 
                 </section>
 
-                <section id='map'>
+                {/* <section id="map">
+                    <div
+                        data-aos="fade-in"
+                        data-aos-duration="1500"
+                        className='map-appartments-title'>
+                        Map
+                    </div>
 
-                </section>
+                    <Map />
+
+                </section> */}
 
             </div>
 

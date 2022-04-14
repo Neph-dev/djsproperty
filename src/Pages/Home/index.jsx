@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
 import { Link } from 'react-router-dom';
-
 import { Helmet } from 'react-helmet-async';
 
 import AOS from 'aos';
@@ -42,7 +40,7 @@ function Home() {
                     className='welcome-text-container'>
                     <div>
                         <div className='welcome-text-title'>Welcome to DJS PROPERTIES</div>
-                        <div className='welcome-text'>The Best Shared Accomodation in Johannesburg</div>
+                        <div className='welcome-text'>The Best Single & Shared Accomodation in Johannesburg</div>
                     </div>
                 </div>
                 <div className='apply-btn'>

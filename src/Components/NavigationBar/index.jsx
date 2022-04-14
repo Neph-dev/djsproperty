@@ -18,7 +18,7 @@ function NavigationBar({ activeTab }) {
         return () => {
             window.removeEventListener('resize', changeWidth)
         }
-    })
+    }, [])
 
     return (
         <>

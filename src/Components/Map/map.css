@@ -1,0 +1,7 @@
+.map-container {
+    background-color: aliceblue;
+    display: flex;
+    margin-top: 3rem;
+    height: 60vh;
+    width: 100%;
+}
