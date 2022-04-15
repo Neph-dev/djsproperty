@@ -11,6 +11,8 @@ import Contact from '../Pages/Contact';
 import Home from '../Pages/Home';
 import ViewUnit from '../Pages/ViewUnit';
 
+// Import authentication components.
+import Login from '../Pages/Authentication/Login';
 
 export default function Router() {
   return (
@@ -20,6 +22,9 @@ export default function Router() {
           <Route exact path='/Accomodations' component={Accomodations} />
           <Route exact path='/Contact' component={Contact} />
           <Route exact path='/View-unit' component={ViewUnit} />
+
+          {/* Authentication components */}
+          <Route exact path='/Login' component={Login} />
       </Switch>
     </Routers>
   )

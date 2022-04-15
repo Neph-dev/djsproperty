@@ -1,0 +1,122 @@
+#login {
+    color: #fff;
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+}
+
+.login-content {
+    display: flex;
+    background-color: #bfafb2;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.BiArrowBack {
+    color: #1b1b1b;
+    cursor: pointer;
+    border: 1px solid #1b1b1b;
+    margin: 5px;
+    position: fixed;
+    border-radius: 50px;
+    padding: .3rem;
+}
+
+.login-card-container {
+    background: linear-gradient(45deg, #1b1b1b, #3b3c36);
+    border: 1px solid #fff;
+    justify-content: center;
+    margin: auto;
+    bottom: 0;
+    top: 0;
+    height: 70vh;
+    width: 70vh;
+}
+
+.login-card-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    height: 10vh;
+    width: 100%;
+}
+.login-card-header-title-active {
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+.login-card-header-title {
+    background-color: #3b3c36;
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+
+.login-card-input-container {
+    
+}
+.login-card-input {
+    border: 0;
+    border-radius: 15px;
+    height: 2.5rem;
+    display: flex;
+    font-size: 16px;
+    outline: 0;
+    margin: 2rem auto auto auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 60%;
+}
+.login-text {
+    font-size: 28px;
+    margin-top: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px
+}
+.see-password {
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 5rem;
+}
+.login-card-btn {
+    align-items: center;
+    background-color: #bfafb2;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto auto auto;
+    font-size: 20px;
+    letter-spacing: 5px;
+    padding: 15px;
+    width: 5rem;
+}
+.get-help {
+    cursor: pointer;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+    #login {
+        color: #fff;
+        height: auto;
+        width: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+}

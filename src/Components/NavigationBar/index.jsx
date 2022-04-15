@@ -54,6 +54,10 @@ function NavigationBar({ activeTab }) {
                                     : 'navigation-list-element'} >
                             <Link to='/Contact'>Contact An Agent</Link>
                         </li>
+                        <li
+                            className={'navigation-list-element'} >
+                            <Link to='/Login'>Login</Link>
+                        </li>
                     </ul>
                 </div>
             )}
@@ -86,6 +90,9 @@ function NavigationBar({ activeTab }) {
                             </li>
                             <li className='toggled-nav-list-item'>
                                 <Link to='/Contact'>Contact An Agent</Link>
+                            </li>
+                            <li className='toggled-nav-list-item'>
+                                <Link to='/Login'>Login</Link>
                             </li>
                         </ul>
                     </div>
