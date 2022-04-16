@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { BiArrowBack } from 'react-icons/bi';
 
@@ -10,7 +10,6 @@ function Login() {
 
     const [activeTab, setActiveTab] = useState('tenant')
 
-    let history = useHistory();
 
     return (
         <div id="login">
@@ -26,7 +25,9 @@ function Login() {
 
             <div className='login-content'>
 
-                <BiArrowBack size={40} onClick={() => history.goBack()} className='BiArrowBack' />
+                <Link to='/'>
+                    <BiArrowBack size={40} className='BiArrowBack' />
+                </Link>
 
                 <div className='login-card-container'>
                     <div className='login-card-header'>
@@ -60,7 +61,9 @@ function Login() {
                     </div>
                     <div className='see-password'>See password</div>
 
-                    <bottom className='login-card-btn'>Login</bottom>
+                    <buttom className='login-card-btn'>
+                        <Link to='/Tenant-portal'>Login</Link>
+                    </buttom>
 
                     <div className='get-help'>Get help sign in</div>
                 </div>

@@ -105,6 +105,11 @@
     padding: 15px;
     width: 5rem;
 }
+.login-card-btn a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .get-help {
     cursor: pointer;
     margin-top: 1rem;

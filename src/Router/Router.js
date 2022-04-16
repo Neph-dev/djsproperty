@@ -13,6 +13,7 @@ import ViewUnit from '../Pages/ViewUnit';
 
 // Import authentication components.
 import Login from '../Pages/Authentication/Login';
+import TenantPortal from '../Pages/TenantPortal';
 
 export default function Router() {
   return (
@@ -25,6 +26,9 @@ export default function Router() {
 
           {/* Authentication components */}
           <Route exact path='/Login' component={Login} />
+          
+          {/* tenants components */}
+          <Route exact path='/Tenant-portal' component={TenantPortal} />
       </Switch>
     </Routers>
   )

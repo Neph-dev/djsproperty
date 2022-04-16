@@ -13,6 +13,11 @@ import SentMessage from '../../Components/SentMessage';
 
 function Contact() {
 
+    const [fullNameInput, setFullNameInput] = useState('')
+    const [emailInput, setEmailInput] = useState('')
+    const [phoneNumberInput, setPhoneNumberInput] = useState('')
+    const [messageInput, setMessageInput] = useState('')
+
     const [activeTab, setActiveTab] = useState('contact')
     const [messageSent, setMessageSent] = useState(false)
 
@@ -60,18 +65,21 @@ function Contact() {
                     <div>
                         <div style={{ marginTop: '1rem' }}>
                             <input
+                                onChange={(e) => setFullNameInput(e.target.value)}
                                 placeholder='Name'
                                 type="text"
                                 className="contact-input" />
                         </div>
                         <div style={{ marginTop: '1rem' }}>
                             <input
+                                onChange={(e) => setPhoneNumberInput(e.target.value)}
                                 placeholder='Phone Number'
                                 type="text"
                                 className="contact-input" />
                         </div>
                         <div style={{ marginTop: '1rem' }}>
                             <input
+                                onChange={(e) => setEmailInput(e.target.value)}
                                 placeholder='Email Address'
                                 type="email"
                                 className="contact-input" />
@@ -79,12 +87,13 @@ function Contact() {
 
                         <div style={{ display: 'block' }}>
                             <textarea
+                                onChange={(e) => setMessageInput(e.target.value)}
                                 name="message"
                                 type="text"
                                 placeholder="Type your message here."
                                 maxlength={500}
                                 className='contact-input-msg' />
-                            0/500
+                            {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
                             <div>
                                 <button
                                     onClick={() => setMessageSent(true)}
