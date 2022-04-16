@@ -26,7 +26,7 @@ function TenantPortal() {
 
             <div className='tenantPortal-content'>
                 <div className='tenantPortal-header'>
-                    <div className='tenantPortal-greeting'>Hello Nephthali</div>
+                    <div className='tenantPortal-greeting'>Hello Nephthali - Unit 7b</div>
 
                     <div className='tenantPortal-notification-logout'>
                         <div><RiNotification2Fill size={30} className='RiNotification2Fill' /></div>
@@ -40,7 +40,7 @@ function TenantPortal() {
                     <div className='balance-payBtn'>
                         <div className='balance-container'>
                             <div className='balance-label'>Balance</div>
-                            <div className='balance'>R 0.00</div>
+                            <div className='balance'>R 2450.00</div>
                         </div>
                         <button className='balance-pay-btn'>Pay</button>
                     </div>

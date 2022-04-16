@@ -13,7 +13,14 @@ import ViewUnit from '../Pages/ViewUnit';
 
 // Import authentication components.
 import Login from '../Pages/Authentication/Login';
+
+// Import tenant dashboard components.
 import TenantPortal from '../Pages/TenantPortal';
+
+// Import admin dashboard components.
+import Admin from '../Pages/Admin';
+import AddUnit from '../Pages/Admin/Pages/AddUnit';
+import UnitsAndTenants from '../Pages/Admin/Pages/UnitsAndTenants';
 
 export default function Router() {
   return (
@@ -29,6 +36,11 @@ export default function Router() {
           
           {/* tenants components */}
           <Route exact path='/Tenant-portal' component={TenantPortal} />
+
+          {/* admin components */}
+          <Route exact path='/Admin-dashboard' component={Admin} />
+          <Route exact path='/Units-tenants' component={UnitsAndTenants} />
+          <Route exact path='/Add-unit' component={AddUnit} />
       </Switch>
     </Routers>
   )

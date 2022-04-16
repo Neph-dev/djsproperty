@@ -1,11 +1,11 @@
 #tenantPortal {
-    color: #ffffff;
+    color: #000;
     width: 100%;
     height: auto;
     overflow-x: hidden;
 }
 .tenantPortal-content {
-    background: linear-gradient(45deg, #3494E6, #000C40);
+    background: #ffffff;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -23,11 +23,13 @@
     width: 100%;
 }
 .tenantPortal-greeting {
+    color: #000000;
     align-items: center;
     display: flex;
     font-size: 22px;
     letter-spacing: 1px;
     margin: 2rem;
+    text-decoration: underline;
 }
 .tenantPortal-notification-logout {
     align-items: center;
@@ -36,7 +38,7 @@
 }
 .RiNotification2Fill {
     align-items: center;
-    color: #4ca1af;
+    color: #283e51;
     display: flex;
     margin-right: 2rem;
 }
@@ -47,7 +49,8 @@
 }
 .tenantPortal-logout a{
     text-decoration: none;
-    color: #ed1c24;
+    font-weight: bold;
+    color: #fe2712;
 }
 
 /* Balance */
@@ -62,6 +65,7 @@
     justify-content: center;
 }
 .balance-label {
+    color: #004242;
     letter-spacing: 1px;
     font-size: 18px;
 }
@@ -73,13 +77,13 @@
     background-color: transparent;
     cursor: pointer;
     
-    border: 2px solid #4ca1af;
+    border: 2px solid #283e51;
     border-radius: 20px;
 
     text-transform: capitalize;
     letter-spacing: 5px;
 
-    color: #ffffff;
+    color: #004242;
     display: flex;
     font-size: 18px;
     justify-content: center;
@@ -103,9 +107,9 @@
     cursor: pointer;
 }
 .tenant-icon-el {
-    color: #ffffff;
+    color: #efdfbb;
     align-items: center;
-    border: 2px solid #4ca1af;
+    border: 2px solid #283e51;
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -113,7 +117,7 @@
     padding: 1rem;
 }
 .tenant-icon-label {
-    color: #ffffff;
+    color: #004242;
     letter-spacing: 1px;
     margin-top: .5rem;
 }
@@ -121,7 +125,7 @@
 
 @media only screen and (max-width: 900px) {
     #tenantPortal {
-        color: #fff;
+        color: #ffffff;
         height: auto;
         width: 100vh;
         position: relative;
