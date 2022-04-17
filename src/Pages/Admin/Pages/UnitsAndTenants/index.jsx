@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -13,6 +13,11 @@ import AdminDashHeader from '../../Components/AdminDashHeader';
 function UnitsAndTenants() {
 
     const [activeTab, setActiveTab] = useState('Units')
+
+    //automatically scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div id='unitsAndTenants'>

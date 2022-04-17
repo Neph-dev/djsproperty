@@ -39,8 +39,11 @@
     width: 50%;
 }
 .add-unit-input-label {
+    align-items: center;
+    display: flex;
     margin: auto;
     font-size: 13px;
+    text-transform: capitalize;
 }
 .add-unit-input{
     align-items: center;
@@ -59,14 +62,18 @@
     border: 0; 
     font-size: 18px;    
     outline: none;
+    text-transform: capitalize;
     width: 100%;
 }
+
+/* Dropdown */
 .add-unit-dropdown {
     background-color: #d5d5d5;
     padding: 0.5rem;
     position: absolute;
     overflow-y: auto;
-    height: 20vh;
+    max-height: 20vh;
+    text-transform: capitalize;
     width: 50vh;
 }
 .add-unit-dropdown-el {
@@ -89,4 +96,22 @@
 
     margin: .5rem auto auto auto;
     width: 50%;
+}
+
+.save-btn {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    border: 0;
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 3rem;
+    font-size: 16px;
+    padding: 1rem;
+    text-transform: uppercase;
+}
+.save-btn:hover {
+    background-color: #242124;
 }
