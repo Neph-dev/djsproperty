@@ -21,6 +21,7 @@ import TenantPortal from '../Pages/TenantPortal';
 import Admin from '../Pages/Admin';
 import AddResidence from '../Pages/Admin/Pages/AddResidence';
 import AddUnit from '../Pages/Admin/Pages/AddUnit';
+import ResidenceDetails from '../Pages/Admin/Pages/ResidenceDetails';
 import UnitsAndTenants from '../Pages/Admin/Pages/UnitsAndTenants';
 import UnitDetails from '../Pages/Admin/Pages/UnitDetails';
 
@@ -45,6 +46,7 @@ export default function Router() {
           <Route exact path='/Add-unit' component={AddUnit} />
           <Route exact path='/Add-residence' component={AddResidence} />
           <Route exact path='/Unit-details' component={UnitDetails} />
+          <Route exact path='/Residence-details' component={ResidenceDetails} />
       </Switch>
     </Routers>
   )

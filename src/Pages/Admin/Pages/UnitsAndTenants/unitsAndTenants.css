@@ -71,3 +71,13 @@
     float: right;
     margin: 1rem;
 }
+
+.flat-card-img {
+    background-image: url("../../../../Assets/flat.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    height: 11rem;
+    width: 100%;
+}

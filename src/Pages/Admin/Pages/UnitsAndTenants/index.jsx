@@ -65,7 +65,7 @@ function UnitsAndTenants() {
                 <div className='residences-cards-container'>
                     <div className='residences-card'>
                         <div>
-                            <div className='residences-card-img' />
+                            <div className='flat-card-img' />
                             <div className='residences-card-details'>
                                 <div className='residences-card-location'>
                                     <b>Room / Shared Unit / 7b</b>

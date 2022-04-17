@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -9,6 +9,12 @@ import './residences.css';
 
 
 function Residences() {
+
+    //automatically scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div id="residences">
 
@@ -60,6 +66,9 @@ function Residences() {
 
                                 <div className='residences-card-view'>
                                     <Link to='/units-tenants'>Access Residence</Link>
+                                </div>
+                                <div className='residences-card-view'>
+                                    <Link to='/Residence-details'>Residence Details</Link>
                                 </div>
                             </div>
                         </div>

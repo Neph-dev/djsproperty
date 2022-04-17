@@ -60,7 +60,7 @@
     width: 20rem;
 }
 .residences-card-img {
-    background-image: url("../../../../Assets/flat.jpg");
+    background-image: url("../../../../Assets/app_building.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -84,6 +84,7 @@
 .residences-card-tenant-units {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 1rem;
     margin-top: 1rem;
 }
 .residences-card-total-units {
@@ -102,11 +103,12 @@
     color: #000000;
 }
 .residences-card-view {
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     font-size: 18px;
     border-top: 2px solid #000000;
     background: transparent;
-    margin-top: 1.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     text-align: center;
