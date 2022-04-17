@@ -16,7 +16,6 @@ function ContactAgent({ setShowContact, setMessageSent }) {
         <div id='contact-agent'>
             <ImCancelCircle
                 onClick={() => setShowContact(false)}
-                color={'#000'}
                 size={30}
                 className='ImCancelCircle' />
 

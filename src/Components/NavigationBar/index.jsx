@@ -66,7 +66,6 @@ function NavigationBar({ activeTab }) {
                 showToggle === false ? (
                     <AiOutlineMenu
                         size={45}
-                        color={'#ffff'}
                         onClick={() => setShowToggle((prevState) => !prevState)}
                         className='AiOutlineMenu' />
                 )

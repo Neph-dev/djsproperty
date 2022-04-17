@@ -1,0 +1,89 @@
+#add-notification {
+    align-items: center;
+    background-color: #283e51;
+    color: #ffffff;
+    
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+
+    position: fixed;
+    
+    height: 30rem;
+    width: 50vh;
+}
+
+.add-notif-ImCancelCircle {
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: .5rem;
+    margin-left: .5rem;
+
+    z-index: 50;
+}
+
+.add-notification-title {
+    color: #ffffff;
+    display: flex;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.add-notification-input {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+.add-notification-input input {
+    display: flex;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 16px;
+    outline:none;
+}
+
+.add-notification-description {
+    background-color: transparent;
+  
+    align-items: center;
+    border-color: #cccccc;
+    border: 1px solid #cccccc;
+  
+    color: #ffffff;
+    display: flex;
+    font-size: 16px;
+  
+    min-height: 9.5rem;
+    max-height: 9.5rem;
+  
+    margin: .5rem auto auto auto;
+  
+    outline: none;
+    padding: 0.5rem;
+    resize: none;
+
+  }
+
+  .add-natification-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    text-transform: uppercase;  
+    height: 2rem;
+    width: 5rem;
+  }

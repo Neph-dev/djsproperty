@@ -23,6 +23,7 @@
 
 .ImCancelCircle {
     cursor: pointer;
+    color: #000000;
     float: left;
     margin: 10px;
     top: 0;
