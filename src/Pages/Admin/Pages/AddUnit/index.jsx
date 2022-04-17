@@ -41,7 +41,10 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Type of unit</div>
                             <div
-                                onClick={() => setTypeOfUnitDropdown(prevState => !prevState)}
+                                onClick={() => {
+                                    setTypeOfUnitDropdown(prevState => !prevState)
+                                    setSingleSharedDropdown(false)
+                                }}
                                 className='add-unit-input'>
                                 <input
                                     type="text" />
@@ -50,7 +53,9 @@ function AddUnit() {
                             {
                                 typeOfUnitDropdown && (
                                     <div
-                                        onClick={() => setTypeOfUnitDropdown(prevState => !prevState)}
+                                        onClick={() => {
+                                            setTypeOfUnitDropdown(prevState => !prevState)
+                                        }}
                                         className='add-unit-dropdown' >
                                         <div className='add-unit-dropdown-el'>Bachelor</div>
                                         <div className='add-unit-dropdown-el'>Room</div>
@@ -65,7 +70,9 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Shared / Single unit</div>
                             <div
-                                onClick={() => setSingleSharedDropdown(prevState => !prevState)}
+                                onClick={() => {
+                                    setSingleSharedDropdown(prevState => !prevState)
+                                }}
                                 className='add-unit-input'>
                                 <input
                                     type="text" />
@@ -74,7 +81,7 @@ function AddUnit() {
                             {
                                 singleSharedDropdown && (
                                     <div
-                                        onClick={() => setSingleSharedDropdown(prevState => !prevState)}
+                                        onClick={() => { setSingleSharedDropdown(prevState => !prevState) }}
                                         className='add-unit-dropdown'>
                                         <div className='add-unit-dropdown-el'>Shared</div>
                                         <div className='add-unit-dropdown-el'>Single</div>
@@ -153,7 +160,11 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>In Unit Bath</div>
                             <div
-                                onClick={() => setBathroomDropdown(prevState => !prevState)}
+                                onClick={() => {
+                                    setBathroomDropdown(prevState => !prevState)
+                                    setKitchenDropdown(false)
+                                    setParkingDropdown(false)
+                                }}
                                 className='add-unit-input'>
                                 <input type="text" />
                                 <MdKeyboardArrowDown size={25} />
@@ -179,7 +190,10 @@ function AddUnit() {
                             <div className='add-unit-input-label'>In Unit Kitchen</div>
                             <div
                                 className='add-unit-input'
-                                onClick={() => setKitchenDropdown(prevState => !prevState)} >
+                                onClick={() => {
+                                    setKitchenDropdown(prevState => !prevState)
+                                    setParkingDropdown(false)
+                                }} >
                                 <input type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
