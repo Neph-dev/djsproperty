@@ -10,7 +10,9 @@ import './adminDashHeader.css';
 function AdminDashHeader() {
     return (
         <div className='admin-header'>
-            <div className='admin-greeting'>Admin Dashboard</div>
+            <div className='admin-greeting'>
+                <Link to='./Admin-dashboard'>Admin Dashboard</Link>
+            </div>
 
             <div className='admin-notification-logout'>
                 <div><RiNotification2Fill size={30} className='RiNotification2Fill' /></div>

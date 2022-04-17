@@ -19,6 +19,7 @@ import TenantPortal from '../Pages/TenantPortal';
 
 // Import admin dashboard components.
 import Admin from '../Pages/Admin';
+import AddResidence from '../Pages/Admin/Pages/AddResidence';
 import AddUnit from '../Pages/Admin/Pages/AddUnit';
 import UnitsAndTenants from '../Pages/Admin/Pages/UnitsAndTenants';
 
@@ -41,6 +42,7 @@ export default function Router() {
           <Route exact path='/Admin-dashboard' component={Admin} />
           <Route exact path='/Units-tenants' component={UnitsAndTenants} />
           <Route exact path='/Add-unit' component={AddUnit} />
+          <Route exact path='/Add-residence' component={AddResidence} />
       </Switch>
     </Routers>
   )

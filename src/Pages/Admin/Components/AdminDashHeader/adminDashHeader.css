@@ -9,8 +9,12 @@
     font-size: 22px;
     letter-spacing: 1px;
     margin: 2rem;
+}
+.admin-greeting a{
+    color: #000000;
     text-decoration: underline;
 }
+
 .admin-notification-logout {
     align-items: center;
     display: flex;

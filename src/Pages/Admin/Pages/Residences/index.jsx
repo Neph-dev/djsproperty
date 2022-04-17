@@ -28,10 +28,12 @@ function Residences() {
                     <div className='residence-title-label'>Residences</div>
                 </div>
 
-                <AiOutlinePlusCircle
-                    title='Add a residence.'
-                    size={40}
-                    className='AiOutlinePlusCircle' />
+                <Link to='/Add-residence'>
+                    <AiOutlinePlusCircle
+                        title='Add a residence.'
+                        size={40}
+                        className='AiOutlinePlusCircle' />
+                </Link>
 
                 <div className='residence-area-name'>Berario</div>
 

@@ -16,6 +16,8 @@ function AddUnit() {
     const [kitchenDropdown, setKitchenDropdown] = useState(false)
     const [parkingDropdown, setParkingDropdown] = useState(false)
 
+    const [messageInput, setMessageInput] = useState('')
+
     //automatically scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -150,6 +152,24 @@ function AddUnit() {
                             <div className='add-unit-input-label'>Deposit:</div>
                             <div className='add-unit-input'>
                                 R <input type="text" maxlength={10} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>
+                                Description (This will appear on your website.)
+                            </div>
+                            <div>
+                                <textarea
+                                    onChange={(e) => setMessageInput(e.target.value)}
+                                    name="message"
+                                    type="text"
+                                    placeholder="Type a description here."
+                                    maxlength={500}
+                                    className='nei-description' />
+                                {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
                             </div>
                         </div>
                     </div>
