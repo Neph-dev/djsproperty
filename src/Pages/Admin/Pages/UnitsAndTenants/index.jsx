@@ -78,7 +78,7 @@ function UnitsAndTenants() {
                                 </div>
 
                                 <div className='residences-card-view'>
-                                    <Link to='/'>See Unit</Link>
+                                    <Link to='/Unit-details'>Unit Details</Link>
                                 </div>
                             </div>
                         </div>

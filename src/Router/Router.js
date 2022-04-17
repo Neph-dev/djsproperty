@@ -22,6 +22,7 @@ import Admin from '../Pages/Admin';
 import AddResidence from '../Pages/Admin/Pages/AddResidence';
 import AddUnit from '../Pages/Admin/Pages/AddUnit';
 import UnitsAndTenants from '../Pages/Admin/Pages/UnitsAndTenants';
+import UnitDetails from '../Pages/Admin/Pages/UnitDetails';
 
 export default function Router() {
   return (
@@ -43,6 +44,7 @@ export default function Router() {
           <Route exact path='/Units-tenants' component={UnitsAndTenants} />
           <Route exact path='/Add-unit' component={AddUnit} />
           <Route exact path='/Add-residence' component={AddResidence} />
+          <Route exact path='/Unit-details' component={UnitDetails} />
       </Switch>
     </Routers>
   )
