@@ -62,7 +62,10 @@ function Login() {
                     <div className='see-password'>See password</div>
 
                     <buttom className='login-card-btn'>
-                        <Link to={activeTab === 'tenant' ? '/Tenant-portal' : '/Admin-dashboard'}>
+                        <Link to={
+                            activeTab === 'tenant'
+                                ? '/Tenant-portal-statements'
+                                : '/Admin-dashboard'}>
                             Login
                         </Link>
                     </buttom>

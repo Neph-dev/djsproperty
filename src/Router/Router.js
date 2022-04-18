@@ -15,7 +15,7 @@ import ViewUnit from '../Pages/ViewUnit';
 import Login from '../Pages/Authentication/Login';
 
 // Import tenant dashboard components.
-import TenantPortal from '../Pages/TenantPortal';
+import Statements from '../Pages/TenantPortal/Pages/Statements';
 
 // Import admin dashboard components.
 import Admin from '../Pages/Admin';
@@ -27,6 +27,7 @@ import ResidenceDetails from '../Pages/Admin/Pages/ResidenceDetails';
 import TenantDetails from '../Pages/Admin/Pages/TenantDetails';
 import UnitsAndTenants from '../Pages/Admin/Pages/UnitsAndTenants';
 import UnitDetails from '../Pages/Admin/Pages/UnitDetails';
+import Account from '../Pages/TenantPortal/Pages/Account';
 
 export default function Router() {
   return (
@@ -41,7 +42,8 @@ export default function Router() {
           <Route exact path='/Login' component={Login} />
           
           {/* tenants components */}
-          <Route exact path='/Tenant-portal' component={TenantPortal} />
+          <Route exact path='/Tenant-portal-account' component={Account} />
+          <Route exact path='/Tenant-portal-statements' component={Statements} />
 
           {/* admin components */}
           <Route exact path='/Admin-dashboard' component={Admin} />

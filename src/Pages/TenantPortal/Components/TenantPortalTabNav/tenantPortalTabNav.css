@@ -1,0 +1,60 @@
+.upload-statements-history {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: -2rem auto;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+.tenant-icon-el-container {
+    cursor: pointer;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: 2rem;
+}
+.tenant-icon-el-active {
+    color: #eae0c8;
+    align-items: center;
+    border: 2px solid #283e51;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem auto auto auto;
+    padding: 1rem;
+}
+.tenant-icon-el-active {
+    color: #eae0c8;
+    align-items: center;
+    border: 2px solid #283e51;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem auto auto auto;
+    padding: 1rem;
+}
+.tenant-icon-el {
+    color: #283e51;
+    align-items: center;
+    border: 2px solid #283e51;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem auto auto auto;
+    padding: 1rem;
+}
+.tenant-icon-el:hover {
+    color: #eae0c8;
+}
+.tenant-icon-label {
+    color: #004242;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 4rem;
+}

@@ -1,0 +1,75 @@
+#statements {
+    color: #000000;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.statements-content {
+    background: #ffffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-bottom: auto;
+    position: absolute;
+    z-index: 9;
+}
+
+.tenant-tab-name {
+    color: #000000;
+    font-size: 18px;
+    letter-spacing: 15px;
+    margin-bottom: 5vh;
+    margin-top: 15vh;
+    text-align:center;
+    text-transform: uppercase;
+}
+
+.tenant-statement-month-label {
+    font-size: 20px;
+    margin-top: 2rem;
+    font-weight: bold;
+    letter-spacing:2px;
+    text-align: center;
+    text-transform: capitalize;
+}
+.tenant-statement-card {
+    background-color: transparent;
+    border: 2px solid #000000;
+    margin: 1rem auto 1rem auto;
+    cursor: context-menu;
+    height: 10rem;
+    width: 15rem;
+}
+.tenant-statement-FcDownload {
+    align-items: center;
+    display: flex;
+    margin: 2rem auto auto auto;
+    left: 0;
+    right: 0;
+    justify-content: center;
+}
+
+.tenant-statement-doc-name {
+    align-items: center;
+    display: flex;
+    margin: auto;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tenant-statement-doc-update {
+    font-size: 13px;
+    top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    margin: .5rem;
+    position: relative;
+}
