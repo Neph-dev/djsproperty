@@ -1,0 +1,65 @@
+.search-and-add {
+    align-items: center;
+    display: flex;
+    float: right;
+}
+.search-tenant {
+    border: 1px solid #283e51;
+    border-radius: 50px;
+    font-size: 18px;
+    padding: 1rem;
+    height: 2rem;
+    width: 20rem;
+}
+
+.tenants-unit-label {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+
+}
+
+.tenant-card {
+    background-color: #eae0c8;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    height: auto;
+    width: auto;
+}
+
+.tenant-card-unit-number {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: .5rem auto auto auto;
+}
+.tenant-card-el {
+    text-align: center;
+    font-size: 18px;
+
+    letter-spacing: 2px;
+    margin: .5rem auto auto auto;
+    
+}
+
+.tenant-card-btn {
+    display: flex;
+    background-color: #283e51;
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 1rem auto 1rem auto;
+    padding: .5rem;
+    text-transform: capitalize;
+}
+.tenant-card-btn a{
+    color: #ffffff;
+    text-decoration: none;
+}

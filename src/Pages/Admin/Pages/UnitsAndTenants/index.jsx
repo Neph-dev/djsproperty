@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-import { AiOutlinePlusCircle, AiTwotoneHome } from 'react-icons/ai';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { MdPeopleAlt } from 'react-icons/md';
-import { BiArrowBack } from 'react-icons/bi';
 
 import './unitsAndTenants.css';
-import AdminDashHeader from '../../Components/AdminDashHeader';
+import UnitsAndTenantsTabNav from '../../Components/UnitsAndTenantsTabNav';
 
 
 function UnitsAndTenants() {
 
-    const [activeTab, setActiveTab] = useState('Units')
+    const activeTab = 'units'
 
     //automatically scroll to top
     useEffect(() => {
@@ -34,24 +33,7 @@ function UnitsAndTenants() {
 
             <div className='us-ts-content'>
 
-                <AdminDashHeader />
-
-                <Link to='/Admin-dashboard'>
-                    <BiArrowBack size={35} className='us-ts-BiArrowBack' />
-                </Link>
-
-                <div className='us-ts-tab-container'>
-                    <div
-                        onClick={() => setActiveTab('Units')}
-                        className={activeTab === 'Units' ? 'us-ts-tab-active' : 'us-ts-tab'}>
-                        <div className='us-ts-tab-label'>Units</div>
-                    </div>
-                    <div
-                        onClick={() => setActiveTab('manage')}
-                        className={activeTab === 'manage' ? 'us-ts-tab-active' : 'us-ts-tab'}>
-                        <div className='us-ts-tab-label'>Manage Tenants</div>
-                    </div>
-                </div>
+                <UnitsAndTenantsTabNav activeTab={activeTab} />
 
                 <Link to='/Add-unit' >
                     <AiOutlinePlusCircle

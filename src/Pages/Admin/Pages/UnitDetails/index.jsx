@@ -46,8 +46,9 @@ function UnitDetails() {
                     <BiArrowBack size={35} className='us-ts-BiArrowBack' />
                 </Link>
 
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div className='add-unit-title'>Unit <b>7b</b> Details</div>
+                    <div style={{ textDecoration: 'underline', cursor: 'pointer' }}>Edit</div>
                 </div>
 
                 <div className='add-unit-inputs-container'>
