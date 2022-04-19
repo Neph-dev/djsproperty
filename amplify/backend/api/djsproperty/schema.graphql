@@ -1,0 +1,67 @@
+type Area @model {
+  id: ID!
+  name: String!
+  description: String!
+  image: String!
+  residences: [Residence] @connection(keyName: "byArea", fields: ["id"])
+}
+
+type Residence
+  @model
+  @key(
+    name: "byArea"
+    fields: [
+      "areaID"
+      "name"
+      "address"
+      "totalUnits"
+      "totalCapacity"
+      "feature"
+    ]
+  ) {
+  id: ID!
+  name: String!
+  address: String!
+  totalUnits: Int
+  totalCapacity: Int!
+  feature: [String]
+
+  areaID: ID!
+  area: Area @connection(fields: ["areaID"])
+
+  units: [Unit] @connection(keyName: "byResidence", fields: ["id"])
+}
+
+type Unit
+  @model
+  @key(
+    name: "byResidence"
+    fields: [
+      "residenceID"
+      "type"
+      "style"
+      "capacity"
+      "dimensions"
+      "unitNumber"
+      "rent_sale"
+      "price"
+      "deposit"
+      "description"
+      "feature"
+    ]
+  ) {
+  id: ID!
+  type: String!
+  style: String
+  capacity: Int!
+  dimensions: String
+  unitNumber: String
+  rent_sale: String
+  price: Int
+  deposit: Int
+  description: String
+  feature: [String]
+
+  residenceID: ID!
+  residence: Residence @connection(fields: ["residenceID"])
+}

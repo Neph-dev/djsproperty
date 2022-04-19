@@ -115,8 +115,7 @@
 }
 .neighborhood-card-img {
     height: 11rem;
-    width: 100%;
-    background-image: url("../../Assets/Berario.jpg");
+    width: 20rem;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

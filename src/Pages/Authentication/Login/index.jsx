@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+
 import { BiArrowBack } from 'react-icons/bi';
+
+import { Redirect } from 'react-router-dom';
 
 import './login.css';
 
@@ -10,6 +13,15 @@ function Login() {
 
     const [activeTab, setActiveTab] = useState('tenant')
 
+    //Show Password function.
+    const showPassword = () => {
+        var input = document.getElementById("thePassword");
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
 
     return (
         <div id="login">
@@ -57,9 +69,15 @@ function Login() {
                         <input
                             type='password'
                             placeholder='Password'
-                            className='login-card-input' />
+                            className='login-card-input'
+                            id="thePassword" />
                     </div>
-                    <div className='see-password'>See password</div>
+                    <div className='see-password'>
+                        <input
+                            type="checkbox"
+                            onClick={showPassword} />
+                        See password
+                    </div>
 
                     <buttom className='login-card-btn'>
                         <Link to={

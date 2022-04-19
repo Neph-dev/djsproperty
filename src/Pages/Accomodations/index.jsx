@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 
 import { Helmet } from 'react-helmet-async';
 
+//import aws api and components.
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import { listAreas } from '../../graphql/queries';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -17,14 +21,32 @@ function Accomodations() {
 
     const [activeTab, setActiveTab] = useState('accomodations')
 
-    //automatically scroll to top
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    const [stateListArea, setStateListArea] = useState([])
 
     useEffect(() => {
         AOS.init({ duration: 2000 })
     })
+
+    useEffect(() => {
+        //automatically scroll to top
+        window.scrollTo(0, 0);
+
+        const fetchAreas = async () => {
+            try {
+                // Areas
+                const areaResults = await API.graphql(
+                    graphqlOperation(listAreas)
+                )
+                let area = areaResults.data.listAreas.items
+                setStateListArea(area)
+                console.log(area)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAreas();
+    }, [])
 
     return (
         <div id="accomodations">
@@ -86,24 +108,23 @@ function Accomodations() {
                     </div>
 
                     <div className='neighborhoods-cards-container'>
-                        <div className='neighborhood-card'>
-                            <div>
-                                <div className='neighborhood-card-img' />
-                                <div className='neighborhood-card-details'>
-                                    <div className='neighborhood-card-location'>
-                                        Berario
-                                    </div>
-                                    <div className='neighborhood-card-description'>
-                                        Berario is a suburb of Johannesburg, in the
-                                        South African province of Gauteng. It is
-                                        located in Region 4. It is located just
-                                        below Northcliff Hill and close to Cresta
-                                        Shopping Centre, one of the biggest malls
-                                        in South Africa.
+                        {
+                            stateListArea.map((area) => (
+                                <div className='neighborhood-card'>
+                                    <div>
+                                        <img src={area.image} alt='' className='neighborhood-card-img' />
+                                        <div className='neighborhood-card-details'>
+                                            <div className='neighborhood-card-location'>
+                                                {area.name}
+                                            </div>
+                                            <div className='neighborhood-card-description'>
+                                                {area.description}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
 
                 </section>

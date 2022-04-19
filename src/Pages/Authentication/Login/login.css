@@ -89,10 +89,17 @@
     letter-spacing: 5px
 }
 .see-password {
+    align-items: center;
+    display: flex;
     cursor: pointer;
     margin-top: 1rem;
     margin-left: 5rem;
 }
+.see-password input {
+    align-items: center;
+    display: flex;
+}
+
 .login-card-btn {
     align-items: center;
     background-color: #bfafb2;

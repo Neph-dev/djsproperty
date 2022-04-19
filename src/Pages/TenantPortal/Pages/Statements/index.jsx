@@ -34,15 +34,19 @@ function Statements() {
                     <div className='tenant-statement-month-label'>
                         March 2022
                     </div>
-                    <div className='tenant-statement-card' title='Click to download this document.'>
-                        <FcDownload
-                            size={50}
-                            className='tenant-statement-FcDownload' />
-                        <div className='tenant-statement-doc-name'>
-                            document_name.txt
-                        </div>
-                        <div className='tenant-statement-doc-update'>
-                            updated on 00/00/0000
+                    <div
+                        className='tenant-statement-card'
+                        title='Click to download this document.'>
+                        <div>
+                            <FcDownload
+                                size={50}
+                                className='tenant-statement-FcDownload' />
+                            <div className='tenant-statement-doc-name'>
+                                document_name.txt
+                            </div>
+                            <div className='tenant-statement-doc-update'>
+                                updated on 00/00/0000
+                            </div>
                         </div>
                     </div>
                 </div>

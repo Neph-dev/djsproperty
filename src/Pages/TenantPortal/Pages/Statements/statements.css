@@ -40,18 +40,21 @@
 .tenant-statement-card {
     background-color: transparent;
     border: 2px solid #000000;
-    margin: 1rem auto 1rem auto;
     cursor: context-menu;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto 1rem auto;
     height: 10rem;
     width: 15rem;
 }
 .tenant-statement-FcDownload {
     align-items: center;
     display: flex;
-    margin: 2rem auto auto auto;
+    margin: auto auto auto auto;
+    justify-content: center;
     left: 0;
     right: 0;
-    justify-content: center;
 }
 
 .tenant-statement-doc-name {

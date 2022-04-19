@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
+
 import { Helmet } from 'react-helmet-async';
+
+//import aws api and components.
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import { listAreas } from '../../../../graphql/queries';
+import * as mutations from '../../../../graphql/mutations';
+import awsExports from '../../../../aws-exports';
+
+// Import icons.
 import { BiArrowBack } from 'react-icons/bi';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
+// Import styling components
 import './addResidence.css';
+
 import AdminDashHeader from '../../Components/AdminDashHeader';
 
 
@@ -12,12 +24,84 @@ function AddResidence() {
 
     const [neighborhoodDropdown, setNeighborhoodDropdown] = useState(false)
 
-    const [messageInput, setMessageInput] = useState('')
+    // Area States
+    const [addArea, setAddArea] = useState(false)
+    const [areaID, setAreaID] = useState('')
+    const [stateListArea, setStateListArea] = useState([])
+    const [areaNameInput, setAreaNameInput] = useState('')
+    const [areaDescriptionInput, setAreaDescriptionInput] = useState('')
+    const [areaImageInput, setAreaImageInput] = useState('')
 
-    //automatically scroll to top
+    // Residence States
+    const [residenceNameInput, setResidenceNameInput] = useState('')
+    const [residenceAddressInput, setResidenceAddressInput] = useState('')
+    const [residenceTotalUnitsInput, setResidenceTotalUnitsInput] = useState('')
+    const [residenceTotalCapacityInput, setResidenceTotalCapacityInput] = useState('')
+    const [residenceImageInput, setResidenceImageInput] = useState('')
+    const [residenceFeaturesInput, setResidenceFeaturesInput] = useState([])
+
+    // This Function is used to create a new area(Neighborhood)
+    // then reload the page.
+    const createNewArea = async () => {
+        if (
+            addArea === true
+            && areaNameInput !== ''
+            && areaDescriptionInput !== ''
+            && areaImageInput !== '') {
+            const areaDetails = {
+                name: areaNameInput,
+                description: areaDescriptionInput,
+                image: areaImageInput,
+            };
+            const newArea = await API.graphql({
+                query: mutations.createArea,
+                variables: { input: areaDetails }
+            });
+
+            window.location.reload(false);
+        }
+    }
+
+    // This Function is used to create a new residence
+    // then reload the page.
+    const createNewResidence = async () => {
+        const areaDetails = {
+            name: residenceNameInput,
+            address: residenceAddressInput,
+            image: residenceImageInput,
+            totalUnits: residenceTotalUnitsInput,
+            totalCapacity: residenceTotalCapacityInput,
+            feature: residenceFeaturesInput,
+
+            areaID: areaID
+        };
+        const newArea = await API.graphql({
+            query: mutations.createArea,
+            variables: { input: areaDetails }
+        });
+
+        window.location.reload(false);
+    }
+
     useEffect(() => {
+        //automatically scroll to top
         window.scrollTo(0, 0);
-    }, []);
+
+        const fetchAreas = async () => {
+            try {
+                // Areas
+                const areaResults = await API.graphql(
+                    graphqlOperation(listAreas)
+                )
+                let area = areaResults.data.listAreas.items
+                setStateListArea(area)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAreas();
+    }, [])
 
     return (
         <div id='add-residence'>
@@ -57,8 +141,7 @@ function AddResidence() {
                                     setNeighborhoodDropdown(prevState => !prevState)
                                 }}
                                 className='add-unit-input'>
-                                <input
-                                    type="text" />
+                                <input type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
                             {
@@ -68,11 +151,33 @@ function AddResidence() {
                                             setNeighborhoodDropdown(prevState => !prevState)
                                         }}
                                         className='add-unit-dropdown' >
-                                        <div className='add-unit-dropdown-el'>
+                                        <div
+                                            onClick={() => {
+                                                setAddArea(true)
+                                                setAreaNameInput('')
+                                                setAreaImageInput('')
+                                                setAreaDescriptionInput('')
+                                            }}
+                                            className='add-unit-dropdown-el'>
                                             + Add a new neighborhood
                                         </div>
-                                        <div className='add-unit-dropdown-el'>Berario</div>
-                                    </div>)
+                                        {
+                                            stateListArea.map((area) => (
+                                                <div
+                                                    onClick={() => {
+                                                        setAddArea(false)
+                                                        setAreaNameInput(area.name)
+                                                        setAreaImageInput(area.image)
+                                                        setAreaDescriptionInput(area.description)
+                                                        setAreaID(area.id)
+                                                    }}
+                                                    className='add-unit-dropdown-el'>
+                                                    {area.name}
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                )
                             }
                         </div>
                     </div>
@@ -82,8 +187,25 @@ function AddResidence() {
                             <div className='add-unit-input-label'>Name of the neighborhood</div>
                             <div className='add-unit-input'>
                                 <input
+                                    value={areaNameInput}
+                                    onChange={(e) => setAreaNameInput(e.target.value)}
                                     type="text"
-                                    maxlength={15} />
+                                    maxlength={30}
+                                    disabled={addArea ? false : true} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Image URL</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setAreaImageInput(e.target.value)}
+                                    value={areaImageInput}
+                                    type="text"
+                                    maxlength={200}
+                                    disabled={addArea ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -95,15 +217,42 @@ function AddResidence() {
                             </div>
                             <div>
                                 <textarea
-                                    onChange={(e) => setMessageInput(e.target.value)}
+                                    value={areaDescriptionInput}
+                                    onChange={(e) => setAreaDescriptionInput(e.target.value)}
                                     name="message"
                                     type="text"
                                     placeholder="Type a description here."
                                     maxlength={500}
-                                    className='nei-description' />
-                                {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
+                                    className='nei-description'
+                                    disabled={addArea ? false : true} />
+                                {
+                                    areaDescriptionInput.length < 10
+                                        ? `0${areaDescriptionInput.length}`
+                                        : areaDescriptionInput.length
+                                }/500
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+                        <button
+                            className={
+                                addArea
+                                    && areaNameInput !== ''
+                                    && areaDescriptionInput !== ''
+                                    && areaImageInput !== '' ?
+                                    'addResidence-add-nei-btn-act'
+                                    : 'addResidence-add-nei-btn'
+                            }
+                            onClick={createNewArea}
+                            disabled={
+                                addArea
+                                    && areaNameInput !== ''
+                                    && areaDescriptionInput !== ''
+                                    && areaImageInput !== '' ?
+                                    false : true}>
+                            Add Area
+                        </button>
                     </div>
 
                     <div className='features-label'>Residence Information</div>
@@ -113,8 +262,9 @@ function AddResidence() {
                             <div className='add-unit-input-label'>Residence Name</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceNameInput(e.target.value)}
                                     type="text"
-                                    maxlength={15} />
+                                    maxlength={30} />
                             </div>
                         </div>
                     </div>
@@ -124,8 +274,21 @@ function AddResidence() {
                             <div className='add-unit-input-label'>Residence Address</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceAddressInput(e.target.value)}
                                     type="text"
-                                    maxlength={15} />
+                                    maxlength={100} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Image URL</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setResidenceImageInput(e.target.value)}
+                                    type="text"
+                                    maxlength={100} />
                             </div>
                         </div>
                     </div>
@@ -135,8 +298,9 @@ function AddResidence() {
                             <div className='add-unit-input-label'>Total units in Residence</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceTotalUnitsInput(e.target.value)}
                                     type="text"
-                                    maxlength={15} />
+                                    maxlength={4} />
                             </div>
                         </div>
                     </div>
@@ -146,6 +310,7 @@ function AddResidence() {
                             <div className='add-unit-input-label'>Total Residence capacity</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceTotalCapacityInput(e.target.value)}
                                     type="text"
                                     maxlength={4} />People
                             </div>
