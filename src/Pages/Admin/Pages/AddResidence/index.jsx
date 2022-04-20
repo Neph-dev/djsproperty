@@ -8,7 +8,6 @@ import { Helmet } from 'react-helmet-async';
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { listAreas } from '../../../../graphql/queries';
 import * as mutations from '../../../../graphql/mutations';
-import awsExports from '../../../../aws-exports';
 
 // Import icons.
 import { BiArrowBack } from 'react-icons/bi';
@@ -25,6 +24,7 @@ function AddResidence() {
     const [neighborhoodDropdown, setNeighborhoodDropdown] = useState(false)
 
     // Area States
+    const [selectedArea, setSelectedArea] = useState(false)
     const [addArea, setAddArea] = useState(false)
     const [areaID, setAreaID] = useState('')
     const [stateListArea, setStateListArea] = useState([])
@@ -35,6 +35,8 @@ function AddResidence() {
     // Residence States
     const [residenceNameInput, setResidenceNameInput] = useState('')
     const [residenceAddressInput, setResidenceAddressInput] = useState('')
+    const [residenceCityInput, setResidenceCityInput] = useState('')
+    const [residencePostalInput, setResidencePostalInput] = useState('')
     const [residenceTotalUnitsInput, setResidenceTotalUnitsInput] = useState('')
     const [residenceTotalCapacityInput, setResidenceTotalCapacityInput] = useState('')
     const [residenceImageInput, setResidenceImageInput] = useState('')
@@ -65,9 +67,11 @@ function AddResidence() {
     // This Function is used to create a new residence
     // then reload the page.
     const createNewResidence = async () => {
-        const areaDetails = {
+        const residenceDetails = {
             name: residenceNameInput,
             address: residenceAddressInput,
+            city: residenceCityInput,
+            postalCode: residencePostalInput,
             image: residenceImageInput,
             totalUnits: residenceTotalUnitsInput,
             totalCapacity: residenceTotalCapacityInput,
@@ -75,9 +79,9 @@ function AddResidence() {
 
             areaID: areaID
         };
-        const newArea = await API.graphql({
-            query: mutations.createArea,
-            variables: { input: areaDetails }
+        const newResidence = await API.graphql({
+            query: mutations.createResidence,
+            variables: { input: residenceDetails }
         });
 
         window.location.reload(false);
@@ -164,7 +168,9 @@ function AddResidence() {
                                         {
                                             stateListArea.map((area) => (
                                                 <div
+                                                    key={area.key}
                                                     onClick={() => {
+                                                        setSelectedArea(true)
                                                         setAddArea(false)
                                                         setAreaNameInput(area.name)
                                                         setAreaImageInput(area.image)
@@ -280,6 +286,28 @@ function AddResidence() {
                             </div>
                         </div>
                     </div>
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>City</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setResidenceCityInput(e.target.value)}
+                                    type="text"
+                                    maxlength={100} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Postal Code</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setResidencePostalInput(e.target.value)}
+                                    type="text"
+                                    maxlength={100} />
+                            </div>
+                        </div>
+                    </div>
 
                     <div className='add-unit-input-container'>
                         <div>
@@ -300,6 +328,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidenceTotalUnitsInput(e.target.value)}
                                     type="text"
+                                    placeholder="Enter numbers only."
                                     maxlength={4} />
                             </div>
                         </div>
@@ -312,6 +341,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidenceTotalCapacityInput(e.target.value)}
                                     type="text"
+                                    placeholder="Enter numbers only."
                                     maxlength={4} />People
                             </div>
                         </div>
@@ -331,7 +361,9 @@ function AddResidence() {
                         <div
                             className='add-unit-input-label'
                             style={{ marginTop: 5, marginBottom: 5, fontSize: 16 }}>
-                            <input type='checkbox' />Wifi
+                            <input
+                                value='Wifi'
+                                type='checkbox' />Wifi
                         </div>
                         <div
                             className='add-unit-input-label'
@@ -366,8 +398,29 @@ function AddResidence() {
 
                     <div>
                         <button
-                            className='save-btn'
-                            onClick={() => ''}>
+                            className={
+                                selectedArea
+                                    && residenceNameInput !== ''
+                                    && residenceAddressInput !== ''
+                                    && residenceImageInput !== ''
+                                    && residenceTotalUnitsInput !== ''
+                                    && residenceTotalCapacityInput !== ''
+                                    && areaImageInput !== '' ?
+                                    'addResidence-add-nei-btn-act'
+                                    : 'addResidence-add-nei-btn'
+                            }
+                            disabled={
+                                selectedArea
+                                    && residenceNameInput !== ''
+                                    && residenceAddressInput !== ''
+                                    && residenceCityInput !== ''
+                                    && residencePostalInput !== ''
+                                    && residenceImageInput !== ''
+                                    && residenceTotalUnitsInput !== ''
+                                    && residenceTotalCapacityInput !== ''
+                                    && areaImageInput !== '' ?
+                                    false : true}
+                            onClick={createNewResidence}>
                             Save Residence
                         </button>
                     </div>

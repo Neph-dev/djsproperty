@@ -14,17 +14,23 @@ type Residence
       "areaID"
       "name"
       "address"
+      "city"
+      "postalCode"
       "totalUnits"
       "totalCapacity"
       "feature"
+      "image"
     ]
   ) {
   id: ID!
   name: String!
   address: String!
+  city: String!
+  postalCode: Int!
   totalUnits: Int
   totalCapacity: Int!
   feature: [String]
+  image: String
 
   areaID: ID!
   area: Area @connection(fields: ["areaID"])

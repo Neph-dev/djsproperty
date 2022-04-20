@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+
+//import aws api and components.
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import * as mutations from '../../../../graphql/mutations';
+import awsExports from '../../../../aws-exports';
 
 import { BiArrowBack } from 'react-icons/bi';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -12,14 +17,75 @@ import AdminDashHeader from '../../Components/AdminDashHeader';
 
 function ResidenceDetails() {
 
-    const [neighborhoodDropdown, setNeighborhoodDropdown] = useState(false)
+    const location = useLocation()
 
-    const [messageInput, setMessageInput] = useState('')
+    const areaDetails = location.state.area
+    const residenceDetails = location.state
+
+    const [edit, setEdit] = useState(false)
+
+    const [updated, setUpdated] = useState(false)
+    const [deleted, setDeleted] = useState(false)
+
+    // Residence States
+    const [residenceNameInput, setResidenceNameInput] = useState(residenceDetails.name)
+    const [residenceAddressInput, setResidenceAddressInput] = useState(residenceDetails.address)
+    const [residenceCityInput, setResidenceCityInput] = useState(residenceDetails.city)
+    const [residencePostalInput, setResidencePostalInput] = useState(residenceDetails.postalCode)
+    const [residenceTotalUnitsInput, setResidenceTotalUnitsInput] = useState(residenceDetails.totalUnits)
+    const [residenceTotalCapacityInput, setResidenceTotalCapacityInput] = useState(residenceDetails.totalCapacity)
+    const [residenceImageInput, setResidenceImageInput] = useState(residenceDetails.image)
+    const [residenceFeaturesInput, setResidenceFeaturesInput] = useState([])
+
 
     //automatically scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // This Function is used to delete a residence
+    // then reload the page.
+    const deleteResidence = async () => {
+        const residenceDetail = {
+            id: residenceDetails.id,
+        };
+        const deleteResidence = await API.graphql({
+            query: mutations.deleteResidence,
+            variables: { input: residenceDetail }
+        });
+        setDeleted(true)
+    }
+    if (deleted) {
+        return <Redirect to='/Admin-dashboard' />
+    }
+
+    // This Function is used to update a residence
+    // then reload the page.
+    const updateResidence = async () => {
+        const residenceDetail = {
+
+            id: residenceDetails.id,
+            name: residenceNameInput,
+            address: residenceAddressInput,
+            city: residenceCityInput,
+            postalCode: residencePostalInput,
+            image: residenceImageInput,
+            totalUnits: residenceTotalUnitsInput,
+            totalCapacity: residenceTotalCapacityInput,
+            feature: residenceFeaturesInput,
+
+            areaID: areaDetails.id
+        };
+        const updateResidence = await API.graphql({
+            query: mutations.updateResidence,
+            variables: { input: residenceDetail }
+        });
+
+        setUpdated(true)
+    }
+    if (updated) {
+        return <Redirect to='/Admin-dashboard' />
+    }
 
     return (
         <div id='residence-details'>
@@ -44,7 +110,11 @@ function ResidenceDetails() {
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div className='add-unit-title'>Residence <b>Berario Palms</b> Details</div>
-                    <div style={{ textDecoration: 'underline', cursor: 'pointer' }}>Edit</div>
+                    <div
+                        onClick={() => setEdit(true)}
+                        style={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                        Edit
+                    </div>
                 </div>
 
                 <div className='add-unit-inputs-container'>
@@ -53,39 +123,13 @@ function ResidenceDetails() {
 
                     <div className='add-unit-input-container'>
                         <div>
-                            <div className='add-unit-input-label'>Select or add neighborhood</div>
-                            <div
-                                onClick={() => {
-                                    setNeighborhoodDropdown(prevState => !prevState)
-                                }}
-                                className='add-unit-input'>
-                                <input
-                                    type="text" />
-                                <MdKeyboardArrowDown size={25} />
-                            </div>
-                            {
-                                neighborhoodDropdown && (
-                                    <div
-                                        onClick={() => {
-                                            setNeighborhoodDropdown(prevState => !prevState)
-                                        }}
-                                        className='add-unit-dropdown' >
-                                        <div className='add-unit-dropdown-el'>
-                                            + Add a new neighborhood
-                                        </div>
-                                        <div className='add-unit-dropdown-el'>Berario</div>
-                                    </div>)
-                            }
-                        </div>
-                    </div>
-
-                    <div className='add-unit-input-container'>
-                        <div>
                             <div className='add-unit-input-label'>Name of the neighborhood</div>
                             <div className='add-unit-input'>
                                 <input
+                                    value={areaDetails.name}
                                     type="text"
-                                    maxlength={15} />
+                                    maxLength={15}
+                                    readOnly={true} />
                             </div>
                         </div>
                     </div>
@@ -97,13 +141,12 @@ function ResidenceDetails() {
                             </div>
                             <div>
                                 <textarea
-                                    onChange={(e) => setMessageInput(e.target.value)}
+                                    value={areaDetails.description}
                                     name="message"
                                     type="text"
                                     placeholder="Type a description here."
-                                    maxlength={500}
-                                    className='nei-description' />
-                                {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
+                                    maxLength={500}
+                                    className='nei-description' readOnly={true} />
                             </div>
                         </div>
                     </div>
@@ -115,8 +158,11 @@ function ResidenceDetails() {
                             <div className='add-unit-input-label'>Residence Name</div>
                             <div className='add-unit-input'>
                                 <input
+                                    value={residenceNameInput}
+                                    onChange={(e) => setResidenceNameInput(e.target.value)}
                                     type="text"
-                                    maxlength={15} />
+                                    maxLength={15}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -126,8 +172,53 @@ function ResidenceDetails() {
                             <div className='add-unit-input-label'>Residence Address</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceAddressInput(e.target.value)}
+                                    value={residenceAddressInput}
                                     type="text"
-                                    maxlength={15} />
+                                    maxLength={40}
+                                    readOnly={edit ? false : true} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>City</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setResidenceCityInput(e.target.value)}
+                                    value={residenceCityInput}
+                                    type="text"
+                                    maxLength={40}
+                                    readOnly={edit ? false : true} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Postal Code</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setResidencePostalInput(e.target.value)}
+                                    value={residencePostalInput}
+                                    type="text"
+                                    maxLength={5}
+                                    readOnly={edit ? false : true} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Image URL</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    onChange={(e) => setResidenceImageInput(e.target.value)}
+                                    value={residenceImageInput}
+                                    type="text"
+                                    maxLength={5}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -137,8 +228,11 @@ function ResidenceDetails() {
                             <div className='add-unit-input-label'>Total units in Residence</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceTotalUnitsInput(e.target.value)}
+                                    value={residenceTotalUnitsInput}
                                     type="text"
-                                    maxlength={15} />
+                                    maxLength={15}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -148,8 +242,11 @@ function ResidenceDetails() {
                             <div className='add-unit-input-label'>Total Residence capacity</div>
                             <div className='add-unit-input'>
                                 <input
+                                    onChange={(e) => setResidenceTotalCapacityInput(e.target.value)}
+                                    value={residenceTotalCapacityInput}
                                     type="text"
-                                    maxlength={4} />People
+                                    maxLength={4}
+                                    readOnly={edit ? false : true} />People
                             </div>
                         </div>
                     </div>
@@ -195,7 +292,7 @@ function ResidenceDetails() {
                         <div>
                             <div className='add-unit-input-label'>Add a feature</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={15} />
+                                <input type="text" maxLength={15} />
                             </div>
                             <button>Add feature</button>
                         </div>
@@ -203,13 +300,18 @@ function ResidenceDetails() {
 
                     <div>
                         <button
-                            className='save-btn'
-                            onClick={() => ''}>
+                            className={
+                                edit === true ?
+                                    'addResidence-add-nei-btn-act'
+                                    : 'addResidence-add-nei-btn'
+                            }
+                            onClick={updateResidence}
+                            disabled={edit === false ? true : false}>
                             Save Residence
                         </button>
                         <button
                             className='residence-delete-btn'
-                            onClick={() => ''}>
+                            onClick={deleteResidence}>
                             Delete Residence
                         </button>
                     </div>

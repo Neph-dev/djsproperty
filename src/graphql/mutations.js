@@ -16,9 +16,12 @@ export const createArea = /* GraphQL */ `
           id
           name
           address
+          city
+          postalCode
           totalUnits
           totalCapacity
           feature
+          image
           areaID
           createdAt
           updatedAt
@@ -45,9 +48,12 @@ export const updateArea = /* GraphQL */ `
           id
           name
           address
+          city
+          postalCode
           totalUnits
           totalCapacity
           feature
+          image
           areaID
           createdAt
           updatedAt
@@ -74,9 +80,12 @@ export const deleteArea = /* GraphQL */ `
           id
           name
           address
+          city
+          postalCode
           totalUnits
           totalCapacity
           feature
+          image
           areaID
           createdAt
           updatedAt
@@ -97,9 +106,12 @@ export const createResidence = /* GraphQL */ `
       id
       name
       address
+      city
+      postalCode
       totalUnits
       totalCapacity
       feature
+      image
       areaID
       area {
         id
@@ -145,9 +157,12 @@ export const updateResidence = /* GraphQL */ `
       id
       name
       address
+      city
+      postalCode
       totalUnits
       totalCapacity
       feature
+      image
       areaID
       area {
         id
@@ -193,9 +208,12 @@ export const deleteResidence = /* GraphQL */ `
       id
       name
       address
+      city
+      postalCode
       totalUnits
       totalCapacity
       feature
+      image
       areaID
       area {
         id
@@ -254,9 +272,12 @@ export const createUnit = /* GraphQL */ `
         id
         name
         address
+        city
+        postalCode
         totalUnits
         totalCapacity
         feature
+        image
         areaID
         area {
           id
@@ -299,9 +320,12 @@ export const updateUnit = /* GraphQL */ `
         id
         name
         address
+        city
+        postalCode
         totalUnits
         totalCapacity
         feature
+        image
         areaID
         area {
           id
@@ -344,9 +368,12 @@ export const deleteUnit = /* GraphQL */ `
         id
         name
         address
+        city
+        postalCode
         totalUnits
         totalCapacity
         feature
+        image
         areaID
         area {
           id

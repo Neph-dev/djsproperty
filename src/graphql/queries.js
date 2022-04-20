@@ -13,9 +13,12 @@ export const getArea = /* GraphQL */ `
           id
           name
           address
+          city
+          postalCode
           totalUnits
           totalCapacity
           feature
+          image
           areaID
           createdAt
           updatedAt
@@ -55,9 +58,12 @@ export const getResidence = /* GraphQL */ `
       id
       name
       address
+      city
+      postalCode
       totalUnits
       totalCapacity
       feature
+      image
       areaID
       area {
         id
@@ -105,9 +111,12 @@ export const listResidences = /* GraphQL */ `
         id
         name
         address
+        city
+        postalCode
         totalUnits
         totalCapacity
         feature
+        image
         areaID
         area {
           id
@@ -146,9 +155,12 @@ export const getUnit = /* GraphQL */ `
         id
         name
         address
+        city
+        postalCode
         totalUnits
         totalCapacity
         feature
+        image
         areaID
         area {
           id
@@ -193,9 +205,12 @@ export const listUnits = /* GraphQL */ `
           id
           name
           address
+          city
+          postalCode
           totalUnits
           totalCapacity
           feature
+          image
           areaID
           createdAt
           updatedAt
