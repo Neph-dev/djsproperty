@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet-async';
 
@@ -15,6 +15,10 @@ import SentMessage from '../../Components/SentMessage';
 
 
 function ViewUnit() {
+
+    const location = useLocation()
+
+    const unitDetails = location.state
 
     const [activeTab, setActiveTab] = useState('accomodations')
     const [showContact, setShowContact] = useState(false)
@@ -64,22 +68,24 @@ function ViewUnit() {
                                 setShowContact={setShowContact} />
                         )
                     }
-                    <div className='view-unit-img' />
+                    <img src={unitDetails.image} alt='' className='view-unit-img' />
                     <div
                         data-aos="fade-in"
                         data-aos-duration="1500"
                         className='view-unit-details'>
-                        <div className='view-unit-details-location'>Richmond, Johannesburg</div>
-                        <div className='view-unit-details-type'>Bachelor Unit</div>
+                        <div className='view-unit-details-location'>
+                            {unitDetails.residence.name}
+                        </div>
+                        <div className='view-unit-details-type'>{unitDetails.type} Unit</div>
 
                         <div className='view-unit-details-address'>
-                            Empire Road Richmond, Johannesburg
+                            {unitDetails.residence.address}, {unitDetails.residence.city}
                         </div>
 
                         <div className='view-unit-details-price'>
                             <div>
                                 <div>Price</div>
-                                <div>R 3,729.36 pm</div>
+                                <div>R {unitDetails.price} pm</div>
                             </div>
                             <div>
                                 <div>Features</div>
@@ -90,13 +96,7 @@ function ViewUnit() {
                         </div>
 
                         <div className='view-unit-description'>
-                            Bachelor unit to let on Empire Road in Richmond, Johannesburg.
-                            Close to UJ (University of Johannesburg), Wits and SABC. Within
-                            walking distance to shops and other amenities.
-
-                            The bachelor flat is a single room, suitable for a double
-                            bed, with built in cupboards and a small kitchenette. Bathroom
-                            consists of shower, basin and toilet, no bath.
+                            {unitDetails.description}
                         </div>
 
                         <div

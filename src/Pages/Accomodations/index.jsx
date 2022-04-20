@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 
 //import aws api and components.
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import { listAreas } from '../../graphql/queries';
+import { listAreas, listUnits } from '../../graphql/queries';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -22,6 +22,7 @@ function Accomodations() {
     const [activeTab, setActiveTab] = useState('accomodations')
 
     const [stateListArea, setStateListArea] = useState([])
+    const [stateListUnits, setStateListUnits] = useState([])
 
     useEffect(() => {
         AOS.init({ duration: 2000 })
@@ -39,7 +40,15 @@ function Accomodations() {
                 )
                 let area = areaResults.data.listAreas.items
                 setStateListArea(area)
-                console.log(area)
+
+                // units
+                const unitResults = await API.graphql(
+                    graphqlOperation(listUnits)
+                )
+                let unit = unitResults.data.listUnits.items
+                setStateListUnits(unit)
+                console.log(stateListUnits)
+
             }
             catch (error) {
                 console.log(error)
@@ -76,25 +85,38 @@ function Accomodations() {
                     </div>
 
                     <div className='accomodation-cards-container'>
-                        <div className='accomodation-card'>
-                            <div>
-                                <div className='accomodation-card-img' />
-                                <div className='accomodation-card-details'>
-                                    <div className='accomodation-card-location'>
-                                        <b>Richmond</b>, Johannesburg
-                                    </div>
-                                    <div className='accomodation-card-type'>
-                                        Bachelor Unit
-                                    </div>
-                                    <div className='accomodation-card-price'>
-                                        Price: R 3729.36 pm
-                                    </div>
-                                    <div className='accomodation-card-view'>
-                                        <Link to='/View-unit'>View Unit</Link>
+                        {
+                            stateListUnits.map((unit) => (
+                                <div className='accomodation-card'>
+                                    <div>
+                                        <img
+                                            src={unit.image}
+                                            alt=''
+                                            className='accomodation-card-img' />
+                                        <div className='accomodation-card-details'>
+                                            <div className='accomodation-card-location'>
+                                                <b>{unit.residence.name}</b>
+                                            </div>
+                                            <div className='accomodation-card-type'>
+                                                {unit.type} Unit
+                                            </div>
+                                            <div className='accomodation-card-price'>
+                                                Price: R {unit.price} pm
+                                            </div>
+                                            <div className='accomodation-card-view'>
+                                                <Link
+                                                    to={{
+                                                        state: unit,
+                                                        pathname: '/View-unit'
+                                                    }}>
+                                                    View Unit
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
 
                 </section>
