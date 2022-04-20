@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
 import { Link, useLocation, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 //import aws api and components.
-import { API, graphqlOperation, Auth } from "aws-amplify";
+import { API } from "aws-amplify";
 import * as mutations from '../../../../graphql/mutations';
-import awsExports from '../../../../aws-exports';
 
 import { BiArrowBack } from 'react-icons/bi';
-import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import './residenceDetails.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';

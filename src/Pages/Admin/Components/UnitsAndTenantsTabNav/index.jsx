@@ -7,7 +7,7 @@ import './unitsAndTenantsTabNav.css';
 import AdminDashHeader from '../AdminDashHeader';
 
 
-function UnitsAndTenantsTabNav({ activeTab }) {
+function UnitsAndTenantsTabNav({ activeTab, residenceDetails, area }) {
     return (
         <div>
             <AdminDashHeader />
@@ -23,7 +23,7 @@ function UnitsAndTenantsTabNav({ activeTab }) {
                         activeTab === 'units'
                             ? 'us-ts-tab-label-active'
                             : 'us-ts-tab-label'}>
-                        <Link to='/Units-tenants'>
+                        <Link to={{ state: residenceDetails, area, pathname: '/Units-tenants' }}>
                             Units
                         </Link>
                     </div>
@@ -34,7 +34,7 @@ function UnitsAndTenantsTabNav({ activeTab }) {
                         activeTab === 'manage'
                             ? 'us-ts-tab-label-active'
                             : 'us-ts-tab-label'}>
-                        <Link to='/Manage-tenants'>
+                        <Link to={{ state: residenceDetails, area, pathname: '/Manage-tenants' }}>
                             Manage Tenants
                         </Link>
                     </div>

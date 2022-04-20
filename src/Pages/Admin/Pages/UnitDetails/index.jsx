@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+
+//import aws api and components.
+import { API } from "aws-amplify";
+import * as mutations from '../../../../graphql/mutations';
 
 import { BiArrowBack } from 'react-icons/bi';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -12,6 +16,11 @@ import AdminDashHeader from '../../Components/AdminDashHeader';
 
 function UnitDetails() {
 
+    const location = useLocation()
+    const area = location.state.area
+    const residenceDetails = location.state
+    const unit = location.unit
+
     const [typeOfUnitDropdown, setTypeOfUnitDropdown] = useState(false)
     const [singleSharedDropdown, setSingleSharedDropdown] = useState(false)
     const [rentSaleDropdown, setRentSaleDropdown] = useState(false)
@@ -19,12 +28,42 @@ function UnitDetails() {
     const [kitchenDropdown, setKitchenDropdown] = useState(false)
     const [parkingDropdown, setParkingDropdown] = useState(false)
 
-    const [messageInput, setMessageInput] = useState('')
+    // Unit States
+    const [unitID, setUnitID] = useState(unit.id)
+    const [unitTypeInput, setUnitTypeInput] = useState(unit.type)
+    const [unitStyleInput, setUnitStyleInput] = useState(unit.style)
+    const [unitCapacityInput, setUnitCapacityInput] = useState(unit.capacity)
+    const [unitDimensionsInput, setUnitDimensionsInput] = useState(unit.dimensions)
+    const [unitNumberInput, setUnitNumberInput] = useState(unit.unitNumber)
+    const [unitRentSaleInput, setUnitRentSaleInput] = useState(unit.rent_sale)
+    const [unitPriceInput, setUnitPriceInput] = useState(unit.price)
+    const [unitDepositInput, setUnitDepositInput] = useState(unit.deposit)
+    const [unitDescriptionInput, setUnitDescriptionInput] = useState(unit.description)
+    const [unitImageInput, setUnitImageInput] = useState(unit.image)
+    const [unitFeaturesInput, setUnitFeaturesInput] = useState([])
+
+    const [deleted, setDeleted] = useState(false)
 
     //automatically scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // This Function is used to delete a Unit
+    // then reload the page.
+    const handleDeleteUnit = async () => {
+        const unitDetail = {
+            id: unitID,
+        };
+        const deleteUnit = await API.graphql({
+            query: mutations.deleteUnit,
+            variables: { input: unitDetail }
+        });
+        setDeleted(true)
+    }
+    if (deleted) {
+        return <Redirect to={{ state: residenceDetails, area, pathname: '/units-tenants' }} />
+    }
 
     return (
         <div id="unit-details">
@@ -42,7 +81,7 @@ function UnitDetails() {
             <div className="unit-details-content">
                 <AdminDashHeader />
 
-                <Link to='/units-tenants'>
+                <Link to={{ state: residenceDetails, area, pathname: '/units-tenants' }}>
                     <BiArrowBack size={35} className='us-ts-BiArrowBack' />
                 </Link>
 
@@ -62,6 +101,8 @@ function UnitDetails() {
                                 }}
                                 className='add-unit-input'>
                                 <input
+                                    value={unitTypeInput}
+                                    onChange={(e) => setUnitTypeInput(e.target.value)}
                                     type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
@@ -72,11 +113,21 @@ function UnitDetails() {
                                             setTypeOfUnitDropdown(prevState => !prevState)
                                         }}
                                         className='add-unit-dropdown' >
-                                        <div className='add-unit-dropdown-el'>Bachelor</div>
-                                        <div className='add-unit-dropdown-el'>Room</div>
-                                        <div className='add-unit-dropdown-el'>1 Bedroom</div>
-                                        <div className='add-unit-dropdown-el'>2 Bedroom</div>
-                                        <div className='add-unit-dropdown-el'>3 Bedroom</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('Bachelor') }}
+                                            className='add-unit-dropdown-el'>Bachelor</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('Room') }}
+                                            className='add-unit-dropdown-el'>Room</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('1 Bedroom') }}
+                                            className='add-unit-dropdown-el'>1 Bedroom</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('2 Bedroom') }}
+                                            className='add-unit-dropdown-el'>2 Bedroom</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('3 Bedroom') }}
+                                            className='add-unit-dropdown-el'>3 Bedroom</div>
                                     </div>)
                             }
                         </div>
@@ -90,6 +141,8 @@ function UnitDetails() {
                                 }}
                                 className='add-unit-input'>
                                 <input
+                                    value={unitStyleInput}
+                                    onChange={(e) => setUnitStyleInput(e.target.value)}
                                     type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
@@ -98,8 +151,12 @@ function UnitDetails() {
                                     <div
                                         onClick={() => { setSingleSharedDropdown(prevState => !prevState) }}
                                         className='add-unit-dropdown'>
-                                        <div className='add-unit-dropdown-el'>Shared</div>
-                                        <div className='add-unit-dropdown-el'>Single</div>
+                                        <div
+                                            onClick={() => setUnitStyleInput('Shared')}
+                                            className='add-unit-dropdown-el'>Shared</div>
+                                        <div
+                                            onClick={() => setUnitStyleInput('Single')}
+                                            className='add-unit-dropdown-el'>Single</div>
                                     </div>)
                             }
                         </div>
@@ -109,8 +166,10 @@ function UnitDetails() {
                             <div className='add-unit-input-label'>Capacity</div>
                             <div className='add-unit-input'>
                                 <input
+                                    value={unitCapacityInput}
+                                    onChange={(e) => setUnitCapacityInput(e.target.value)}
                                     type="text"
-                                    maxlength={6} /> People
+                                    maxLength={6} /> People
                             </div>
                         </div>
                     </div>
@@ -118,7 +177,11 @@ function UnitDetails() {
                         <div>
                             <div className='add-unit-input-label'>Dimemsion</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={10} /> m2
+                                <input
+                                    value={unitDimensionsInput}
+                                    onChange={(e) => setUnitDimensionsInput(e.target.value)}
+                                    type="text"
+                                    maxLength={10} /> m2
                             </div>
                         </div>
                     </div>
@@ -127,7 +190,11 @@ function UnitDetails() {
                         <div>
                             <div className='add-unit-input-label'>Unit Number</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={5} />
+                                <input
+                                    value={unitNumberInput}
+                                    onChange={(e) => setUnitNumberInput(e.target.value)}
+                                    type="text"
+                                    maxLength={5} />
                             </div>
                         </div>
                     </div>
@@ -138,6 +205,8 @@ function UnitDetails() {
                                 onClick={() => setRentSaleDropdown(prevState => !prevState)}
                                 className='add-unit-input'>
                                 <input
+                                    value={unitRentSaleInput}
+                                    onChange={(e) => setUnitRentSaleInput(e.target.value)}
                                     type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
@@ -146,8 +215,12 @@ function UnitDetails() {
                                     <div
                                         onClick={() => setRentSaleDropdown(prevState => !prevState)}
                                         className='add-unit-dropdown'>
-                                        <div className='add-unit-dropdown-el'>Rent</div>
-                                        <div className='add-unit-dropdown-el'>Sale</div>
+                                        <div
+                                            onClick={() => setUnitRentSaleInput('Rent')}
+                                            className='add-unit-dropdown-el'>Rent</div>
+                                        <div
+                                            onClick={() => setUnitRentSaleInput('Sale')}
+                                            className='add-unit-dropdown-el'>Sale</div>
                                     </div>)
                             }
                         </div>
@@ -156,7 +229,11 @@ function UnitDetails() {
                         <div>
                             <div className='add-unit-input-label'>Price:</div>
                             <div className='add-unit-input'>
-                                R <input type="text" maxlength={10} />
+                                R <input
+                                    value={unitPriceInput}
+                                    onChange={(e) => setUnitPriceInput(e.target.value)}
+                                    type="text"
+                                    maxLength={10} />
                             </div>
                         </div>
                     </div>
@@ -164,7 +241,24 @@ function UnitDetails() {
                         <div>
                             <div className='add-unit-input-label'>Deposit:</div>
                             <div className='add-unit-input'>
-                                R <input type="text" maxlength={10} />
+                                R <input
+                                    value={unitDepositInput}
+                                    onChange={(e) => setUnitDepositInput(e.target.value)}
+                                    type="text"
+                                    maxLength={10} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Image URL:</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    value={unitImageInput}
+                                    onChange={(e) => setUnitImageInput(e.target.value)}
+                                    type="text"
+                                    maxLength={100} />
                             </div>
                         </div>
                     </div>
@@ -176,13 +270,14 @@ function UnitDetails() {
                             </div>
                             <div>
                                 <textarea
-                                    onChange={(e) => setMessageInput(e.target.value)}
+                                    value={unitDescriptionInput}
+                                    onChange={(e) => setUnitDescriptionInput(e.target.value)}
                                     name="message"
                                     type="text"
                                     placeholder="Type a description here."
-                                    maxlength={500}
+                                    maxLength={500}
                                     className='nei-description' />
-                                {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
+                                {unitDescriptionInput.length < 10 ? `0${unitDescriptionInput.length}` : unitDescriptionInput.length}/500
                             </div>
                         </div>
                     </div>
@@ -314,7 +409,7 @@ function UnitDetails() {
                         <div>
                             <div className='add-unit-input-label'>Add a feature</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={15} />
+                                <input type="text" maxLength={15} />
                             </div>
                             <button>Add feature</button>
                         </div>
@@ -328,7 +423,7 @@ function UnitDetails() {
                         </button>
                         <button
                             className='delete-btn'
-                            onClick={() => ''}>
+                            onClick={handleDeleteUnit}>
                             Delete Unit
                         </button>
                     </div>

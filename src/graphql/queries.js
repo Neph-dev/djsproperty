@@ -89,6 +89,7 @@ export const getResidence = /* GraphQL */ `
           deposit
           description
           feature
+          image
           residenceID
           createdAt
           updatedAt
@@ -150,6 +151,7 @@ export const getUnit = /* GraphQL */ `
       deposit
       description
       feature
+      image
       residenceID
       residence {
         id
@@ -200,6 +202,7 @@ export const listUnits = /* GraphQL */ `
         deposit
         description
         feature
+        image
         residenceID
         residence {
           id

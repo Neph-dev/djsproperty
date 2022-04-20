@@ -54,6 +54,7 @@ type Unit
       "deposit"
       "description"
       "feature"
+      "image"
     ]
   ) {
   id: ID!
@@ -67,6 +68,7 @@ type Unit
   deposit: Int
   description: String
   feature: [String]
+  image: String!
 
   residenceID: ID!
   residence: Residence @connection(fields: ["residenceID"])

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import { AiOutlinePlusCircle } from 'react-icons/ai';
@@ -10,6 +10,11 @@ import UnitsAndTenantsTabNav from '../../Components/UnitsAndTenantsTabNav';
 
 
 function ManageTenants() {
+
+    const location = useLocation()
+
+    const area = location.state.area
+    const residenceDetails = location.state
 
     const activeTab = 'manage'
 
@@ -22,7 +27,9 @@ function ManageTenants() {
         <div id='unitsAndTenants'>
             <div className='us-ts-content'>
 
-                <UnitsAndTenantsTabNav activeTab={activeTab} />
+                <UnitsAndTenantsTabNav
+                    residenceDetails={residenceDetails} area={area}
+                    activeTab={activeTab} />
 
                 <div className='search-and-add'>
                     <div>

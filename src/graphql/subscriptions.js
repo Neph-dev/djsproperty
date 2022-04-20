@@ -125,6 +125,7 @@ export const onCreateResidence = /* GraphQL */ `
           deposit
           description
           feature
+          image
           residenceID
           createdAt
           updatedAt
@@ -173,6 +174,7 @@ export const onUpdateResidence = /* GraphQL */ `
           deposit
           description
           feature
+          image
           residenceID
           createdAt
           updatedAt
@@ -221,6 +223,7 @@ export const onDeleteResidence = /* GraphQL */ `
           deposit
           description
           feature
+          image
           residenceID
           createdAt
           updatedAt
@@ -246,6 +249,7 @@ export const onCreateUnit = /* GraphQL */ `
       deposit
       description
       feature
+      image
       residenceID
       residence {
         id
@@ -291,6 +295,7 @@ export const onUpdateUnit = /* GraphQL */ `
       deposit
       description
       feature
+      image
       residenceID
       residence {
         id
@@ -336,6 +341,7 @@ export const onDeleteUnit = /* GraphQL */ `
       deposit
       description
       feature
+      image
       residenceID
       residence {
         id

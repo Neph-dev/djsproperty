@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Redirect } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+
+//import aws api and components.
+import { API } from "aws-amplify";
+import * as mutations from '../../../../graphql/mutations';
 
 import './addUnit.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';
 
 
 function AddUnit() {
+
+    const location = useLocation()
+    const area = location.state.area
+    const residenceDetails = location.state
 
     const [typeOfUnitDropdown, setTypeOfUnitDropdown] = useState(false)
     const [singleSharedDropdown, setSingleSharedDropdown] = useState(false)
@@ -18,10 +26,56 @@ function AddUnit() {
 
     const [messageInput, setMessageInput] = useState('')
 
+    // Unit States
+    const [unitTypeInput, setUnitTypeInput] = useState('')
+    const [unitStyleInput, setUnitStyleInput] = useState('')
+    const [unitCapacityInput, setUnitCapacityInput] = useState('')
+    const [unitDimensionsInput, setUnitDimensionsInput] = useState('')
+    const [unitNumberInput, setUnitNumberInput] = useState('')
+    const [unitRentSaleInput, setUnitRentSaleInput] = useState('')
+    const [unitPriceInput, setUnitPriceInput] = useState('')
+    const [unitDepositInput, setUnitDepositInput] = useState('')
+    const [unitDescriptionInput, setUnitDescriptionInput] = useState('')
+    const [unitImageInput, setUnitImageInput] = useState('')
+    const [unitFeaturesInput, setUnitFeaturesInput] = useState([])
+
+    const [createdUnit, setCreatedUnit] = useState(false)
+
     //automatically scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // This Function is used to create a new area(Neighborhood)
+    // then reload the page.
+    const createNewUnit = async () => {
+        const unitDetails = {
+            type: unitTypeInput,
+            style: unitStyleInput,
+            capacity: unitCapacityInput,
+            dimensions: unitDimensionsInput,
+            unitNumber: unitNumberInput,
+            rent_sale: unitRentSaleInput,
+            price: unitPriceInput,
+            deposit: unitDepositInput,
+            description: unitDescriptionInput,
+            image: unitImageInput,
+            feature: unitFeaturesInput,
+
+            residenceID: residenceDetails.id
+
+        };
+        const newUnit = await API.graphql({
+            query: mutations.createUnit,
+            variables: { input: unitDetails }
+        });
+
+        setCreatedUnit(true)
+    }
+
+    if (createdUnit) {
+        return <Redirect to={{ state: residenceDetails, area, pathname: '/units-tenants' }} />
+    }
 
     return (
         <div id='add-unit'>
@@ -30,12 +84,12 @@ function AddUnit() {
 
                 <AdminDashHeader />
 
-                <Link to='/units-tenants'>
+                <Link to={{ state: residenceDetails, area, pathname: '/units-tenants' }}>
                     <BiArrowBack size={35} className='us-ts-BiArrowBack' />
                 </Link>
 
                 <div>
-                    <div className='add-unit-title'>Add a unit in <b>Berario Palms</b></div>
+                    <div className='add-unit-title'>Add a unit in <b>{residenceDetails.name}</b></div>
                 </div>
 
                 <div className='add-unit-inputs-container'>
@@ -49,6 +103,8 @@ function AddUnit() {
                                 }}
                                 className='add-unit-input'>
                                 <input
+                                    value={unitTypeInput}
+                                    onChange={(e) => setUnitTypeInput(e.target.value)}
                                     type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
@@ -59,11 +115,21 @@ function AddUnit() {
                                             setTypeOfUnitDropdown(prevState => !prevState)
                                         }}
                                         className='add-unit-dropdown' >
-                                        <div className='add-unit-dropdown-el'>Bachelor</div>
-                                        <div className='add-unit-dropdown-el'>Room</div>
-                                        <div className='add-unit-dropdown-el'>1 Bedroom</div>
-                                        <div className='add-unit-dropdown-el'>2 Bedroom</div>
-                                        <div className='add-unit-dropdown-el'>3 Bedroom</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('Bachelor') }}
+                                            className='add-unit-dropdown-el'>Bachelor</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('Room') }}
+                                            className='add-unit-dropdown-el'>Room</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('1 Bedroom') }}
+                                            className='add-unit-dropdown-el'>1 Bedroom</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('2 Bedroom') }}
+                                            className='add-unit-dropdown-el'>2 Bedroom</div>
+                                        <div
+                                            onClick={() => { setUnitTypeInput('3 Bedroom') }}
+                                            className='add-unit-dropdown-el'>3 Bedroom</div>
                                     </div>)
                             }
                         </div>
@@ -77,6 +143,8 @@ function AddUnit() {
                                 }}
                                 className='add-unit-input'>
                                 <input
+                                    value={unitStyleInput}
+                                    onChange={(e) => setUnitStyleInput(e.target.value)}
                                     type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
@@ -85,8 +153,12 @@ function AddUnit() {
                                     <div
                                         onClick={() => { setSingleSharedDropdown(prevState => !prevState) }}
                                         className='add-unit-dropdown'>
-                                        <div className='add-unit-dropdown-el'>Shared</div>
-                                        <div className='add-unit-dropdown-el'>Single</div>
+                                        <div
+                                            onClick={() => setUnitStyleInput('Shared')}
+                                            className='add-unit-dropdown-el'>Shared</div>
+                                        <div
+                                            onClick={() => setUnitStyleInput('Single')}
+                                            className='add-unit-dropdown-el'>Single</div>
                                     </div>)
                             }
                         </div>
@@ -96,6 +168,8 @@ function AddUnit() {
                             <div className='add-unit-input-label'>Capacity</div>
                             <div className='add-unit-input'>
                                 <input
+                                    value={unitCapacityInput}
+                                    onChange={(e) => setUnitCapacityInput(e.target.value)}
                                     type="text"
                                     maxlength={6} /> People
                             </div>
@@ -105,7 +179,11 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Dimemsion</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={10} /> m2
+                                <input
+                                    value={unitDimensionsInput}
+                                    onChange={(e) => setUnitDimensionsInput(e.target.value)}
+                                    type="text"
+                                    maxlength={10} /> m2
                             </div>
                         </div>
                     </div>
@@ -114,7 +192,11 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Unit Number</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={5} />
+                                <input
+                                    value={unitNumberInput}
+                                    onChange={(e) => setUnitNumberInput(e.target.value)}
+                                    type="text"
+                                    maxlength={5} />
                             </div>
                         </div>
                     </div>
@@ -125,6 +207,8 @@ function AddUnit() {
                                 onClick={() => setRentSaleDropdown(prevState => !prevState)}
                                 className='add-unit-input'>
                                 <input
+                                    value={unitRentSaleInput}
+                                    onChange={(e) => setUnitRentSaleInput(e.target.value)}
                                     type="text" />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
@@ -133,8 +217,12 @@ function AddUnit() {
                                     <div
                                         onClick={() => setRentSaleDropdown(prevState => !prevState)}
                                         className='add-unit-dropdown'>
-                                        <div className='add-unit-dropdown-el'>Rent</div>
-                                        <div className='add-unit-dropdown-el'>Sale</div>
+                                        <div
+                                            onClick={() => setUnitRentSaleInput('Rent')}
+                                            className='add-unit-dropdown-el'>Rent</div>
+                                        <div
+                                            onClick={() => setUnitRentSaleInput('Sale')}
+                                            className='add-unit-dropdown-el'>Sale</div>
                                     </div>)
                             }
                         </div>
@@ -143,7 +231,11 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Price:</div>
                             <div className='add-unit-input'>
-                                R <input type="text" maxlength={10} />
+                                R <input
+                                    value={unitPriceInput}
+                                    onChange={(e) => setUnitPriceInput(e.target.value)}
+                                    type="text"
+                                    maxlength={10} />
                             </div>
                         </div>
                     </div>
@@ -151,7 +243,24 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Deposit:</div>
                             <div className='add-unit-input'>
-                                R <input type="text" maxlength={10} />
+                                R <input
+                                    value={unitDepositInput}
+                                    onChange={(e) => setUnitDepositInput(e.target.value)}
+                                    type="text"
+                                    maxlength={10} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Image URL:</div>
+                            <div className='add-unit-input'>
+                                <input
+                                    value={unitImageInput}
+                                    onChange={(e) => setUnitImageInput(e.target.value)}
+                                    type="text"
+                                    maxlength={100} />
                             </div>
                         </div>
                     </div>
@@ -163,13 +272,16 @@ function AddUnit() {
                             </div>
                             <div>
                                 <textarea
-                                    onChange={(e) => setMessageInput(e.target.value)}
+                                    value={unitDescriptionInput}
+                                    onChange={(e) => setUnitDescriptionInput(e.target.value)}
                                     name="message"
                                     type="text"
                                     placeholder="Type a description here."
                                     maxlength={500}
                                     className='nei-description' />
-                                {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
+                                {unitDescriptionInput.length < 10
+                                    ? `0${unitDescriptionInput.length}`
+                                    : unitDescriptionInput.length}/500
                             </div>
                         </div>
                     </div>
@@ -309,9 +421,34 @@ function AddUnit() {
 
                     <div>
                         <button
-                            className='save-btn'
-                            onClick={() => ''}>
-                            Save Unit
+                            className={
+                                unitTypeInput !== ''
+                                    && unitStyleInput !== ''
+                                    && unitCapacityInput !== ''
+                                    && unitDimensionsInput !== ''
+                                    && unitNumberInput !== ''
+                                    && unitPriceInput !== ''
+                                    && unitDepositInput !== ''
+                                    && unitImageInput !== ''
+                                    && unitDescriptionInput !== ''
+                                    && unitRentSaleInput !== '' ?
+                                    'addResidence-add-nei-btn-act'
+                                    : 'addResidence-add-nei-btn'
+                            }
+                            disabled={
+                                unitTypeInput !== ''
+                                    && unitStyleInput !== ''
+                                    && unitCapacityInput !== ''
+                                    && unitDimensionsInput !== ''
+                                    && unitNumberInput !== ''
+                                    && unitPriceInput !== ''
+                                    && unitDepositInput !== ''
+                                    && unitImageInput !== ''
+                                    && unitDescriptionInput !== ''
+                                    && unitRentSaleInput !== '' ?
+                                    false : true}
+                            onClick={createNewUnit}>
+                            Add Unit
                         </button>
                     </div>
 
