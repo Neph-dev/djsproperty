@@ -18,12 +18,15 @@ function Residences() {
 
     const [stateListResidence, setStateListResidence] = useState([])
 
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
         //automatically scroll to top
         window.scrollTo(0, 0);
 
         const fetchAreas = async () => {
             try {
+                setIsLoading(true);
                 // Areas
                 const areaResults = await API.graphql(
                     graphqlOperation(listAreas)
@@ -37,9 +40,12 @@ function Residences() {
                 )
                 let residence = residenceResults.data.listResidences.items
                 setStateListResidence(residence)
+
+                setIsLoading(false);
             }
             catch (error) {
                 console.log(error)
+                setIsLoading(false);
             }
         }
         fetchAreas();
@@ -71,68 +77,73 @@ function Residences() {
                         className='AiOutlinePlusCircle' />
                 </Link>
                 {
-                    stateListArea.map((area) => (
-                        <div key={area.id} >
-                            <div className='residence-area-name'>
-                                {area.name}
-                            </div>
 
-                            <div className='residences-cards-container'>
-                                {stateListResidence.map((residence) => (
-                                    residence.areaID === area.id ?
-                                        <div key={residence.id} className='residences-card'>
-                                            <div>
-                                                <img
-                                                    src={residence.image}
-                                                    alt=''
-                                                    className='residences-card-img' />
-                                                <div className='residences-card-details'>
-                                                    <div className='residences-card-location'>
-                                                        {residence.name}
-                                                    </div>
-                                                    <div className='residences-card-type'>
-                                                        {residence.address}, {residence.city}, {residence.postalCode}
-                                                    </div>
+                    isLoading ?
+                        <div className='loader-container'>
+                            <div className='loader' />
+                        </div>
+                        :
+                        stateListArea.map((area) => (
+                            <div key={area.id} >
+                                <div className='residence-area-name'>
+                                    {area.name}
+                                </div>
 
-                                                    <div className='residences-card-tenant-units'>
-                                                        <div className='residences-card-total-units'>
-                                                            <div>{residence.totalUnits}</div>
-                                                            <AiTwotoneHome size={20} className='AiTwotoneHome' />
+                                <div className='residences-cards-container'>
+                                    {stateListResidence.map((residence) => (
+                                        residence.areaID === area.id ?
+                                            <div key={residence.id} className='residences-card'>
+                                                <div>
+                                                    <img
+                                                        src={residence.image}
+                                                        alt=''
+                                                        className='residences-card-img' />
+                                                    <div className='residences-card-details'>
+                                                        <div className='residences-card-location'>
+                                                            {residence.name}
                                                         </div>
-                                                        <div className='residences-card-total-units'>
-                                                            <div>{residence.totalCapacity}</div>
-                                                            <MdPeopleAlt size={20} className='AiTwotoneHome' />
+                                                        <div className='residences-card-type'>
+                                                            {residence.address}, {residence.city}, {residence.postalCode}
                                                         </div>
-                                                    </div>
 
-                                                    <div className='residences-card-view'>
-                                                        <Link to={{
-                                                            state: residence, area: area,
-                                                            pathname: '/units-tenants'
-                                                        }}
-                                                        >
-                                                            Access Residence
-                                                        </Link>
-                                                    </div>
-                                                    <div className='residences-card-view'>
-                                                        <Link to={{
-                                                            state: residence, area: area,
-                                                            pathname: '/Residence-details'
-                                                        }}>
-                                                            Residence Details
-                                                        </Link>
+                                                        <div className='residences-card-tenant-units'>
+                                                            <div className='residences-card-total-units'>
+                                                                <div>{residence.totalUnits}</div>
+                                                                <AiTwotoneHome size={20} className='AiTwotoneHome' />
+                                                            </div>
+                                                            <div className='residences-card-total-units'>
+                                                                <div>{residence.totalCapacity}</div>
+                                                                <MdPeopleAlt size={20} className='AiTwotoneHome' />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className='residences-card-view'>
+                                                            <Link to={{
+                                                                state: residence, area: area,
+                                                                pathname: '/units-tenants'
+                                                            }}
+                                                            >
+                                                                Access Residence
+                                                            </Link>
+                                                        </div>
+                                                        <div className='residences-card-view'>
+                                                            <Link to={{
+                                                                state: residence, area: area,
+                                                                pathname: '/Residence-details'
+                                                            }}>
+                                                                Residence Details
+                                                            </Link>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        : []
-                                ))
-                                }
+                                            : []
+                                    ))
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    ))
+                        ))
                 }
-
             </div>
         </div>
     );

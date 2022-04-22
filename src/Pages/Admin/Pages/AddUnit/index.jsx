@@ -171,7 +171,7 @@ function AddUnit() {
                                     value={unitCapacityInput}
                                     onChange={(e) => setUnitCapacityInput(e.target.value)}
                                     type="text"
-                                    maxlength={6} /> People
+                                    maxLength={6} /> People
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@ function AddUnit() {
                                     value={unitDimensionsInput}
                                     onChange={(e) => setUnitDimensionsInput(e.target.value)}
                                     type="text"
-                                    maxlength={10} /> m2
+                                    maxLength={10} /> m2
                             </div>
                         </div>
                     </div>
@@ -196,7 +196,7 @@ function AddUnit() {
                                     value={unitNumberInput}
                                     onChange={(e) => setUnitNumberInput(e.target.value)}
                                     type="text"
-                                    maxlength={5} />
+                                    maxLength={5} />
                             </div>
                         </div>
                     </div>
@@ -235,7 +235,7 @@ function AddUnit() {
                                     value={unitPriceInput}
                                     onChange={(e) => setUnitPriceInput(e.target.value)}
                                     type="text"
-                                    maxlength={10} />
+                                    maxLength={10} />
                             </div>
                         </div>
                     </div>
@@ -247,7 +247,7 @@ function AddUnit() {
                                     value={unitDepositInput}
                                     onChange={(e) => setUnitDepositInput(e.target.value)}
                                     type="text"
-                                    maxlength={10} />
+                                    maxLength={10} />
                             </div>
                         </div>
                     </div>
@@ -260,7 +260,7 @@ function AddUnit() {
                                     value={unitImageInput}
                                     onChange={(e) => setUnitImageInput(e.target.value)}
                                     type="text"
-                                    maxlength={100} />
+                                    maxLength={100} />
                             </div>
                         </div>
                     </div>
@@ -277,7 +277,7 @@ function AddUnit() {
                                     name="message"
                                     type="text"
                                     placeholder="Type a description here."
-                                    maxlength={500}
+                                    maxLength={500}
                                     className='nei-description' />
                                 {unitDescriptionInput.length < 10
                                     ? `0${unitDescriptionInput.length}`
@@ -413,7 +413,7 @@ function AddUnit() {
                         <div>
                             <div className='add-unit-input-label'>Add a feature</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={15} />
+                                <input type="text" maxLength={15} />
                             </div>
                             <button>Add feature</button>
                         </div>

@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { useDetectClickOutside } from 'react-detect-click-outside';
+
 import { RiNotification2Fill } from 'react-icons/ri';
+import { MdOutlineClose } from 'react-icons/md';
 
 import './adminDashHeader.css';
 import AddNotification from '../AddNotification';
@@ -13,6 +16,12 @@ function AdminDashHeader() {
     const [showNotificationDropdown, setShowNotificationDropdown] = useState(false)
     const [addNotification, setAddNotification] = useState(false)
 
+
+    const closeNotificationDropdown = () => {
+        setShowNotificationDropdown(false);
+    }
+    const notificationRef = useDetectClickOutside({ onTriggered: closeNotificationDropdown });
+
     return (
         <div className='admin-header'>
             <div className='admin-greeting'>
@@ -22,7 +31,7 @@ function AdminDashHeader() {
             {addNotification && (<AddNotification setAddNotification={setAddNotification} />)}
 
             <div className='admin-notification-logout'>
-                <div>
+                <div ref={notificationRef}>
                     <RiNotification2Fill
                         onClick={() => setShowNotificationDropdown((prevState) => !prevState)}
                         size={30}
@@ -34,36 +43,43 @@ function AdminDashHeader() {
                                 onClick={() => setShowNotificationDropdown((prevState) => !prevState)}
                                 className='showNotification-dropdown'>
 
-                                <div className='showNotification-dropdown-el'>
+
+                                <div className='notification-dropdown'>
+                                    <div className='notification-label_cross'>
+                                        <div className='notification-label'>
+                                            Notifications
+                                        </div>
+                                        <MdOutlineClose
+                                            onClick={() => setShowNotificationDropdown(false)}
+                                            size={20}
+                                            className='notification-close' />
+                                    </div>
+
                                     <div
                                         onClick={() => setAddNotification(true)}
-                                        className='showNotification-dropdown-title-ur'>
-                                        Add a notification
-                                    </div>
-                                </div>
-
-                                <div className='showNotification-dropdown-el'>
-                                    <div>
-                                        <div className='showNotification-dropdown-title-ur'>
-                                            New Entry code at Beraria Building
-                                        </div>
-                                        <div className='showNotification-dropdown-msg'>
-                                            The New Entry code at Beraria Building is 000000
+                                        className='notification-el'>
+                                        <div className='notification-title'>
+                                            Add a notification
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className='showNotification-dropdown-el'>
-                                    <div>
-                                        <div className='showNotification-dropdown-title'>
-                                            New Entry code at Beraria Building
+                                    <div className='notification-el'>
+                                        <div className='notification-title'>
+                                            This is a title
                                         </div>
-                                        <div className='showNotification-dropdown-msg'>
-                                            The New Entry code at Beraria Building is 000000
+                                        <div className='notification-description'>
+                                            Lorem Ipsum is simply dummy text of the printing and
+                                            typesetting industry. Lorem Ipsum has been the industry's
+                                            standard dummy text ever since the 1500s, when an unknown
+                                            printer took a galley of type and scrambled it to make a
+                                            type specimen book. It has survived not only five centuries,
+                                            but also the leap into electronic typesetting, remaining
+                                            essentially unchanged.
+                                        </div>
+                                        <div className='notification-date'>
+                                            • 1 hour ago
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         )
                     }

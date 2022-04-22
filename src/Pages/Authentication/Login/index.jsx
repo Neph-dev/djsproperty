@@ -79,14 +79,14 @@ function Login() {
                         See password
                     </div>
 
-                    <buttom className='login-card-btn'>
+                    <button className='login-card-btn'>
                         <Link to={
                             activeTab === 'tenant'
                                 ? '/Tenant-portal-statements'
                                 : '/Admin-dashboard'}>
                             Login
                         </Link>
-                    </buttom>
+                    </button>
 
                     <div className='get-help'>Get help sign in</div>
                 </div>

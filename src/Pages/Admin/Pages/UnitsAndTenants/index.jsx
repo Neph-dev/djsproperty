@@ -24,10 +24,7 @@ function UnitsAndTenants() {
 
     const [stateUnit, setStateUnit] = useState([])
 
-    //automatically scroll to top
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         //automatically scroll to top
@@ -35,15 +32,19 @@ function UnitsAndTenants() {
 
         const fetchAreas = async () => {
             try {
+                setIsLoading(true);
                 // Areas
                 const unitResults = await API.graphql(
                     graphqlOperation(listUnits)
                 )
                 let unit = unitResults.data.listUnits.items
                 setStateUnit(unit)
+
+                setIsLoading(false);
             }
             catch (error) {
                 console.log(error)
+                setIsLoading(false);
             }
         }
         fetchAreas();
@@ -65,7 +66,8 @@ function UnitsAndTenants() {
             <div className='us-ts-content'>
 
                 <UnitsAndTenantsTabNav
-                    residenceDetails={residenceDetails} area={area}
+                    residenceDetails={residenceDetails}
+                    area={area}
                     activeTab={activeTab} />
 
                 <Link to={{ state: residenceDetails, area, pathname: '/Add-unit' }} >
@@ -79,35 +81,40 @@ function UnitsAndTenants() {
 
                 <div className='residences-cards-container'>
                     {
-                        stateUnit.map((unit) => (
-                            unit.residenceID === residenceDetails.id ?
-                                <div className='residences-card'>
-                                    <div>
-                                        <div className='flat-card-img' />
-                                        <div className='residences-card-details'>
-                                            <div className='residences-card-location'>
-                                                <b>{unit.type} / {unit.style} Unit / {unit.unitNumber}</b>
-                                            </div>
-
-                                            <div className='residences-card-tenant-units'>
-                                                <div className='residences-card-total-units' title='Capacity'>
-                                                    <div>{unit.capacity}</div>
-                                                    <MdPeopleAlt size={20} className='AiTwotoneHome' />
+                        isLoading ?
+                            <div className='loader-container'>
+                                <div className='loader' />
+                            </div>
+                            :
+                            stateUnit.map((unit) => (
+                                unit.residenceID === residenceDetails.id ?
+                                    <div key={unit.id} className='residences-card'>
+                                        <div>
+                                            <div className='flat-card-img' />
+                                            <div className='residences-card-details'>
+                                                <div className='residences-card-location'>
+                                                    <b>{unit.type} / {unit.style} Unit / {unit.unitNumber}</b>
                                                 </div>
-                                            </div>
 
-                                            <div className='residences-card-view'>
-                                                <Link
-                                                    to={{ state: residenceDetails, area, unit, pathname: '/Unit-details' }}>
-                                                    Unit Details
-                                                </Link>
+                                                <div className='residences-card-tenant-units'>
+                                                    <div className='residences-card-total-units' title='Capacity'>
+                                                        <div>{unit.capacity}</div>
+                                                        <MdPeopleAlt size={20} className='AiTwotoneHome' />
+                                                    </div>
+                                                </div>
+
+                                                <div className='residences-card-view'>
+                                                    <Link
+                                                        to={{ state: residenceDetails, area, unit, pathname: '/Unit-details' }}>
+                                                        Unit Details
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                : []
+                                    : []
 
-                        ))
+                            ))
                     }
                 </div>
             </div>

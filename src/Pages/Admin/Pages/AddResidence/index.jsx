@@ -196,7 +196,7 @@ function AddResidence() {
                                     value={areaNameInput}
                                     onChange={(e) => setAreaNameInput(e.target.value)}
                                     type="text"
-                                    maxlength={30}
+                                    maxLength={30}
                                     disabled={addArea ? false : true} />
                             </div>
                         </div>
@@ -210,7 +210,7 @@ function AddResidence() {
                                     onChange={(e) => setAreaImageInput(e.target.value)}
                                     value={areaImageInput}
                                     type="text"
-                                    maxlength={200}
+                                    maxLength={200}
                                     disabled={addArea ? false : true} />
                             </div>
                         </div>
@@ -228,7 +228,7 @@ function AddResidence() {
                                     name="message"
                                     type="text"
                                     placeholder="Type a description here."
-                                    maxlength={500}
+                                    maxLength={500}
                                     className='nei-description'
                                     disabled={addArea ? false : true} />
                                 {
@@ -270,7 +270,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidenceNameInput(e.target.value)}
                                     type="text"
-                                    maxlength={30} />
+                                    maxLength={30} />
                             </div>
                         </div>
                     </div>
@@ -282,7 +282,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidenceAddressInput(e.target.value)}
                                     type="text"
-                                    maxlength={100} />
+                                    maxLength={100} />
                             </div>
                         </div>
                     </div>
@@ -293,7 +293,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidenceCityInput(e.target.value)}
                                     type="text"
-                                    maxlength={100} />
+                                    maxLength={100} />
                             </div>
                         </div>
                     </div>
@@ -304,7 +304,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidencePostalInput(e.target.value)}
                                     type="text"
-                                    maxlength={100} />
+                                    maxLength={100} />
                             </div>
                         </div>
                     </div>
@@ -316,7 +316,7 @@ function AddResidence() {
                                 <input
                                     onChange={(e) => setResidenceImageInput(e.target.value)}
                                     type="text"
-                                    maxlength={100} />
+                                    maxLength={100} />
                             </div>
                         </div>
                     </div>
@@ -329,7 +329,7 @@ function AddResidence() {
                                     onChange={(e) => setResidenceTotalUnitsInput(e.target.value)}
                                     type="text"
                                     placeholder="Enter numbers only."
-                                    maxlength={4} />
+                                    maxLength={4} />
                             </div>
                         </div>
                     </div>
@@ -342,7 +342,7 @@ function AddResidence() {
                                     onChange={(e) => setResidenceTotalCapacityInput(e.target.value)}
                                     type="text"
                                     placeholder="Enter numbers only."
-                                    maxlength={4} />People
+                                    maxLength={4} />People
                             </div>
                         </div>
                     </div>
@@ -390,7 +390,7 @@ function AddResidence() {
                         <div>
                             <div className='add-unit-input-label'>Add a feature</div>
                             <div className='add-unit-input'>
-                                <input type="text" maxlength={15} />
+                                <input type="text" maxLength={15} />
                             </div>
                             <button>Add feature</button>
                         </div>

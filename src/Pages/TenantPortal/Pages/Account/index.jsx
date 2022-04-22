@@ -5,7 +5,6 @@ import './account.css';
 import TenantDashHeader from '../../Components/TenantDashHeader';
 
 
-
 function Account() {
 
     const activeTab = 'account'
@@ -37,7 +36,7 @@ function Account() {
                                 <input
                                     type="text"
                                     value='Nephthali Salam'
-                                    maxlength={100} disabled={true} />
+                                    maxLength={100} disabled={true} />
                             </div>
                         </div>
                     </div>
@@ -48,7 +47,7 @@ function Account() {
                                 <input
                                     type="email"
                                     value='snephthali@gmail.com'
-                                    maxlength={30} disabled={true} />
+                                    maxLength={30} disabled={true} />
                             </div>
                         </div>
                     </div>
@@ -59,7 +58,7 @@ function Account() {
                                 <input
                                     value='+27 67 791 9267'
                                     type="text"
-                                    maxlength={15} disabled={true} />
+                                    maxLength={15} disabled={true} />
                             </div>
                         </div>
                     </div>
@@ -71,7 +70,7 @@ function Account() {
                                 <input
                                     type="text"
                                     value='Berario Palms'
-                                    maxlength={100} disabled={true} />
+                                    maxLength={100} disabled={true} />
                             </div>
                         </div>
                     </div>
@@ -83,7 +82,7 @@ function Account() {
                                 <input
                                     type="text"
                                     value='185 Arkansas avenue. berario, Johannesburg, 2181'
-                                    maxlength={100} disabled={true} />
+                                    maxLength={100} disabled={true} />
                             </div>
                         </div>
                     </div>

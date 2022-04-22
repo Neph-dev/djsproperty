@@ -7,8 +7,6 @@ import './statements.css';
 import TenantDashHeader from '../../Components/TenantDashHeader';
 
 
-
-
 function Statements() {
 
     const activeTab = 'statements'

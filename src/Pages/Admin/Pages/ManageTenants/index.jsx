@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
+import { tenants } from '../../../../Mock';
+
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import './manageTenants.css';
@@ -40,7 +42,7 @@ function ManageTenants() {
                             maxLength={30}
                             autoFocus={true} />
                     </div>
-                    <Link to='/Add-tenant' >
+                    <Link to={{ state: residenceDetails, area, pathname: '/Add-tenant' }} >
                         <AiOutlinePlusCircle
                             title='Add a tenant.'
                             size={40}
@@ -49,23 +51,36 @@ function ManageTenants() {
                 </div>
 
                 <div className='residence-area-name'>Berario Palms</div>
-
-                <div>
-                    <div className='tenants-unit-label'>Unit 1</div>
-                    <div className='residences-cards-container'>
-                        <div className='tenant-card'>
-                            <div className='tenant-card-unit-number'>Unit: 7 a</div>
-                            <div className='tenant-card-el'>name + surname</div>
-                            <div className='tenant-card-el'>email@gmail.com</div>
-                            <div className='tenant-card-el'>+27 67 791 9267</div>
-                            <button className='tenant-card-btn'>
-                                <Link to='/Tenant-details'>
-                                    Tenants details
-                                </Link>
-                            </button>
+                {
+                    tenants.map((tenant) => (
+                        <div key={tenant.id} >
+                            <div className='tenants-unit-label'>
+                                Unit {tenant.unit}
+                            </div>
+                            <div className='residences-cards-container'>
+                                <div className='tenant-card'>
+                                    <div className='tenant-card-unit-number'>
+                                        {tenant.unitNumber}
+                                    </div>
+                                    <div className='tenant-card-el'>
+                                        {tenant.firstName} {tenant.lastName}
+                                    </div>
+                                    <div className='tenant-card-el'>
+                                        {tenant.email}
+                                    </div>
+                                    <div className='tenant-card-el'>
+                                        {tenant.phoneNumber}
+                                    </div>
+                                    <button className='tenant-card-btn'>
+                                        <Link to={{ state: residenceDetails, area, pathname: '/Tenant-details' }}>
+                                            Tenants details
+                                        </Link>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    ))
+                }
 
             </div>
         </div>

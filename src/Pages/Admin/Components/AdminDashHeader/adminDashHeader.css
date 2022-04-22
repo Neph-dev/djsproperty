@@ -15,46 +15,67 @@
     text-decoration: underline;
 }
 
-/* Notification */
-.showNotification-dropdown {
-    background-color: #cccccc;
+/* notification dropdown*/
+.notification-dropdown {
+    background-color: #ffffff;
+    border: 2px solid #126180;
+    cursor: context-menu;
+    height: 100%;
+    right: 0rem;
     overflow-y: auto;
-    position: absolute;
-    max-height: 50vh;
-    margin-right:0.5rem;
-    right:0;
+    position: fixed;
     width: 50vh;
+    animation: slide .5s forwards;
+    
 }
-.showNotification-dropdown-el {
-    align-items: center;
-    justify-content: center;
+@keyframes slide {
+    0% {
+      right: -4rem;
+    }
+    100% {
+      right: 0;
+    }
+}
+.notification-label_cross {
     display: flex;
-    border-bottom: 2px solid #fff;
-    cursor: pointer;
-    font-size: 16px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.notification-label {
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+}
+.notification-close {
+    color: #000000;
+    margin: 10px;
+}
+.notification-el {
+    border-top: 2px solid #126180;
+    border-bottom: 2px solid #126180;
+    background: #ffff;
+    color: #000000;
     height: auto;
-    width: 100%;
-} 
-.showNotification-dropdown-el:hover {
-    background-color: #283e51;
-    color: #eae0c8;
+    margin: 10px;
 }
-.showNotification-dropdown-title-ur {
-    font-size: 16px;
-    font-weight: bold; 
-    text-align: center;
-    margin: .5rem auto .5rem auto;
-}
-.showNotification-dropdown-title {
-    font-size: 16px;
-    text-align: center;
-    margin: .5rem auto .5rem auto;
-}
-.showNotification-dropdown-msg {
-    font-size: 16px;
-    font-weight: normal; 
+.notification-title {
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
     text-align: center;
 }
+.notification-description {
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.notification-date {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
 
 .admin-notification-logout {
     align-items: center;

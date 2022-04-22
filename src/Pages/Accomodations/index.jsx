@@ -24,6 +24,8 @@ function Accomodations() {
     const [stateListArea, setStateListArea] = useState([])
     const [stateListUnits, setStateListUnits] = useState([])
 
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
         AOS.init({ duration: 2000 })
     })
@@ -34,6 +36,7 @@ function Accomodations() {
 
         const fetchAreas = async () => {
             try {
+                setIsLoading(true)
                 // Areas
                 const areaResults = await API.graphql(
                     graphqlOperation(listAreas)
@@ -47,11 +50,13 @@ function Accomodations() {
                 )
                 let unit = unitResults.data.listUnits.items
                 setStateListUnits(unit)
-                console.log(stateListUnits)
+
+                setIsLoading(false)
 
             }
             catch (error) {
                 console.log(error)
+                setIsLoading(false)
             }
         }
         fetchAreas();
@@ -86,36 +91,41 @@ function Accomodations() {
 
                     <div className='accomodation-cards-container'>
                         {
-                            stateListUnits.map((unit) => (
-                                <div className='accomodation-card'>
-                                    <div>
-                                        <img
-                                            src={unit.image}
-                                            alt=''
-                                            className='accomodation-card-img' />
-                                        <div className='accomodation-card-details'>
-                                            <div className='accomodation-card-location'>
-                                                <b>{unit.residence.name}</b>
-                                            </div>
-                                            <div className='accomodation-card-type'>
-                                                {unit.type} Unit
-                                            </div>
-                                            <div className='accomodation-card-price'>
-                                                Price: R {unit.price} pm
-                                            </div>
-                                            <div className='accomodation-card-view'>
-                                                <Link
-                                                    to={{
-                                                        state: unit,
-                                                        pathname: '/View-unit'
-                                                    }}>
-                                                    View Unit
-                                                </Link>
+                            isLoading ?
+                                <div className='loader-container'>
+                                    <div className='loader' />
+                                </div>
+                                :
+                                stateListUnits.map((unit) => (
+                                    <div key={unit.id} className='accomodation-card'>
+                                        <div>
+                                            <img
+                                                src={unit.image}
+                                                alt=''
+                                                className='accomodation-card-img' />
+                                            <div className='accomodation-card-details'>
+                                                <div className='accomodation-card-location'>
+                                                    <b>{unit.residence.name}</b>
+                                                </div>
+                                                <div className='accomodation-card-type'>
+                                                    {unit.type} Unit
+                                                </div>
+                                                <div className='accomodation-card-price'>
+                                                    Price: R {unit.price} pm
+                                                </div>
+                                                <div className='accomodation-card-view'>
+                                                    <Link
+                                                        to={{
+                                                            state: unit,
+                                                            pathname: '/View-unit'
+                                                        }}>
+                                                        View Unit
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
+                                ))
                         }
                     </div>
 
@@ -132,7 +142,7 @@ function Accomodations() {
                     <div className='neighborhoods-cards-container'>
                         {
                             stateListArea.map((area) => (
-                                <div className='neighborhood-card'>
+                                <div key={area.id} className='neighborhood-card'>
                                     <div>
                                         <img src={area.image} alt='' className='neighborhood-card-img' />
                                         <div className='neighborhood-card-details'>

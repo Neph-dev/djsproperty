@@ -1,0 +1,29 @@
+/* loader */
+.loader-container {
+    display: flex;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+  }
+  .loader {
+    margin: auto;
+    border: 20px solid #eaf0f6;
+    border-radius: 50%;
+    border-top: 20px solid #eae0c8;
+    width: 70px;
+    height: 70px;
+    animation: spinner 4s linear infinite;
+  }
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

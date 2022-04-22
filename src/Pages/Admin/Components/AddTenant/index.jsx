@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import { BiArrowBack } from 'react-icons/bi';
@@ -11,6 +11,11 @@ import AdminDashHeader from '../../Components/AdminDashHeader';
 
 
 function AddTenant() {
+
+    const location = useLocation()
+
+    const area = location.state.area
+    const residenceDetails = location.state
 
     const [addStatement, setAddStatement] = useState(false)
 
@@ -36,7 +41,7 @@ function AddTenant() {
 
             <AdminDashHeader />
 
-            <Link to='/Manage-tenants'>
+            <Link to={{ state: residenceDetails, area, pathname: '/Manage-tenants' }}>
                 <BiArrowBack size={35} className='us-ts-BiArrowBack' />
             </Link>
 
@@ -53,7 +58,7 @@ function AddTenant() {
                         <div className='add-unit-input'>
                             <input
                                 type="text"
-                                maxlength={100} />
+                                maxLength={100} />
                         </div>
                     </div>
                 </div>
@@ -63,7 +68,7 @@ function AddTenant() {
                         <div className='add-unit-input'>
                             <input
                                 type="text"
-                                maxlength={30} />
+                                maxLength={30} />
                         </div>
                     </div>
                 </div>
@@ -73,7 +78,7 @@ function AddTenant() {
                         <div className='add-unit-input'>
                             <input
                                 type="text"
-                                maxlength={15} />
+                                maxLength={15} />
                         </div>
                     </div>
                 </div>
@@ -86,7 +91,7 @@ function AddTenant() {
                             className='add-unit-input'>
                             <input
                                 type="text"
-                                maxlength={50} />
+                                maxLength={50} />
                             <MdKeyboardArrowDown size={25} />
                         </div>
                         {
@@ -106,7 +111,7 @@ function AddTenant() {
                         <div className='add-unit-input'>
                             <input
                                 type="text"
-                                maxlength={100} />
+                                maxLength={100} />
                         </div>
                     </div>
                 </div>

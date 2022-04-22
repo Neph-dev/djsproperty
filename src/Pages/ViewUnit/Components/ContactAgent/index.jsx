@@ -56,7 +56,7 @@ function ContactAgent({ setShowContact, setMessageSent }) {
                                 name="message"
                                 type="text"
                                 placeholder="Type your message here."
-                                maxlength={500}
+                                maxLength={500}
                                 className='contact-input-msg' />
                             {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
                             <div>
