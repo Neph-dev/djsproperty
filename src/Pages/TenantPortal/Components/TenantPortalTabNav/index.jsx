@@ -51,20 +51,22 @@ function TenantPortalTabNav({ activeTab }) {
                 </div>
             </Link>
 
-            <div
-                onMouseEnter={() => setUploadFocused(true)}
-                onMouseLeave={() => setUploadFocused(false)}
-                className='tenant-icon-el-container'
-                title='UPLOAD DOCUMENTS'>
-                <BsPlusLg
-                    className={activeTab === 'add'
-                        ? 'tenant-icon-el-active'
-                        : 'tenant-icon-el'}
-                    size={25} />
-                <div className='tenant-icon-label'>
-                    {uploadFocused && 'Upload Documents'}
+            <Link to='/Tenant-portal-upload'>
+                <div
+                    onMouseEnter={() => setUploadFocused(true)}
+                    onMouseLeave={() => setUploadFocused(false)}
+                    className='tenant-icon-el-container'
+                    title='UPLOAD DOCUMENTS'>
+                    <BsPlusLg
+                        className={activeTab === 'upload'
+                            ? 'tenant-icon-el-active'
+                            : 'tenant-icon-el'}
+                        size={25} />
+                    <div className='tenant-icon-label'>
+                        {uploadFocused && 'Upload Documents'}
+                    </div>
                 </div>
-            </div>
+            </Link>
 
         </div >
     );

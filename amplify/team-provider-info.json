@@ -1,15 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-djsproperty-dev-203828-authRole",
-      "UnauthRoleArn": "arn:aws:iam::755830341824:role/amplify-djsproperty-dev-203828-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::755830341824:role/amplify-djsproperty-dev-203828-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-djsproperty-dev-203828-deployment",
-      "UnauthRoleName": "amplify-djsproperty-dev-203828-unauthRole",
-      "StackName": "amplify-djsproperty-dev-203828",
-      "StackId": "arn:aws:cloudformation:us-east-2:755830341824:stack/amplify-djsproperty-dev-203828/eaad2160-c00f-11ec-bdce-028ddab0a32c",
-      "AmplifyAppId": "d35z941r7sp53b"
+      "AuthRoleName": "amplify-djsproperty-dev-73500-authRole",
+      "UnauthRoleArn": "arn:aws:iam::077535700697:role/amplify-djsproperty-dev-73500-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::077535700697:role/amplify-djsproperty-dev-73500-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-djsproperty-dev-73500-deployment",
+      "UnauthRoleName": "amplify-djsproperty-dev-73500-unauthRole",
+      "StackName": "amplify-djsproperty-dev-73500",
+      "StackId": "arn:aws:cloudformation:us-east-1:077535700697:stack/amplify-djsproperty-dev-73500/7538e880-c459-11ec-ad06-0ebc45c46451",
+      "AmplifyAppId": "d3khzo8kpno227"
     }
   }
 }

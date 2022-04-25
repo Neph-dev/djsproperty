@@ -90,7 +90,7 @@ function UnitsAndTenants() {
                                 unit.residenceID === residenceDetails.id ?
                                     <div key={unit.id} className='residences-card'>
                                         <div>
-                                            <div className='flat-card-img' />
+                                            <img src={unit.image} alt='' className='flat-card-img' />
                                             <div className='residences-card-details'>
                                                 <div className='residences-card-location'>
                                                     <b>{unit.type} / {unit.style} Unit / {unit.unitNumber}</b>

@@ -1,0 +1,11 @@
+.fileUploader {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    left: 0;
+    right: 0;
+}
+.fileUploader-label {
+    text-align: center;
+}
