@@ -1,0 +1,15 @@
+.AdminDash-title {
+    align-items: center;
+    background: #283e51;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    height: 3.5rem;
+    width: auto;
+    text-align: center;
+    font-size: 18px;
+}

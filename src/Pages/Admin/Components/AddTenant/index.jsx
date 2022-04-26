@@ -157,8 +157,8 @@ function AddTenant() {
 
             <AdminDashHeader />
 
-            <Link to={{ state: residenceDetails, area, pathname: '/Manage-tenants' }}>
-                <BiArrowBack size={35} className='us-ts-BiArrowBack' />
+            <Link to={{ state: residenceDetails, area, pathname: '/Tenants' }}>
+                <BiArrowBack size={30} className='BiArrowBack' />
             </Link>
 
             {isLoading ?

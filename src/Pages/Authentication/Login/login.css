@@ -1,11 +1,11 @@
-#login {
+#Login {
     color: #fff;
     width: 100%;
     height: auto;
     overflow-x: hidden;
 }
 
-.login-content {
+.Login-content {
     display: flex;
     background-color: #ffffff;
     background-repeat: no-repeat;
@@ -18,17 +18,7 @@
     z-index: 1;
 }
 
-.BiArrowBack {
-    color: #1b1b1b;
-    cursor: pointer;
-    border: 1px solid #1b1b1b;
-    margin: 5px;
-    position: fixed;
-    border-radius: 50px;
-    padding: .3rem;
-}
-
-.login-card-container {
+.Login-card-container {
     background: linear-gradient(45deg, #1b1b1b, #3b3c36);
     border: 1px solid #fff;
     justify-content: center;
@@ -39,14 +29,14 @@
     width: 70vh;
 }
 
-.login-card-header {
+.Login-card-header {
     align-items: center;
     display: flex;
     justify-content: space-around;
     height: 10vh;
     width: 100%;
 }
-.login-card-header-title-active {
+.Login-card-header-title-active {
     cursor: pointer;
     font-size: 22px;
     display: flex;
@@ -55,7 +45,7 @@
     height: 100%;
     width: 50%;
 }
-.login-card-header-title {
+.Login-card-header-title {
     background-color: #3b3c36;
     cursor: pointer;
     font-size: 22px;
@@ -66,11 +56,9 @@
     width: 50%;
 }
 
-.login-card-input-container {
-    
-}
-.login-card-input {
-    border: 0;
+
+.Login-input {
+    border: 2px solid #004040;
     border-radius: 15px;
     height: 2.5rem;
     display: flex;
@@ -81,51 +69,68 @@
     padding-right: 1rem;
     width: 60%;
 }
-.login-text {
+.Login-input-red {
+    border: 1.5px solid red;
+    border-radius: 15px;
+    height: 2.5rem;
+    display: flex;
+    font-size: 16px;
+    outline: 0;
+    margin: 2rem auto auto auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 60%;
+}
+.Login-title {
     font-size: 28px;
     margin-top: 1rem;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 5px
 }
-.see-password {
+.Login-show-password {
     align-items: center;
     display: flex;
     cursor: pointer;
     margin-top: 1rem;
     margin-left: 5rem;
 }
-.see-password input {
+.Login-show-password input {
     align-items: center;
     display: flex;
 }
 
-.login-card-btn {
+.Login-btn {
     align-items: center;
-    background-color: #bfafb2;
+    background-color: #004040;
     border: 0;
+    border-radius: 15px;
     color: #ffffff;
     cursor: pointer;
     display: flex;
+    font-size: 18px;
+    height: 3rem;
     justify-content: center;
-    margin: 1rem auto auto auto;
-    font-size: 20px;
     letter-spacing: 5px;
-    padding: 15px;
+    margin: 1rem auto auto auto;
     text-decoration: none;
-    width: 5rem;
+    width: 7rem;
 }
-.login-card-btn a {
+.Login-btn:hover {
+    background-color: #004242;
 }
 
-.get-help {
-    cursor: pointer;
+.Login-centeredText {
+    cursor: context-menu;
     margin-top: 1rem;
     text-align: center;
 }
+.Login-centeredText:hover {
+    text-decoration: underline;
+}
 
 @media only screen and (max-width: 900px) {
-    #login {
+    #Login {
         color: #fff;
         height: auto;
         width: 100vh;

@@ -82,7 +82,7 @@ function TenantDetails() {
     }
 
     if (deleted === true) {
-        return <Redirect to={{ state: residenceDetails, area, pathname: '/Manage-tenants' }} />
+        return <Redirect to={{ state: residenceDetails, area, pathname: '/Tenants' }} />
     }
 
     return (
@@ -100,10 +100,10 @@ function TenantDetails() {
 
             <AdminDashHeader />
 
-            <Link to={{ state: residenceDetails, area, pathname: '/Manage-tenants' }}>
+            <Link to={{ state: residenceDetails, area, pathname: '/Tenants' }}>
                 <BiArrowBack
-                    size={35}
-                    className='us-ts-BiArrowBack' />
+                    size={30}
+                    className='BiArrowBack' />
             </Link>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -20,12 +20,6 @@
     display: flex;
     margin: 2rem;
 }
-.RiNotification2Fill {
-    align-items: center;
-    color: #283e51;
-    display: flex;
-    margin-right: 2rem;
-}
 .tenantPortal-logout {
     cursor: pointer;
     letter-spacing: 1px;

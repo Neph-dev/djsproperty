@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+
+import { Link } from 'react-router-dom';
 
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { listUnits } from '../../../../graphql/queries';
 
-import { tenants } from '../../../../Mock';
-
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-
-import './manageTenants.css';
-
-import UnitsAndTenantsTabNav from '../../Components/UnitsAndTenantsTabNav';
+import './TenantList.css';
 
 
-function ManageTenants() {
+function TenantList({ area, residenceDetails }) {
 
-    const location = useLocation()
+    const [isLoading, setIsLoading] = useState(false)
 
-    const area = location.state.area
-    const residenceDetails = location.state
-
-    const activeTab = 'manage'
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [units, setUnits] = useState([]);
-
-    const [users, setUsers] = useState([]);
+    const [units, setUnits] = useState([])
+    const [tenants, setTenants] = useState([])
 
     let nextToken;
 
@@ -38,6 +25,7 @@ function ManageTenants() {
             try {
                 setIsLoading(true)
 
+                // Units
                 const unitResult = await API.graphql(
                     graphqlOperation(listUnits)
                 )
@@ -63,8 +51,7 @@ function ManageTenants() {
 
                 setIsLoading(false);
 
-                console.log(rest.Users);
-                setUsers(rest.Users);
+                setTenants(rest.Users);
 
                 // Users response index: 
 
@@ -90,49 +77,27 @@ function ManageTenants() {
         fetchUnits()
     }, []);
 
+
     return (
-        <div id='unitsAndTenants'>
-            <div className='us-ts-content'>
-
-                <UnitsAndTenantsTabNav
-                    residenceDetails={residenceDetails}
-                    area={area}
-                    activeTab={activeTab} />
-
-                <div className='search-and-add'>
-                    <div>
-                        <input
-                            className='search-tenant'
-                            placeholder='Search by name or unit'
-                            type='search'
-                            maxLength={30}
-                            autoFocus={true} />
-                    </div>
-                    <Link to={{ state: residenceDetails, area, pathname: '/Add-tenant' }} >
-                        <AiOutlinePlusCircle
-                            title='Add a tenant.'
-                            size={40}
-                            className='AiOutlinePlusCircle' />
-                    </Link>
+        <>
+            {isLoading ?
+                <div className='loader-container'>
+                    <div className='loader' />
                 </div>
-
-                <div className='residence-area-name'>{residenceDetails.name}</div>
-                {isLoading ?
-                    <div className='loader-container'>
-                        <div className='loader' />
-                    </div>
-
-                    :
-
-                    units.map((unit) => (
-                        <div key={unit.id}>
-                            <div className='tenants-unit-label'>
-                                Unit {unit.unitNumber}
-                            </div>
+                :
+                units.map((unit) => (
+                    <div key={unit.id}>
+                        <div className='tenants-unit-title'>
+                            Unit {unit.unitNumber}
+                        </div>
+                        <div className='tenant-cards-list'>
                             {
-                                users.map((tenant) => (
-                                    <div key={tenant.id} className='residences-cards-container'>
-                                        <div className='tenant-card'>
+                                tenants.map((tenant) => (
+                                    unit.unitNumber === tenant.Attributes[4].Value
+                                        &&
+                                        unit.residence.name === tenant.Attributes[5].Value
+                                        ?
+                                        <div key={tenant.id} className='tenant-card'>
                                             <div className='tenant-card-unit-number'>
                                                 {tenant.Attributes[9].Value}
                                             </div>
@@ -156,15 +121,15 @@ function ManageTenants() {
                                                 </Link>
                                             </button>
                                         </div>
-                                    </div>
-                                ))
+                                        : []))
                             }
                         </div>
-                    ))
-                }
-            </div>
-        </div>
+                    </div>
+                ))
+            }
+
+        </>
     );
 }
 
-export default ManageTenants;
+export default TenantList;

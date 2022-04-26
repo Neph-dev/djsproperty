@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { useDetectClickOutside } from 'react-detect-click-outside';
 
 import { Auth } from 'aws-amplify';
 
-import { Link, Redirect } from 'react-router-dom';
-
-import { useDetectClickOutside } from 'react-detect-click-outside';
-
+//icons
 import { RiNotification2Fill } from 'react-icons/ri';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -15,15 +14,17 @@ import AddNotification from '../AddNotification';
 
 function AdminDashHeader() {
 
-    const [showNotificationDropdown, setShowNotificationDropdown] = useState(false)
+    const [showNotification, setShowNotification] = useState(false)
     const [addNotification, setAddNotification] = useState(false)
 
     const [signedOut, setSignedOut] = useState(false)
 
     const closeNotificationDropdown = () => {
-        setShowNotificationDropdown(false);
+        setShowNotification(false);
     }
-    const notificationRef = useDetectClickOutside({ onTriggered: closeNotificationDropdown });
+    const notificationRef = useDetectClickOutside(
+        { onTriggered: closeNotificationDropdown }
+    );
 
     // Sign out function
     const signOut = async () => {
@@ -31,45 +32,55 @@ function AdminDashHeader() {
             await Auth.signOut();
             setSignedOut(true)
         } catch (error) {
-            console.log('error signing out: ', error);
         }
     }
-
     if (signedOut === true) {
         return <Redirect to='/Login' />
     }
 
     return (
-        <div className='admin-header'>
-            <div className='admin-greeting'>
-                <Link to='./Admin-dashboard'>Admin Dashboard</Link>
-            </div>
+        <div id='Admin-header'>
 
-            {addNotification && (<AddNotification setAddNotification={setAddNotification} />)}
+            <Link
+                to='./Admin-dashboard'
+                className='Page-greeting' >
+                Admin Dashboard
+            </Link>
 
-            <div className='admin-notification-logout'>
+            {addNotification && (
+                <AddNotification
+                    setAddNotification={setAddNotification} />
+            )}
+
+            <div className='Admin-right-window-container'>
                 <div ref={notificationRef}>
                     <RiNotification2Fill
-                        onClick={() => setShowNotificationDropdown((prevState) => !prevState)}
+                        onClick={() =>
+                            setShowNotification((prevState) => !prevState)
+                        }
                         size={30}
+                        title='notification'
                         className='RiNotification2Fill' />
 
                     {
-                        showNotificationDropdown && (
+                        showNotification && (
                             <div
-                                onClick={() => setShowNotificationDropdown((prevState) => !prevState)}
+                                onClick={() =>
+                                    setShowNotification((prevState) => !prevState)
+                                }
                                 className='showNotification-dropdown'>
 
 
                                 <div className='notification-dropdown'>
-                                    <div className='notification-label_cross'>
-                                        <div className='notification-label'>
+                                    <div className='notification-header'>
+                                        <div className='notification-header-label'>
                                             Notifications
                                         </div>
                                         <MdOutlineClose
-                                            onClick={() => setShowNotificationDropdown(false)}
-                                            size={20}
-                                            className='notification-close' />
+                                            onClick={() => setShowNotification(false)}
+                                            size={25}
+                                            title='Close'
+                                            className='MdOutlineClose-notification' />
                                     </div>
 
                                     <div
@@ -101,7 +112,9 @@ function AdminDashHeader() {
                         )
                     }
                 </div>
-                <button onClick={signOut} className='admin-logout'>
+                <button
+                    onClick={signOut}
+                    className='Admin-logout'>
                     Sign out
                 </button>
             </div>

@@ -62,7 +62,7 @@ function UnitDetails() {
         setDeleted(true)
     }
     if (deleted) {
-        return <Redirect to={{ state: residenceDetails, area, pathname: '/units-tenants' }} />
+        return <Redirect to={{ state: residenceDetails, area, pathname: '/Units' }} />
     }
 
     return (
@@ -81,8 +81,8 @@ function UnitDetails() {
             <div className="unit-details-content">
                 <AdminDashHeader />
 
-                <Link to={{ state: residenceDetails, area, pathname: '/units-tenants' }}>
-                    <BiArrowBack size={35} className='us-ts-BiArrowBack' />
+                <Link to={{ state: residenceDetails, area, pathname: '/Units' }}>
+                    <BiArrowBack size={30} className='BiArrowBack' />
                 </Link>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

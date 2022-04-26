@@ -102,7 +102,7 @@ function ResidenceDetails() {
                 <AdminDashHeader />
 
                 <Link to='/Admin-dashboard'>
-                    <BiArrowBack size={35} className='us-ts-BiArrowBack' />
+                    <BiArrowBack size={35} className='BiArrowBack' />
                 </Link>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

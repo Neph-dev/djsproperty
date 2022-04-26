@@ -126,7 +126,7 @@ function AddResidence() {
                 <AdminDashHeader />
 
                 <Link to='/Admin-dashboard'>
-                    <BiArrowBack size={35} className='us-ts-BiArrowBack' />
+                    <BiArrowBack size={30} className='BiArrowBack' />
                 </Link>
 
                 <div>

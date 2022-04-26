@@ -20,14 +20,14 @@ import Statements from '../Pages/TenantPortal/Pages/Statements';
 import TenantUpload from '../Pages/TenantPortal/Pages/Upload';
 
 // Import admin dashboard components.
-import Admin from '../Pages/Admin';
+import AdminDashboard from '../Pages/Admin/Pages/Dashboard';
 import AddResidence from '../Pages/Admin/Pages/AddResidence';
 import AddTenant from '../Pages/Admin/Components/AddTenant';
 import AddUnit from '../Pages/Admin/Pages/AddUnit';
-import ManageTenants from '../Pages/Admin/Pages/ManageTenants';
+import Tenants from '../Pages/Admin/Pages/Tenants';
 import ResidenceDetails from '../Pages/Admin/Pages/ResidenceDetails';
 import TenantDetails from '../Pages/Admin/Pages/TenantDetails';
-import UnitsAndTenants from '../Pages/Admin/Pages/UnitsAndTenants';
+import Units from '../Pages/Admin/Pages/Units';
 import UnitDetails from '../Pages/Admin/Pages/UnitDetails';
 
 export default function Router() {
@@ -48,14 +48,14 @@ export default function Router() {
           <Route exact path='/Tenant-portal-upload' component={TenantUpload} />
 
           {/* admin components */}
-          <Route exact path='/Admin-dashboard' component={Admin} />
+          <Route exact path='/Admin-dashboard' component={AdminDashboard} />
           <Route exact path='/Add-tenant' component={AddTenant} />
           <Route exact path='/Add-unit' component={AddUnit} />
           <Route exact path='/Add-residence' component={AddResidence} />
-          <Route exact path='/Manage-tenants' component={ManageTenants} />
+          <Route exact path='/Tenants' component={Tenants} />
           <Route exact path='/Residence-details' component={ResidenceDetails} />
           <Route exact path='/Tenant-details' component={TenantDetails} />
-          <Route exact path='/Units-tenants' component={UnitsAndTenants} />
+          <Route exact path='/Units' component={Units} />
           <Route exact path='/Unit-details' component={UnitDetails} />
       </Switch>
     </Routers>
