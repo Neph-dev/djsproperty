@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
+
+import { Link, Redirect } from 'react-router-dom';
 
 import { useDetectClickOutside } from 'react-detect-click-outside';
 
@@ -16,11 +18,26 @@ function AdminDashHeader() {
     const [showNotificationDropdown, setShowNotificationDropdown] = useState(false)
     const [addNotification, setAddNotification] = useState(false)
 
+    const [signedOut, setSignedOut] = useState(false)
 
     const closeNotificationDropdown = () => {
         setShowNotificationDropdown(false);
     }
     const notificationRef = useDetectClickOutside({ onTriggered: closeNotificationDropdown });
+
+    // Sign out function
+    const signOut = async () => {
+        try {
+            await Auth.signOut();
+            setSignedOut(true)
+        } catch (error) {
+            console.log('error signing out: ', error);
+        }
+    }
+
+    if (signedOut === true) {
+        return <Redirect to='/Login' />
+    }
 
     return (
         <div className='admin-header'>
@@ -84,9 +101,9 @@ function AdminDashHeader() {
                         )
                     }
                 </div>
-                <div className='admin-logout'>
-                    <Link to='Login'>log out</Link>
-                </div>
+                <button onClick={signOut} className='admin-logout'>
+                    Sign out
+                </button>
             </div>
         </div>
     );

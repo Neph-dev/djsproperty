@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { Auth } from "aws-amplify";
 
 import { useDetectClickOutside } from 'react-detect-click-outside';
 
@@ -12,6 +14,11 @@ import TenantPortalTabNav from '../TenantPortalTabNav';
 
 function TenantDashHeader({ activeTab }) {
 
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [email, setEmail] = useState('')
+
     const [showNotificationDropdown, setShowNotificationDropdown] = useState(false)
 
     const closeNotificationDropdown = () => {
@@ -19,12 +26,41 @@ function TenantDashHeader({ activeTab }) {
     }
     const notificationRef = useDetectClickOutside({ onTriggered: closeNotificationDropdown });
 
+    useEffect(() => {
+        //automatically scroll to top
+        window.scrollTo(0, 0);
+
+        try {
+            Auth.currentAuthenticatedUser({
+                // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+                bypassCache: false
+            }).then(user => {
+                setFirstName(user.attributes.name)
+                setLastName(user.attributes.family_name)
+                setPhoneNumber(user.attributes.phone_number);
+                setEmail(user.attributes.email);
+
+                // TBD
+            }).catch(err => console.log(err));
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+    const userDetails = {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+    }
+
     return (
         <div>
             <div className='tenantPortal-header'>
                 <div className='tenantPortal-greeting'>
                     <Link to='Tenant-portal-statements'>
-                        Hello Nephthali - Unit 7b
+                        Hello {firstName} - Unit 7b
                     </Link>
                 </div>
 
@@ -80,7 +116,9 @@ function TenantDashHeader({ activeTab }) {
                 </div>
             </div>
 
-            <TenantPortalTabNav activeTab={activeTab} />
+            <TenantPortalTabNav
+                userDetails={userDetails}
+                activeTab={activeTab} />
 
         </div>
     );

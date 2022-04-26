@@ -10,6 +10,17 @@
       "StackName": "amplify-djsproperty-dev-73500",
       "StackId": "arn:aws:cloudformation:us-east-1:077535700697:stack/amplify-djsproperty-dev-73500/7538e880-c459-11ec-ad06-0ebc45c46451",
       "AmplifyAppId": "d3khzo8kpno227"
+    },
+    "categories": {
+      "auth": {
+        "djsproperty8039ee628039ee62": {}
+      },
+      "function": {
+        "AdminQueries9fd319cd": {
+          "deploymentBucketName": "amplify-djsproperty-dev-73500-deployment",
+          "s3Key": "amplify-builds/AdminQueries9fd319cd-57706f416e6c362f3336-build.zip"
+        }
+      }
     }
   }
 }

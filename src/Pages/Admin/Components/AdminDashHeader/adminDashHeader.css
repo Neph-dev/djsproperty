@@ -83,11 +83,11 @@
     margin: 2rem;
 }
 .admin-logout {
+    background: transparent;
+    border: 0; 
+    font-size: 16px;   
     cursor: pointer;
+    color: #ed1c24;
     letter-spacing: 1px;
     text-decoration: underline;
-}
-.admin-logout a{
-    text-decoration: none;
-    color: #ed1c24;
 }

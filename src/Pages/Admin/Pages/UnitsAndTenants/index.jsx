@@ -6,7 +6,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { MdPeopleAlt } from 'react-icons/md';
 
 //import aws api and components.
-import { API, graphqlOperation, Auth } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { listUnits } from '../../../../graphql/queries';
 
 import './unitsAndTenants.css';

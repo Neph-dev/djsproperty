@@ -8,7 +8,7 @@ import { CgFileDocument } from 'react-icons/cg';
 import './tenantPortalTabNav.css';
 
 
-function TenantPortalTabNav({ activeTab }) {
+function TenantPortalTabNav({ userDetails, activeTab }) {
 
     const [statementFocused, setStatementFocused] = useState(false)
     const [personalInfoFocused, setPersonalInfoFocused] = useState(false)
@@ -34,7 +34,7 @@ function TenantPortalTabNav({ activeTab }) {
                 </div>
             </Link>
 
-            <Link to='/Tenant-portal-account'>
+            <Link to={{ state: userDetails, pathname: '/Tenant-portal-account' }}>
                 <div
                     onMouseEnter={() => setPersonalInfoFocused(true)}
                     onMouseLeave={() => setPersonalInfoFocused(false)}

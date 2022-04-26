@@ -103,6 +103,8 @@
 .login-card-btn {
     align-items: center;
     background-color: #bfafb2;
+    border: 0;
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -110,11 +112,10 @@
     font-size: 20px;
     letter-spacing: 5px;
     padding: 15px;
+    text-decoration: none;
     width: 5rem;
 }
 .login-card-btn a {
-    color: #ffffff;
-    text-decoration: none;
 }
 
 .get-help {

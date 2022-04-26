@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useLocation } from 'react-router-dom';
+
 import { Helmet } from 'react-helmet-async';
 
 import './account.css';
@@ -6,6 +9,10 @@ import TenantDashHeader from '../../Components/TenantDashHeader';
 
 
 function Account() {
+
+    const location = useLocation()
+
+    const userDetails = location.state
 
     const activeTab = 'account'
 
@@ -35,7 +42,7 @@ function Account() {
                             <div className='tenant-account-input'>
                                 <input
                                     type="text"
-                                    value='Nephthali Salam'
+                                    value={userDetails.firstName + ' ' + userDetails.lastName}
                                     maxLength={100} disabled={true} />
                             </div>
                         </div>
@@ -46,7 +53,7 @@ function Account() {
                             <div className='tenant-account-input'>
                                 <input
                                     type="email"
-                                    value='snephthali@gmail.com'
+                                    value={userDetails.email}
                                     maxLength={30} disabled={true} />
                             </div>
                         </div>
@@ -56,7 +63,7 @@ function Account() {
                             <div className='add-unit-input-label'>Phone Number</div>
                             <div className='tenant-account-input'>
                                 <input
-                                    value='+27 67 791 9267'
+                                    value={userDetails.phoneNumber}
                                     type="text"
                                     maxLength={15} disabled={true} />
                             </div>
