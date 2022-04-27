@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
+import { FileUploader } from "react-drag-drop-files";
+
 //import aws api and components.
-import { API, graphqlOperation, Auth } from "aws-amplify";
+import { API, Storage, Auth } from "aws-amplify";
 
 import { BiArrowBack } from 'react-icons/bi';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
@@ -17,6 +19,11 @@ import AdminDashHeader from '../../Components/AdminDashHeader';
 function TenantDetails() {
 
     const location = useLocation()
+
+    const fileTypes = ["JPEG", "PNG", "GIF", "PDF"];
+    const [file, setFile] = useState();
+    const [files, setFiles] = useState([]);
+    const [deleteFile, setDeleteFile] = useState('')
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -42,14 +49,23 @@ function TenantDetails() {
     //tenant.Attributes[10] : family_name 
     //tenant.Attributes[11] : email
 
-    const [addStatement, setAddStatement] = useState(false)
+    let folderName = tenant.Attributes[7].Value + tenant.Attributes[9].Value
+
+    const baseS3URL = 'https://bucketdjsproperty73500-dev.s3.amazonaws.com/public/'
 
     const [residenceDropdown, setResidenceDropdown] = useState(false)
 
-    //automatically scroll to top
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+        // Fetch files
+        async function fetchFiles() {
+            Storage.list(`${folderName}/`) // for listing ALL files without prefix, pass '' instead
+                .then(result => {
+                    setFiles(result)
+                })
+                .catch(err => console.log(err));
+        }
+        fetchFiles()
+    });
 
     async function deleteUser() {
         try {
@@ -80,9 +96,30 @@ function TenantDetails() {
         }
 
     }
-
     if (deleted === true) {
         return <Redirect to={{ state: residenceDetails, area, pathname: '/Tenants' }} />
+    }
+
+    // Upload Files
+    async function handleUploadFile(file) {
+        setFile(file);
+
+        setIsLoading(true)
+
+        await Storage.put(`${folderName}/${file[0].name}`, file[0], { contentType: 'application/pdf' })
+
+        setIsLoading(false)
+
+        console.log('uploaded')
+    }
+    // Remove Files
+    async function handleRemoveFile() {
+        setIsLoading(true)
+
+        await Storage.remove(deleteFile);
+        setIsLoading(false)
+        
+        console.log('removed')
     }
 
     return (
@@ -121,7 +158,7 @@ function TenantDetails() {
                             <input
                                 type="text"
                                 value={tenant.Attributes[7].Value}
-                                maxLength={100} />
+                                maxLength={100} readOnly={true} />
                         </div>
                     </div>
                 </div>
@@ -132,7 +169,7 @@ function TenantDetails() {
                             <input
                                 type="text"
                                 value={tenant.Attributes[10].Value}
-                                maxLength={100} />
+                                maxLength={100} readOnly={true} />
                         </div>
                     </div>
                 </div>
@@ -143,7 +180,7 @@ function TenantDetails() {
                             <input
                                 value={tenant.Attributes[11].Value}
                                 type="text"
-                                maxLength={30} />
+                                maxLength={30} readOnly={true} />
                         </div>
                     </div>
                 </div>
@@ -154,7 +191,7 @@ function TenantDetails() {
                             <input
                                 value={tenant.Attributes[8].Value}
                                 type="text"
-                                maxLength={15} />
+                                maxLength={15} readOnly={true} />
                         </div>
                     </div>
                 </div>
@@ -168,7 +205,7 @@ function TenantDetails() {
                             <input
                                 value={tenant.Attributes[5].Value}
                                 type="text"
-                                maxLength={50} />
+                                maxLength={50} readOnly={true} />
                             <MdKeyboardArrowDown size={25} />
                         </div>
                         {
@@ -189,46 +226,55 @@ function TenantDetails() {
                             <input
                                 value={tenant.Attributes[1].Value}
                                 type="text"
-                                maxLength={100} />
+                                maxLength={100} readOnly={true} />
                         </div>
                     </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div className='features-label'>Statements</div>
-
-                    <AiOutlinePlusCircle
-                        title='Add a statement.'
-                        onClick={() => setAddStatement(true)}
-                        size={40}
-                        className='AiOutlinePlusCircle' />
                 </div>
 
-                <div className='tenantDetails-doc-container'>
-                    <div>
-                        <div className='tenantDetails-doc-label'>February 2022</div>
-                        <div className='tenantDetails-doc'>
-                            <div>
-
-                            </div>
-                        </div>
-                        <div className='tenantDetails-doc-delete'>
-                            delete
-                        </div>
+                <div className='fileUploader'>
+                    <div style={{ marginTop: '2rem' }}>
+                        <FileUploader
+                            multiple={true}
+                            handleChange={handleUploadFile}
+                            name="file"
+                            types={fileTypes}
+                            className='FileUploader'
+                        />
+                        <p className='fileUploader-label'>
+                            {file ? `File name: ${file[0].name}` : "no files uploaded yet"}
+                        </p>
                     </div>
                 </div>
-
+                
                 <div className='tenantDetails-doc-container'>
                     <div>
-                        <div className='tenantDetails-doc-label'>January 2022</div>
-                        <div className='tenantDetails-doc'>
-                            <div>
+                    {files.map((mapFile) => (
+                        <div>
+                            <a key={mapFile.key}
+                                onMouseEnter={() => setDeleteFile(mapFile.key)}
+                                href={`${baseS3URL}${mapFile.key}`}
+                                target='_blank' rel='noreferrer'>
+                                
+                                <div className='tenantDetails-doc-label'>
+                                    {mapFile.key}
+                                </div>
+                                {/* <div className='tenantDetails-doc'>
+                                    <div>
 
+                                    </div>
+                                </div> */}
+                            </a>
+                            <div 
+                                onClick={handleRemoveFile}
+                                className='tenantDetails-doc-delete'>
+                                delete
                             </div>
                         </div>
-                        <div className='tenantDetails-doc-delete'>
-                            delete
-                        </div>
+                    ))}
                     </div>
                 </div>
 

@@ -29,8 +29,18 @@
 }
 
 .tenantDetails-doc-delete {
+    border:0;
+    background: transparent;
     color: red;
     cursor: pointer;
     font-size: 17px;
+    margin-top: .5rem;
     text-decoration: underline;
+}
+
+.FileUploader {
+    display: flex; 
+    justify-content: center; 
+    margin: auto;
+    width: 10rem; 
 }

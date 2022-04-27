@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, UseEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { FileUploader } from "react-drag-drop-files";
@@ -8,7 +8,7 @@ import TenantDashHeader from '../../Components/TenantDashHeader';
 import './upload.css';
 
 
-const fileTypes = ["JPEG", "PNG", "GIF"];
+const fileTypes = ["JPEG", "PNG", "GIF", "PDF"];
 
 
 function TenantUpload() {
@@ -50,10 +50,9 @@ function TenantUpload() {
                             style={{ width: '10rem', display: 'flex', justifyContent: 'center', margin: 'auto' }}
                         />
                         <p className='fileUploader-label'>
-                            {file ? `File name: ${file[0].name}` : "no files uploaded yet"}
+                            {file ? `File name: ${file[0].name}` : "no file uploaded yet"}
                         </p>
                     </div>
-
                 </div>
 
 

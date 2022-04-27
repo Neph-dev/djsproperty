@@ -17,7 +17,7 @@ function TenantPortalTabNav({ userDetails, activeTab }) {
     return (
         <div className='upload-statements-history'>
 
-            <Link to='/Tenant-portal-statements'>
+            <Link to={{ state: userDetails, pathname: '/Tenant-portal-statements' }}>
                 <div
                     onMouseEnter={() => setStatementFocused(true)}
                     onMouseLeave={() => setStatementFocused(false)}
