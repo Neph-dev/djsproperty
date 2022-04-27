@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { Auth } from "aws-amplify";
 
 import { Helmet } from 'react-helmet-async';
 
@@ -10,11 +10,46 @@ import TenantDashHeader from '../../Components/TenantDashHeader';
 
 function Account() {
 
-    const location = useLocation()
 
-    const userDetails = location.state
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [email, setEmail] = useState('')
+    const [gender, setGender] = useState('')
+    const [address, setAddress] = useState('')
+    const [residence, setResidence] = useState('')
+    const [unitNumber, setUnitNumber] = useState('')
+    const [roomNumber, setRoomNumber] = useState('')
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const activeTab = 'account'
+
+    useEffect(() => {
+        //automatically scroll to top
+        window.scrollTo(0, 0);
+
+        try {
+            Auth.currentAuthenticatedUser({
+                // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+                bypassCache: false
+            }).then(user => {
+                setFirstName(user.attributes.name)
+                setLastName(user.attributes.family_name)
+                setEmail(user.attributes.email)
+                setPhoneNumber(user.attributes.phone_number)
+                setAddress(user.attributes.address)
+                setGender(user.attributes.gender)
+                setResidence(user.attributes['custom:residence'])
+                setUnitNumber(user.attributes['custom:unitNumber'])
+                setRoomNumber(user.attributes['custom:roomNumber'])
+                // TBD
+            }).catch(err => console.log(err));
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }, []);
 
     return (
         <div id="tennant-account">
@@ -42,7 +77,7 @@ function Account() {
                             <div className='tenant-account-input'>
                                 <input
                                     type="text"
-                                    value={userDetails.firstName + ' ' + userDetails.lastName}
+                                    value={firstName + ' ' + lastName}
                                     maxLength={100} disabled={true} />
                             </div>
                         </div>
@@ -53,7 +88,7 @@ function Account() {
                             <div className='tenant-account-input'>
                                 <input
                                     type="email"
-                                    value={userDetails.email}
+                                    value={email}
                                     maxLength={30} disabled={true} />
                             </div>
                         </div>
@@ -63,7 +98,7 @@ function Account() {
                             <div className='add-unit-input-label'>Phone Number</div>
                             <div className='tenant-account-input'>
                                 <input
-                                    value={userDetails.phoneNumber}
+                                    value={phoneNumber}
                                     type="text"
                                     maxLength={15} disabled={true} />
                             </div>
@@ -76,7 +111,7 @@ function Account() {
                             <div className='tenant-account-input'>
                                 <input
                                     type="text"
-                                    value='Berario Palms'
+                                    value={residence}
                                     maxLength={100} disabled={true} />
                             </div>
                         </div>
@@ -84,11 +119,35 @@ function Account() {
 
                     <div className='add-unit-input-container'>
                         <div>
-                            <div className='add-unit-input-label'>Residence Address</div>
+                            <div className='add-unit-input-label'>Address</div>
                             <div className='tenant-account-input'>
                                 <input
                                     type="text"
-                                    value='185 Arkansas avenue. berario, Johannesburg, 2181'
+                                    value={address}
+                                    maxLength={100} disabled={true} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Unit number</div>
+                            <div className='tenant-account-input'>
+                                <input
+                                    type="text"
+                                    value={unitNumber}
+                                    maxLength={100} disabled={true} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='add-unit-input-container'>
+                        <div>
+                            <div className='add-unit-input-label'>Room number</div>
+                            <div className='tenant-account-input'>
+                                <input
+                                    type="text"
+                                    value={roomNumber}
                                     maxLength={100} disabled={true} />
                             </div>
                         </div>

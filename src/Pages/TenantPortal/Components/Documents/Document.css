@@ -1,0 +1,39 @@
+.Document-title {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing:2px;
+    margin-top: 2rem;
+    text-align: center;
+    text-transform: capitalize;
+}
+.Document-card {
+    align-items: center;
+    background: #283e51;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin: 1rem auto 1rem auto;
+    padding: 1rem;    
+    width: 13rem;
+}
+.Document-BsCloudDownloadFill {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    margin: auto auto auto auto;
+    right: 0;
+}
+.Document-card-title {
+    display: flex;
+    margin: 1rem auto;
+    color: #ffffff;
+    font-size: 16px;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+}

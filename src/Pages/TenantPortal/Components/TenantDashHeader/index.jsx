@@ -18,6 +18,9 @@ function TenantDashHeader({ activeTab }) {
     const [lastName, setLastName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [email, setEmail] = useState('')
+    const [roomNumber, setRoomNumber] = useState('')
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const [showNotificationDropdown, setShowNotificationDropdown] = useState(false)
 
@@ -36,10 +39,7 @@ function TenantDashHeader({ activeTab }) {
                 bypassCache: false
             }).then(user => {
                 setFirstName(user.attributes.name)
-                setLastName(user.attributes.family_name)
-                setPhoneNumber(user.attributes.phone_number);
-                setEmail(user.attributes.email);
-
+                setRoomNumber(user.attributes['custom:roomNumber'])
                 // TBD
             }).catch(err => console.log(err));
         }
@@ -48,19 +48,12 @@ function TenantDashHeader({ activeTab }) {
         }
     }, []);
 
-    const userDetails = {
-        firstName,
-        lastName,
-        phoneNumber,
-        email,
-    }
-
     return (
         <div>
             <div className='tenantPortal-header'>
                 <div className='tenantPortal-greeting'>
                     <Link to='Tenant-portal-statements'>
-                        Hello {firstName} - Unit 7b
+                        Hello {firstName} - Unit {roomNumber}
                     </Link>
                 </div>
 
@@ -116,9 +109,7 @@ function TenantDashHeader({ activeTab }) {
                 </div>
             </div>
 
-            <TenantPortalTabNav
-                userDetails={userDetails}
-                activeTab={activeTab} />
+            <TenantPortalTabNav activeTab={activeTab} />
 
         </div>
     );

@@ -29,45 +29,6 @@
     text-transform: uppercase;
 }
 
-.tenant-statement-month-label {
-    font-size: 20px;
-    margin-top: 2rem;
-    font-weight: bold;
-    letter-spacing:2px;
-    text-align: center;
-    text-transform: capitalize;
-}
-.tenant-statement-card {
-    background-color: transparent;
-    border: 2px solid #000000;
-    cursor: context-menu;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem auto 1rem auto;
-    height: 10rem;
-    width: 15rem;
-}
-.tenant-statement-FcDownload {
-    align-items: center;
-    display: flex;
-    margin: auto auto auto auto;
-    justify-content: center;
-    left: 0;
-    right: 0;
-}
-
-.tenant-statement-doc-name {
-    align-items: center;
-    display: flex;
-    margin: auto;
-    left: 0;
-    right: 0;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
-}
-
 .tenant-statement-doc-update {
     font-size: 13px;
     top: 1.5rem;
