@@ -18,11 +18,13 @@ function Login() {
     // Authentication states
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [userGroup, setUserGroup] = useState('')
 
     const [signedIn, setSignedIn] = useState(false);
     const [signInError, setSignInError] = useState('');
+    const [signInGroupError, setSignInGroupError] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState();
 
     //Show Password function.
     const showPassword = () => {
@@ -39,6 +41,12 @@ function Login() {
         try {
             setIsLoading(true)
             await Auth.signIn(username, password);
+
+            Auth.currentAuthenticatedUser({
+                bypassCache: false
+            }).then(user => {
+                setUserGroup(user.signInUserSession.accessToken.payload['cognito:groups'][0])
+            })
             setIsLoading(false)
             setSignedIn(true)
         } catch (error) {
@@ -50,7 +58,9 @@ function Login() {
         return <Redirect to={
             activeTab === 'tenant'
                 ? '/Tenant-portal-statements'
-                : '/Admin-dashboard'} />
+                : activeTab === 'admin'
+                    ? '/Admin-dashboard' : window.location.reload(false)
+        } />
     }
 
     return (
@@ -123,13 +133,20 @@ function Login() {
                         Login
                     </button>
                     {
-                        signInError !== '' ?
+                        signInError !== '' && signInGroupError == false ?
                             <div
                                 className='Login-centeredText'
                                 style={{ color: 'red' }}>
                                 Incorrect username or password
                             </div>
-                            : ''
+                            :
+                            signInGroupError === true ?
+                                <div
+                                    className='Login-centeredText'
+                                    style={{ color: 'red' }}>
+                                    Wrong user group login form
+                                </div>
+                                : []
                     }
 
                     <div className='Login-centeredText'>Get help sign in.</div>

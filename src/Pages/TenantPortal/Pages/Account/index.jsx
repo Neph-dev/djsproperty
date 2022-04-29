@@ -43,7 +43,7 @@ function Account() {
                 setResidence(user.attributes['custom:residence'])
                 setUnitNumber(user.attributes['custom:unitNumber'])
                 setRoomNumber(user.attributes['custom:roomNumber'])
-                // TBD
+
             }).catch(err => console.log(err));
         }
         catch (e) {

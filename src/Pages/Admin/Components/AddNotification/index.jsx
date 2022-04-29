@@ -15,13 +15,15 @@ function AddNotification({ setAddNotification }) {
 
                 <ImCancelCircle
                     onClick={() => setAddNotification(false)}
-                    size={30}
+                    size={25}
                     className='add-notif-ImCancelCircle' />
 
                 <div className="add-notification-title">Add a notification</div>
                 <div className="add-notification-input">
-                    Notification Title
-                    <input maxLength={30} type="text" />
+                    <input
+                        maxLength={30}
+                        type="text"
+                        placeholder='Notification Title' />
                 </div>
                 <div>
                     <textarea

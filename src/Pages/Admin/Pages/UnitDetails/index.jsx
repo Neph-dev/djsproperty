@@ -12,6 +12,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import './unitDetails.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';
+import ConfirmDelete from '../../../../Components/ConfirmDelete';
 
 
 function UnitDetails() {
@@ -44,6 +45,8 @@ function UnitDetails() {
 
     const [deleted, setDeleted] = useState(false)
 
+    const [deleting, setDeleting] = useState(false)
+
     //automatically scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -51,7 +54,7 @@ function UnitDetails() {
 
     // This Function is used to delete a Unit
     // then reload the page.
-    const handleDeleteUnit = async () => {
+    const handleDelete = async () => {
         const unitDetail = {
             id: unitID,
         };
@@ -427,10 +430,17 @@ function UnitDetails() {
                         </button>
                         <button
                             className='delete-btn'
-                            onClick={handleDeleteUnit}>
+                            onClick={() => setDeleting(true)}>
                             Delete Unit
                         </button>
                     </div>
+
+                    {
+                        deleting && (
+                            <ConfirmDelete
+                                handleDelete={handleDelete}
+                                setDeleting={setDeleting} />)
+                    }
 
                 </div>
 

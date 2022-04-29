@@ -11,6 +11,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import './residenceDetails.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';
 import SuccessMessage from '../../../../Components/SuccessMessage';
+import ConfirmDelete from '../../../../Components/ConfirmDelete';
 
 
 function ResidenceDetails() {
@@ -26,6 +27,8 @@ function ResidenceDetails() {
 
     const [updated, setUpdated] = useState(false)
     const [deleted, setDeleted] = useState(false)
+
+    const [deleting, setDeleting] = useState(false)
 
     // Residence States
     const [residenceNameInput, setResidenceNameInput] = useState(residenceDetails.name)
@@ -45,7 +48,7 @@ function ResidenceDetails() {
 
     // This Function is used to delete a residence
     // then reload the page.
-    const deleteResidence = async () => {
+    const handleDelete = async () => {
         const residenceDetail = {
             id: residenceDetails.id,
         };
@@ -324,10 +327,17 @@ function ResidenceDetails() {
                         </button>
                         <button
                             className='residence-delete-btn'
-                            onClick={deleteResidence}>
+                            onClick={() => setDeleting(true)}>
                             Delete Residence
                         </button>
                     </div>
+
+                    {
+                        deleting && (
+                            <ConfirmDelete
+                                handleDelete={handleDelete}
+                                setDeleting={setDeleting} />)
+                    }
 
                 </div>
 

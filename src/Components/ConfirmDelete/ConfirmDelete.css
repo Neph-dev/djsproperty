@@ -1,0 +1,56 @@
+#ConfirmDelete {
+    align-items: center;
+    background-color: #283e51;
+    color: #ffffff;
+    
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+
+    position: fixed;
+    
+    height: 30vh;
+    width: 60vh;
+}
+
+.con_del-first-text {
+    font-size: 18px;
+    width: 100%;
+}
+.con_del-second-text {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.con_del-btns {
+    display: flex;
+    margin-top: 2rem;
+}
+.con_del-delete {
+    background: #ed1c24;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 1rem;
+    padding: 10px;
+}
+.con_del-delete:hover {
+    background: #ff5349;
+}
+.con_del-cancel {
+    background: transparent;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;
+}
+.con_del-cancel:hover {
+    text-decoration: underline;
+}
