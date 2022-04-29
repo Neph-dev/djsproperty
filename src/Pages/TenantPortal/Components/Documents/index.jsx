@@ -1,52 +1,35 @@
 import React, { useEffect, useState } from 'react';
 
-import { Auth, Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 
 import { BsCloudDownloadFill } from 'react-icons/bs';
 
 import './Document.css';
 
 
-function TenantDocuments() {
+function TenantDocuments({ folderName, isLoading }) {
     const [files, setFiles] = useState([])
 
-    const [folderName, setFolderName] = useState('');
-
-    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null);
 
     const baseS3URL = 'https://bucketdjsproperty73500-dev.s3.amazonaws.com/public/'
 
-    // Current user details
-    useEffect(() => {
-        try {
-            const fetch = async () => {
-                setIsLoading(true)
-                const currentUserInfo = await Auth.currentUserInfo()
-                const roomNumber = currentUserInfo.attributes['custom:roomNumber']
-                const name = currentUserInfo.attributes.name
-                setFolderName(name + roomNumber)
-                setIsLoading(false)
-            }
-            fetch()
-        } catch (err) {
-            console.log('error fetching user info: ', err);
-            setIsLoading(false)
-        }
-    }, []);
 
-    // Fetch files
     useEffect(() => {
-        async function fetchFiles() {
-            Storage.list(`${folderName}/`)
-                .then(result => {
-                    setFiles(result)
+        const fetchFiles = async () => {
+            try {
+                // Fetch files
+                Storage.list(`${folderName}`).then(result => {
+                    return setFiles(result)
                 })
-                .catch(err => {
-                    console.log(err)
-                });
+            }
+            catch (error) {
+                setError(error)
+                console.log(error)
+            }
         }
         fetchFiles()
-    });
+    }, []);
 
     return (
         <div>

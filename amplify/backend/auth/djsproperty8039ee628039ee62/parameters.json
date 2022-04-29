@@ -1,6 +1,6 @@
 {
     "identityPoolName": "djsproperty8039ee62_identitypool_8039ee62",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "djspro8039ee62",
     "userPoolName": "djsproperty8039ee62_userpool_8039ee62",
     "autoVerifiedAttributes": [
@@ -55,7 +55,7 @@
         "email"
     ],
     "userPoolGroups": false,
-    "adminQueries": true,
+    "adminQueries": false,
     "triggers": "{}",
     "hostedUI": false,
     "userPoolGroupList": [

@@ -9,11 +9,12 @@ import { AiTwotoneHome } from 'react-icons/ai';
 import { MdPeopleAlt } from 'react-icons/md';
 
 import './Residences.css';
+import MissingData from '../../../../Components/MissingData';
 
 
 function Residences() {
 
-    const [area, setAreas] = useState([])
+    const [areas, setAreas] = useState([])
 
     const [residences, setResidences] = useState([])
 
@@ -55,7 +56,7 @@ function Residences() {
                     <div className='loader' />
                 </div>
                 :
-                area.map((area) => (
+                areas.map((area) => (
                     <div key={area.id} >
                         <div className='Page-title'>
                             {area.name}

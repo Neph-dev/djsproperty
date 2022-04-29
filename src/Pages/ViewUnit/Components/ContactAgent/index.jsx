@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { ImCancelCircle } from 'react-icons/im';
+
+//Handles the email on application submission.
+import emailjs from '@emailjs/browser';
 
 import './contactAgent.css';
 
@@ -11,6 +14,20 @@ function ContactAgent({ setShowContact, setMessageSent }) {
     const [emailInput, setEmailInput] = useState('')
     const [phoneNumberInput, setPhoneNumberInput] = useState('')
     const [messageInput, setMessageInput] = useState('')
+
+    // Email JS Configuration starts
+    const form = useRef();
+
+    const handleSend = (e) => {
+        e.preventDefault();
+        emailjs.sendForm('service_ta03w8q', 'template_pg4bkxh', form.current, 'sk4HOWSO0tCtvspvg')
+            .then((result) => {
+                setMessageSent(true)
+            }, (error) => {
+                console.log(error.text);
+            });
+    };
+    // Email JS Configuration ends
 
     return (
         <div id='contact-agent'>
@@ -26,7 +43,7 @@ function ContactAgent({ setShowContact, setMessageSent }) {
                     className='contact-agent-content-title'>
                     Contact An Agent
                 </div>
-                <div className="contact-inputs">
+                <form className="contact-inputs" ref={form} onSubmit={handleSend}>
                     <div>
                         <div style={{ marginTop: '1rem' }}>
                             <input
@@ -61,7 +78,6 @@ function ContactAgent({ setShowContact, setMessageSent }) {
                             {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
                             <div>
                                 <button
-                                    onClick={() => setMessageSent(true)}
                                     type="submit"
                                     value="Send"
                                     className='contact-submit-btn'>
@@ -70,7 +86,7 @@ function ContactAgent({ setShowContact, setMessageSent }) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
         </div>

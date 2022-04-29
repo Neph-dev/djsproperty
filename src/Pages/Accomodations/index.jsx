@@ -38,16 +38,18 @@ function Accomodations() {
             try {
                 setIsLoading(true)
                 // Areas
-                const areaResults = await API.graphql(
-                    graphqlOperation(listAreas)
-                )
+                const areaResults = await API.graphql({
+                    query: listAreas,
+                    authMode: 'AWS_IAM',
+                })
                 let area = areaResults.data.listAreas.items
                 setStateListArea(area)
 
                 // units
-                const unitResults = await API.graphql(
-                    graphqlOperation(listUnits)
-                )
+                const unitResults = await API.graphql({
+                    query: listUnits,
+                    authMode: 'AWS_IAM',
+                })
                 let unit = unitResults.data.listUnits.items
                 setStateListUnits(unit)
 

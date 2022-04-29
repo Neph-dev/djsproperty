@@ -46,7 +46,6 @@ function Login() {
             setIsLoading(false)
         }
     }
-
     if (signedIn === true) {
         return <Redirect to={
             activeTab === 'tenant'

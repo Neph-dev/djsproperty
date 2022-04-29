@@ -6,6 +6,7 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { listUnits } from '../../../../graphql/queries';
 
 import './TenantList.css';
+import MissingData from '../../../../Components/MissingData';
 
 
 function TenantList({ area, residenceDetails }) {
@@ -86,45 +87,49 @@ function TenantList({ area, residenceDetails }) {
                 </div>
                 :
                 units.map((unit) => (
-                    <div key={unit.id}>
-                        <div className='tenants-unit-title'>
-                            Unit {unit.unitNumber}
+                    residenceDetails.id === unit.residenceID ?
+                        <div key={unit.id}>
+                            <div className='tenants-unit-title'>
+                                Unit {unit.unitNumber}
+                            </div>
+                            <div className='tenant-cards-list'>
+                                {
+                                    tenants.map((tenant) => (
+                                        unit.unitNumber === tenant.Attributes[4].Value
+                                            &&
+                                            unit.residence.name === tenant.Attributes[5].Value
+                                            ?
+                                            <div key={tenant.id} className='tenant-card'>
+                                                <div className='tenant-card-unit-number'>
+                                                    {tenant.Attributes[9].Value}
+                                                </div>
+                                                <div className='tenant-card-el'>
+                                                    {tenant.Attributes[7].Value} {tenant.Attributes[10].Value}
+                                                </div>
+                                                <div className='tenant-card-el'>
+                                                    {tenant.Attributes[11].Value}
+                                                </div>
+                                                <div className='tenant-card-el'>
+                                                    {tenant.Attributes[8].Value}
+                                                </div>
+                                                <button className='tenant-card-btn'>
+                                                    <Link to={{
+                                                        state: residenceDetails,
+                                                        area,
+                                                        tenant,
+                                                        pathname: '/Tenant-details'
+                                                    }}>
+                                                        Tenants details
+                                                    </Link>
+                                                </button>
+                                            </div>
+                                            :
+                                            <MissingData />
+                                    ))
+                                }
+                            </div>
                         </div>
-                        <div className='tenant-cards-list'>
-                            {
-                                tenants.map((tenant) => (
-                                    unit.unitNumber === tenant.Attributes[4].Value
-                                        &&
-                                        unit.residence.name === tenant.Attributes[5].Value
-                                        ?
-                                        <div key={tenant.id} className='tenant-card'>
-                                            <div className='tenant-card-unit-number'>
-                                                {tenant.Attributes[9].Value}
-                                            </div>
-                                            <div className='tenant-card-el'>
-                                                {tenant.Attributes[7].Value} {tenant.Attributes[10].Value}
-                                            </div>
-                                            <div className='tenant-card-el'>
-                                                {tenant.Attributes[11].Value}
-                                            </div>
-                                            <div className='tenant-card-el'>
-                                                {tenant.Attributes[8].Value}
-                                            </div>
-                                            <button className='tenant-card-btn'>
-                                                <Link to={{
-                                                    state: residenceDetails,
-                                                    area,
-                                                    tenant,
-                                                    pathname: '/Tenant-details'
-                                                }}>
-                                                    Tenants details
-                                                </Link>
-                                            </button>
-                                        </div>
-                                        : []))
-                            }
-                        </div>
-                    </div>
+                        : <MissingData />
                 ))
             }
 

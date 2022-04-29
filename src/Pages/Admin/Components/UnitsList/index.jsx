@@ -8,6 +8,7 @@ import { listUnits } from '../../../../graphql/queries';
 import { MdPeopleAlt } from 'react-icons/md';
 
 import './UnitsList.css';
+import MissingData from '../../../../Components/MissingData';
 
 
 function UnitsList({ residenceDetails, area }) {
@@ -23,7 +24,7 @@ function UnitsList({ residenceDetails, area }) {
         const fetchAreas = async () => {
             try {
                 setIsLoading(true);
-                // Areas
+                // Units
                 const unitResults = await API.graphql(
                     graphqlOperation(listUnits)
                 )
@@ -81,7 +82,8 @@ function UnitsList({ residenceDetails, area }) {
                                     </div>
                                 </div>
                             </div>
-                            : []
+                            :
+                            <MissingData />
                     ))
             }
 

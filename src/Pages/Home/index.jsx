@@ -43,9 +43,9 @@ function Home() {
                         <div className='welcome-text'>The Best Single & Shared Accomodation in Johannesburg</div>
                     </div>
                 </div>
-                <div className='apply-btn'>
+                {/* <div className='apply-btn'>
                     <Link to='/Accomodations'>Accomodations</Link>
-                </div>
+                </div> */}
             </div>
         </div>
     );

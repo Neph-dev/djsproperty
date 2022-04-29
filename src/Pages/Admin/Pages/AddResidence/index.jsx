@@ -17,11 +17,14 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import './addResidence.css';
 
 import AdminDashHeader from '../../Components/AdminDashHeader';
+import SuccessMessage from '../../../../Components/SuccessMessage';
 
 
 function AddResidence() {
 
     const [neighborhoodDropdown, setNeighborhoodDropdown] = useState(false)
+
+    const [succeeded, setSucceeded] = useState(false)
 
     // Area States
     const [selectedArea, setSelectedArea] = useState(false)
@@ -60,8 +63,17 @@ function AddResidence() {
                 variables: { input: areaDetails }
             });
 
+            setSucceeded(true)
+
             window.location.reload(false);
         }
+    }
+
+    if (succeeded === true) {
+        setTimeout(() => {
+            setSucceeded(false);
+            window.location.reload(false);
+        }, 2000);
     }
 
     // This Function is used to create a new residence
@@ -83,6 +95,8 @@ function AddResidence() {
             query: mutations.createResidence,
             variables: { input: residenceDetails }
         });
+
+        setSucceeded(true)
 
         window.location.reload(false);
     }
@@ -128,6 +142,8 @@ function AddResidence() {
                 <Link to='/Admin-dashboard'>
                     <BiArrowBack size={30} className='BiArrowBack' />
                 </Link>
+
+                {succeeded && (<SuccessMessage />)}
 
                 <div>
                     <div className='add-unit-title'>Add a Residence</div>

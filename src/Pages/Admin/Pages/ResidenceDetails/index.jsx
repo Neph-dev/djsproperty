@@ -10,11 +10,14 @@ import { BiArrowBack } from 'react-icons/bi';
 
 import './residenceDetails.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';
+import SuccessMessage from '../../../../Components/SuccessMessage';
 
 
 function ResidenceDetails() {
 
     const location = useLocation()
+
+    const [succeeded, setSucceeded] = useState(false)
 
     const areaDetails = location.state.area
     const residenceDetails = location.state
@@ -50,7 +53,15 @@ function ResidenceDetails() {
             query: mutations.deleteResidence,
             variables: { input: residenceDetail }
         });
+        setSucceeded(true)
+
         setDeleted(true)
+    }
+    if (succeeded === true) {
+        setTimeout(() => {
+            setSucceeded(false);
+            window.location.reload(false);
+        }, 2000);
     }
     if (deleted) {
         return <Redirect to='/Admin-dashboard' />
@@ -78,8 +89,11 @@ function ResidenceDetails() {
             variables: { input: residenceDetail }
         });
 
+        setSucceeded(true)
+
         setUpdated(true)
     }
+
     if (updated) {
         return <Redirect to='/Admin-dashboard' />
     }
@@ -104,6 +118,8 @@ function ResidenceDetails() {
                 <Link to='/Admin-dashboard'>
                     <BiArrowBack size={35} className='BiArrowBack' />
                 </Link>
+
+                {succeeded && (<SuccessMessage />)}
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div className='add-unit-title'>Residence <b>Berario Palms</b> Details</div>

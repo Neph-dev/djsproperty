@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Helmet } from 'react-helmet-async';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+//Handles the email on application submission.
+import emailjs from '@emailjs/browser';
 
 import './contact.css';
 
@@ -29,6 +32,20 @@ function Contact() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // Email JS Configuration starts
+    const form = useRef();
+
+    const handleSend = (e) => {
+        e.preventDefault();
+        emailjs.sendForm('service_ta03w8q', 'template_pg4bkxh', form.current, 'sk4HOWSO0tCtvspvg')
+            .then((result) => {
+                setMessageSent(true)
+            }, (error) => {
+                console.log(error.text);
+            });
+    };
+    // Email JS Configuration ends
 
     if (messageSent === true) {
         setTimeout(() => {
@@ -61,7 +78,7 @@ function Contact() {
                     className='contact-content-title'>
                     Contact An Agent
                 </div>
-                <div className="contact-inputs">
+                <form ref={form} onSubmit={handleSend} className="contact-inputs">
                     <div>
                         <div style={{ marginTop: '1rem' }}>
                             <input
@@ -96,7 +113,6 @@ function Contact() {
                             {messageInput.length < 10 ? `0${messageInput.length}` : messageInput.length}/500
                             <div>
                                 <button
-                                    onClick={() => setMessageSent(true)}
                                     type="submit"
                                     value="Send"
                                     className='contact-submit-btn'>
@@ -105,7 +121,7 @@ function Contact() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );

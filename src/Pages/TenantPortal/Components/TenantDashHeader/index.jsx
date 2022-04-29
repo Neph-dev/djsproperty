@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { Auth } from "aws-amplify";
 
@@ -14,13 +14,10 @@ import TenantPortalTabNav from '../TenantPortalTabNav';
 
 function TenantDashHeader({ activeTab }) {
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [email, setEmail] = useState('')
-    const [roomNumber, setRoomNumber] = useState('')
+    const [signedOut, setSignedOut] = useState(false)
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [firstName, setFirstName] = useState('')
+    const [roomNumber, setRoomNumber] = useState('')
 
     const [showNotificationDropdown, setShowNotificationDropdown] = useState(false)
 
@@ -47,6 +44,19 @@ function TenantDashHeader({ activeTab }) {
             console.log(e);
         }
     }, []);
+
+    // Sign out function
+    const signOut = async () => {
+        try {
+            await Auth.signOut();
+            setSignedOut(true)
+        } catch (error) {
+        }
+    }
+    if (signedOut === true) {
+        return <Redirect to='/Login' />
+    }
+
 
     return (
         <div>
@@ -103,9 +113,11 @@ function TenantDashHeader({ activeTab }) {
                             )
                         }
                     </div>
-                    <div className='tenantPortal-logout'>
-                        <Link to='Login'>log out</Link>
-                    </div>
+                    <button
+                        onClick={signOut}
+                        className='Admin-logout'>
+                        Sign out
+                    </button>
                 </div>
             </div>
 
