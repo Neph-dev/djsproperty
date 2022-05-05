@@ -13,6 +13,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import './unitDetails.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';
 import ConfirmDelete from '../../../../Components/ConfirmDelete';
+import SuccessMessage from '../../../../Components/SuccessMessage';
 
 
 function UnitDetails() {
@@ -28,6 +29,12 @@ function UnitDetails() {
     const [bathroomDropdown, setBathroomDropdown] = useState(false)
     const [kitchenDropdown, setKitchenDropdown] = useState(false)
     const [parkingDropdown, setParkingDropdown] = useState(false)
+
+    const [edit, setEdit] = useState(false)
+
+    const [updated, setUpdated] = useState(false)
+
+    const [succeeded, setSucceeded] = useState(false)
 
     // Unit States
     const [unitID, setUnitID] = useState(unit.id)
@@ -68,6 +75,43 @@ function UnitDetails() {
         return <Redirect to={{ state: residenceDetails, area, pathname: '/Units' }} />
     }
 
+    // This Function is used to update a residence
+    // then reload the page.
+    const updateUnit = async () => {
+        const residenceDetail = {
+            id: unitID,
+            type: unitTypeInput,
+            style: unitStyleInput,
+            capacity: unitCapacityInput,
+            dimensions: unitDimensionsInput,
+            unitNumber: unitNumberInput,
+            rent_sale: unitRentSaleInput,
+            price: unitPriceInput,
+            deposit: unitDepositInput,
+            description: unitDescriptionInput,
+            feature: unitFeaturesInput,
+            image: unitDescriptionInput,
+
+            residenceID: residenceDetails.id,
+
+        };
+        const updateUnit = await API.graphql({
+            query: mutations.updateUnit,
+            variables: { input: residenceDetail }
+        });
+
+        setSucceeded(true)
+
+        setUpdated(true)
+    }
+
+    if (succeeded === true) {
+        setTimeout(() => {
+            setSucceeded(false);
+            window.location.reload(false);
+        }, 2000);
+    }
+
     return (
         <div id="unit-details">
 
@@ -81,6 +125,8 @@ function UnitDetails() {
                 <link rel='canonical' href='/Unit-details' />
             </Helmet>
 
+            {succeeded && (<SuccessMessage />)}
+
             <div className="unit-details-content">
                 <AdminDashHeader />
 
@@ -92,7 +138,9 @@ function UnitDetails() {
                     <div className='add-unit-title'>
                         Unit <b>{unit.unitNumber}</b> Details
                     </div>
-                    <div style={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                    <div
+                        onClick={() => setEdit(true)}
+                        style={{ textDecoration: 'underline', cursor: 'pointer' }}>
                         Edit
                     </div>
                 </div>
@@ -103,14 +151,15 @@ function UnitDetails() {
                             <div className='add-unit-input-label'>Type of unit</div>
                             <div
                                 onClick={() => {
-                                    setTypeOfUnitDropdown(prevState => !prevState)
+                                    setTypeOfUnitDropdown(edit ? prevState => !prevState : false)
                                     setSingleSharedDropdown(false)
                                 }}
                                 className='add-unit-input'>
                                 <input
                                     value={unitTypeInput}
                                     onChange={(e) => setUnitTypeInput(e.target.value)}
-                                    type="text" />
+                                    type="text"
+                                    readOnly={edit ? false : true} />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
                             {
@@ -144,13 +193,14 @@ function UnitDetails() {
                             <div className='add-unit-input-label'>Shared / Single unit</div>
                             <div
                                 onClick={() => {
-                                    setSingleSharedDropdown(prevState => !prevState)
+                                    setSingleSharedDropdown(edit ? prevState => !prevState : false)
                                 }}
                                 className='add-unit-input'>
                                 <input
                                     value={unitStyleInput}
                                     onChange={(e) => setUnitStyleInput(e.target.value)}
-                                    type="text" />
+                                    type="text"
+                                    readOnly={edit ? false : true} />
                                 <MdKeyboardArrowDown size={25} />
                             </div>
                             {
@@ -176,7 +226,8 @@ function UnitDetails() {
                                     value={unitCapacityInput}
                                     onChange={(e) => setUnitCapacityInput(e.target.value)}
                                     type="text"
-                                    maxLength={6} /> People
+                                    maxLength={6}
+                                    readOnly={edit ? false : true} /> People
                             </div>
                         </div>
                     </div>
@@ -188,7 +239,8 @@ function UnitDetails() {
                                     value={unitDimensionsInput}
                                     onChange={(e) => setUnitDimensionsInput(e.target.value)}
                                     type="text"
-                                    maxLength={10} /> m2
+                                    maxLength={10}
+                                    readOnly={edit ? false : true} /> m2
                             </div>
                         </div>
                     </div>
@@ -201,7 +253,8 @@ function UnitDetails() {
                                     value={unitNumberInput}
                                     onChange={(e) => setUnitNumberInput(e.target.value)}
                                     type="text"
-                                    maxLength={5} />
+                                    maxLength={5}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -209,7 +262,7 @@ function UnitDetails() {
                         <div>
                             <div className='add-unit-input-label'>Rent / Sale</div>
                             <div
-                                onClick={() => setRentSaleDropdown(prevState => !prevState)}
+                                onClick={() => setRentSaleDropdown(edit ? prevState => !prevState : false)}
                                 className='add-unit-input'>
                                 <input
                                     value={unitRentSaleInput}
@@ -240,7 +293,8 @@ function UnitDetails() {
                                     value={unitPriceInput}
                                     onChange={(e) => setUnitPriceInput(e.target.value)}
                                     type="text"
-                                    maxLength={10} />
+                                    maxLength={10}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -252,7 +306,8 @@ function UnitDetails() {
                                     value={unitDepositInput}
                                     onChange={(e) => setUnitDepositInput(e.target.value)}
                                     type="text"
-                                    maxLength={10} />
+                                    maxLength={10}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -265,7 +320,8 @@ function UnitDetails() {
                                     value={unitImageInput}
                                     onChange={(e) => setUnitImageInput(e.target.value)}
                                     type="text"
-                                    maxLength={100} />
+                                    maxLength={100}
+                                    readOnly={edit ? false : true} />
                             </div>
                         </div>
                     </div>
@@ -283,8 +339,11 @@ function UnitDetails() {
                                     type="text"
                                     placeholder="Type a description here."
                                     maxLength={500}
-                                    className='nei-description' />
-                                {unitDescriptionInput.length < 10 ? `0${unitDescriptionInput.length}` : unitDescriptionInput.length}/500
+                                    className='nei-description'
+                                    readOnly={edit ? false : true} />
+                                {unitDescriptionInput.length < 10
+                                    ? `0${unitDescriptionInput.length}`
+                                    : unitDescriptionInput.length}/500
                             </div>
                         </div>
                     </div>
@@ -424,9 +483,14 @@ function UnitDetails() {
 
                     <div>
                         <button
-                            className='save-btn'
-                            onClick={() => ''}>
-                            Save Unit
+                            className={
+                                edit === true ?
+                                    'addResidence-add-nei-btn-act'
+                                    : 'addResidence-add-nei-btn'
+                            }
+                            onClick={updateUnit}
+                            disabled={edit === false ? true : false}>
+                            Save Residence
                         </button>
                         <button
                             className='delete-btn'

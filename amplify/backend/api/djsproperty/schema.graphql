@@ -73,3 +73,11 @@ type Unit
   residenceID: ID!
   residence: Residence @connection(fields: ["residenceID"])
 }
+
+type Notifications {
+  id: ID!
+  title: String!
+  description: String!
+  lastUpdated: String!
+  hasRead: [String]
+}

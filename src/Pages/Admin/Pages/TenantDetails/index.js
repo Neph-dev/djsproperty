@@ -14,6 +14,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import './tenantDetails.css';
 import AdminDashHeader from '../../Components/AdminDashHeader';
+import ConfirmDelete from '../../../../Components/ConfirmDelete';
 
 
 function TenantDetails() {
@@ -33,6 +34,8 @@ function TenantDetails() {
     const tenantUsername = location.tenant.Username
 
     const [deleted, setDeleted] = useState(false)
+
+    const [deleting, setDeleting] = useState(false)
 
     // Teant response index: 
 
@@ -58,14 +61,36 @@ function TenantDetails() {
     useEffect(() => {
         // Fetch files
         async function fetchFiles() {
-            Storage.list(`${folderName}/`) // for listing ALL files without prefix, pass '' instead
+            Storage.list(`${folderName}`) // for listing ALL files without prefix, pass '' instead
                 .then(result => {
                     setFiles(result)
                 })
                 .catch(err => console.log(err));
         }
         fetchFiles()
-    });
+    }, []);
+    
+    // Upload Files
+    async function handleUploadFile(file) {
+        setFile(file);
+
+        setIsLoading(true)
+
+        await Storage.put(`${folderName}/${file[0].name}`, file[0], { contentType: 'application/pdf' })
+
+        setIsLoading(false)
+
+        console.log('uploaded')
+    }
+    // Delete Files
+    async function handleDelete() {
+        setIsLoading(true)
+
+        await Storage.remove(deleteFile);
+        setIsLoading(false)
+        
+        console.log('removed')
+    }
 
     async function deleteUser() {
         try {
@@ -98,28 +123,6 @@ function TenantDetails() {
     }
     if (deleted === true) {
         return <Redirect to={{ state: residenceDetails, area, pathname: '/Tenants' }} />
-    }
-
-    // Upload Files
-    async function handleUploadFile(file) {
-        setFile(file);
-
-        setIsLoading(true)
-
-        await Storage.put(`${folderName}/${file[0].name}`, file[0], { contentType: 'application/pdf' })
-
-        setIsLoading(false)
-
-        console.log('uploaded')
-    }
-    // Remove Files
-    async function handleRemoveFile() {
-        setIsLoading(true)
-
-        await Storage.remove(deleteFile);
-        setIsLoading(false)
-        
-        console.log('removed')
     }
 
     return (
@@ -269,7 +272,7 @@ function TenantDetails() {
                                 </div> */}
                             </a>
                             <div 
-                                onClick={handleRemoveFile}
+                                onClick={() => setDeleting(true)}
                                 className='tenantDetails-doc-delete'>
                                 delete
                             </div>
@@ -290,6 +293,13 @@ function TenantDetails() {
                         Disable
                     </button>
                 </div>
+
+                {
+                    deleting && (
+                        <ConfirmDelete
+                            handleDelete={handleDelete}
+                            setDeleting={setDeleting} />)
+                }
 
             </div>
 
