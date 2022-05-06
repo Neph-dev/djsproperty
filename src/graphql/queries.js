@@ -1,6 +1,39 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getNotification = /* GraphQL */ `
+  query GetNotification($id: ID!) {
+    getNotification(id: $id) {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNotifications = /* GraphQL */ `
+  query ListNotifications(
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        lastUpdated
+        hasRead
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getArea = /* GraphQL */ `
   query GetArea($id: ID!) {
     getArea(id: $id) {
@@ -8,6 +41,8 @@ export const getArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -25,8 +60,6 @@ export const getArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -42,11 +75,11 @@ export const listAreas = /* GraphQL */ `
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -65,16 +98,18 @@ export const getResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -96,8 +131,6 @@ export const getResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -119,6 +152,8 @@ export const listResidences = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -130,8 +165,6 @@ export const listResidences = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -153,6 +186,8 @@ export const getUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -164,6 +199,8 @@ export const getUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -175,11 +212,7 @@ export const getUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -204,6 +237,8 @@ export const listUnits = /* GraphQL */ `
         feature
         image
         residenceID
+        createdAt
+        updatedAt
         residence {
           id
           name
@@ -218,8 +253,6 @@ export const listUnits = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }

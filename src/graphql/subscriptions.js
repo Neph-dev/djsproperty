@@ -1,6 +1,45 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateNotification = /* GraphQL */ `
+  subscription OnCreateNotification {
+    onCreateNotification {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateNotification = /* GraphQL */ `
+  subscription OnUpdateNotification {
+    onUpdateNotification {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteNotification = /* GraphQL */ `
+  subscription OnDeleteNotification {
+    onDeleteNotification {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateArea = /* GraphQL */ `
   subscription OnCreateArea {
     onCreateArea {
@@ -8,6 +47,8 @@ export const onCreateArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -25,8 +66,6 @@ export const onCreateArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -37,6 +76,8 @@ export const onUpdateArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -54,8 +95,6 @@ export const onUpdateArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -66,6 +105,8 @@ export const onDeleteArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -83,8 +124,6 @@ export const onDeleteArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -101,16 +140,18 @@ export const onCreateResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -132,8 +173,6 @@ export const onCreateResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -150,16 +189,18 @@ export const onUpdateResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -181,8 +222,6 @@ export const onUpdateResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -199,16 +238,18 @@ export const onDeleteResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -230,8 +271,6 @@ export const onDeleteResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -251,6 +290,8 @@ export const onCreateUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -262,6 +303,8 @@ export const onCreateUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -273,11 +316,7 @@ export const onCreateUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -297,6 +336,8 @@ export const onUpdateUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -308,6 +349,8 @@ export const onUpdateUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -319,11 +362,7 @@ export const onUpdateUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -343,6 +382,8 @@ export const onDeleteUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -354,6 +395,8 @@ export const onDeleteUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -365,11 +408,7 @@ export const onDeleteUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;

@@ -1,6 +1,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createNotification = /* GraphQL */ `
+  mutation CreateNotification(
+    $input: CreateNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    createNotification(input: $input, condition: $condition) {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateNotification = /* GraphQL */ `
+  mutation UpdateNotification(
+    $input: UpdateNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    updateNotification(input: $input, condition: $condition) {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteNotification = /* GraphQL */ `
+  mutation DeleteNotification(
+    $input: DeleteNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    deleteNotification(input: $input, condition: $condition) {
+      id
+      title
+      description
+      lastUpdated
+      hasRead
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createArea = /* GraphQL */ `
   mutation CreateArea(
     $input: CreateAreaInput!
@@ -11,6 +59,8 @@ export const createArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -28,8 +78,6 @@ export const createArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -43,6 +91,8 @@ export const updateArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -60,8 +110,6 @@ export const updateArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -75,6 +123,8 @@ export const deleteArea = /* GraphQL */ `
       name
       description
       image
+      createdAt
+      updatedAt
       residences {
         items {
           id
@@ -92,8 +142,6 @@ export const deleteArea = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -113,16 +161,18 @@ export const createResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -144,8 +194,6 @@ export const createResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -165,16 +213,18 @@ export const updateResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -196,8 +246,6 @@ export const updateResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -217,16 +265,18 @@ export const deleteResidence = /* GraphQL */ `
       feature
       image
       areaID
+      createdAt
+      updatedAt
       area {
         id
         name
         description
         image
+        createdAt
+        updatedAt
         residences {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       units {
         items {
@@ -248,8 +298,6 @@ export const deleteResidence = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -272,6 +320,8 @@ export const createUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -283,6 +333,8 @@ export const createUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -294,11 +346,7 @@ export const createUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -321,6 +369,8 @@ export const updateUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -332,6 +382,8 @@ export const updateUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -343,11 +395,7 @@ export const updateUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -370,6 +418,8 @@ export const deleteUnit = /* GraphQL */ `
       feature
       image
       residenceID
+      createdAt
+      updatedAt
       residence {
         id
         name
@@ -381,6 +431,8 @@ export const deleteUnit = /* GraphQL */ `
         feature
         image
         areaID
+        createdAt
+        updatedAt
         area {
           id
           name
@@ -392,11 +444,7 @@ export const deleteUnit = /* GraphQL */ `
         units {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;

@@ -16,8 +16,11 @@
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
                 "apiKeyExpirationDays": 365,
-                "description": "djsAPI_KEY"
+                "description": "djsPropertyIAM"
               }
+            },
+            {
+              "authenticationType": "AWS_IAM"
             }
           ]
         }

@@ -10,8 +10,8 @@ import './addNotification.css';
 
 function AddNotification({ setAddNotification }) {
 
-    const [messageInput, setMessageInput] = useState('')
     const [titleInput, setTitleInput] = useState('')
+    const [descriptionInput, setDescriptionInput] = useState('')
 
     let day;
     let month;
@@ -84,19 +84,19 @@ function AddNotification({ setAddNotification }) {
 
 
     const current = day + ' ' + now.getDate() + ' ' + month + ' ' + now.getHours() + ':' + now.getMinutes();
-    console.log(current)
 
-    /*const createNotification = async () => {
+    const createNotification = async () => {
         const notificationDetails = {
             title: 'Power Outrage',
-            description: 'Please not that level 2 has started',
-            lastUpdated: current
+            description: 'Please note that level 2 has started',
+            lastUpdated: current,
+            hasRead: [],
         };
         const newNotification = await API.graphql({
             query: mutations.createNotification,
             variables: { input: notificationDetails }
         });
-    }*/
+    }
 
     return (
         <div id="add-notification">
@@ -117,18 +117,20 @@ function AddNotification({ setAddNotification }) {
                 </div>
                 <div>
                     <textarea
-                        onChange={(e) => setMessageInput(e.target.value)}
+                        onChange={(e) => setDescriptionInput(e.target.value)}
                         name="message"
                         type="text"
                         placeholder="Type a description here."
                         maxLength={100}
                         className='add-notification-description' />
-                    {messageInput.length < 10
-                        ? `0${messageInput.length}`
-                        : messageInput.length}/100
+                    {descriptionInput.length < 10
+                        ? `0${descriptionInput.length}`
+                        : descriptionInput.length}/100
                 </div>
 
-                <button className="add-natification-btn">
+                <button
+                    onClick={createNotification}
+                    className="add-natification-btn">
                     Add
                 </button>
             </div>

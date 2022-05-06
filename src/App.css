@@ -141,6 +141,10 @@ a {
 }
 
 /* Notifications */
+.notificationBell-container {
+  align-items: center;
+  display: flex;
+}
 .RiNotification2Fill {
   align-items: center;
   color: #d4af37;
@@ -209,6 +213,15 @@ a {
 .notification-date {
   font-size: 14px;
   margin: 10px auto 10px 10px;
+}
+.notification-markAsRead {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #283e51;
+}
+.notification-markAsRead:hover {
+  text-decoration: underline;
 }
 
 /* icons */

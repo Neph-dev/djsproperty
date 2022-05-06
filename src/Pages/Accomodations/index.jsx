@@ -43,6 +43,7 @@ function Accomodations() {
                     authMode: 'AWS_IAM',
                 })
                 let area = areaResults.data.listAreas.items
+                console.log(area)
                 setStateListArea(area)
 
                 // units

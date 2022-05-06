@@ -1,4 +1,4 @@
-type Area @model {
+type Area @model @auth(rules: [{ allow: public, provider: iam }]) {
   id: ID!
   name: String!
   description: String!
@@ -8,6 +8,7 @@ type Area @model {
 
 type Residence
   @model
+  @auth(rules: [{ allow: public, provider: iam }])
   @key(
     name: "byArea"
     fields: [
@@ -40,6 +41,7 @@ type Residence
 
 type Unit
   @model
+  @auth(rules: [{ allow: public, provider: iam }])
   @key(
     name: "byResidence"
     fields: [
@@ -74,7 +76,7 @@ type Unit
   residence: Residence @connection(fields: ["residenceID"])
 }
 
-type Notifications {
+type Notification @model {
   id: ID!
   title: String!
   description: String!

@@ -41,6 +41,8 @@ function UnitsList({ residenceDetails, area }) {
         fetchAreas();
     }, [])
 
+    const [query, setQuery] = useState('684a8542-9e80-432e-ab28-4bd2aae468d8')
+
     return (
         <div className='cards-list'>
             {
@@ -73,9 +75,11 @@ function UnitsList({ residenceDetails, area }) {
                                                 state: residenceDetails,
                                                 area,
                                                 unit,
-                                                pathname: '/Unit-details'
+                                                pathname: `/Unit-details`
                                             }}>
-                                            <button className='card-btn'>
+                                            <button
+                                                onMouseEnter={() => setQuery(unit.id)}
+                                                className='card-btn'>
                                                 Unit Details
                                             </button>
                                         </Link>

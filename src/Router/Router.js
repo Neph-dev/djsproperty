@@ -31,6 +31,9 @@ import Units from '../Pages/Admin/Pages/Units';
 import UnitDetails from '../Pages/Admin/Pages/UnitDetails';
 
 export default function Router() {
+  
+  let query;
+
   return (
     <Routers>
       <Switch>           
@@ -56,7 +59,7 @@ export default function Router() {
           <Route exact path='/Residence-details' component={ResidenceDetails} />
           <Route exact path='/Tenant-details' component={TenantDetails} />
           <Route exact path='/Units' component={Units} />
-          <Route exact path='/Unit-details' component={UnitDetails} />
+          <Route path={`/Unit-details`} component={UnitDetails} />
       </Switch>
     </Routers>
   )
