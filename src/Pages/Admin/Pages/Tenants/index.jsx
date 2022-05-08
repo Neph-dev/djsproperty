@@ -16,8 +16,6 @@ function Tenants() {
     const area = location.state.area
     const residenceDetails = location.state
 
-    console.log(location)
-
     const activeTab = 'manage'
 
     useEffect(() => {
