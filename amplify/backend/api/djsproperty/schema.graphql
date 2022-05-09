@@ -1,4 +1,12 @@
-type Area @model @auth(rules: [{ allow: public, provider: iam }]) {
+type Area
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["tenant"], operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String!
   description: String!
@@ -8,7 +16,13 @@ type Area @model @auth(rules: [{ allow: public, provider: iam }]) {
 
 type Residence
   @model
-  @auth(rules: [{ allow: public, provider: iam }])
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["tenant"], operations: [read] }
+    ]
+  )
   @key(
     name: "byArea"
     fields: [
@@ -41,7 +55,13 @@ type Residence
 
 type Unit
   @model
-  @auth(rules: [{ allow: public, provider: iam }])
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["tenant"], operations: [read] }
+    ]
+  )
   @key(
     name: "byResidence"
     fields: [
